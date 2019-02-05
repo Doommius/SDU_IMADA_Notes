@@ -1,0 +1,229 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{Computer Architecture (DM548))}
+\rhead{Mark Jervelund (Mjerv15)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+\section{Course description}
+To describe the services an operating system provides to
+users, processes, and other systems\\
+To discuss the various ways of structuring an operating
+system\\
+To explain how operating systems are installed and
+customized and how they boot\\
+\newpage
+
+\section{Notes from lecture}
+
+
+
+\subsection{Lecture 1}
+Throughput
+
+mb/s
+
+Bottleneck link
+
+lowest Throughput device in the link.
+
+Describe store and forward.
+Can't send a package on before the router has received the whole package.
+
+Where does network delay come form.
+
+Distance, routing etc.
+queueing, propagation delay, processing delay, transmission delay.
+
+What does the bandwidth-delay product indicate.
+How many bits there can be in a link between a and b
+
+
+
+
+
+\section{TA}
+\subsection{TA 1}
+\subsubsection{p2}
+(p-1+N)*(L/R)
+
+\subsubsection{p4}
+a 16 \\
+d 8 \\
+c 8 \\
+
+\subsubsection{p6}
+a\\
+$d_prop$ = m/s \\
+\vspace{10mm}
+b\\
+$d_trans$ = L/R\\
+\vspace{10mm}
+c\\
+$A_prob$ = $A_trans$\\
+\vspace{10mm}
+d\\
+$T_0$ = $A_trans$\\
+T = $A_trans$+s*t\\
+\vspace{10mm}
+e\\
+$d_prob$ > $d_trans$\\
+d er på linket\\
+\vspace{10mm}
+f\\
+$d_prop$ < $d_trans$\\
+$d_trans$ er ved B\\
+\vspace{10mm}
+g\\
+m = (L/R)*s\\
+
+\subsubsection{p13}
+a
+((N-1)/2)*L/R
+b
+N*L/R
+
+\subsubsection{p25}
+a\\
+R*$D_prop$ = 4/15 * $10^6$ bits
+\vspace{10mm}
+b\\
+Same as A
+\vspace{10mm}
+c\\
+The amount of bits at any given time on the link
+
+\vspace{10mm}
+d\\
+20000 km / (4/15 * $10^6$ bits) = 125 m
+
+\vspace{10mm}
+e\\
+m/(r*(m/s))
+
+\subsubsection{p29}
+a\\
+$D_prop$ = distance/speed = 3.6/24 sec
+\vspace{10mm}
+b\\
+R*$D_prop$
+\vspace{10mm}
+c\\
+L = $6*10^8$ = 75 MByte
+
+\subsubsection{p31}
+a\\
+(L/R)*N = 12 Sec
+\vspace{10mm}
+b\\
+L/R = 1/200 sec\\
+The second page is 1/200*2
+\vspace{10mm}
+c\\
+p= 800, n = 3, L' =$10^4$ \\
+(N+p-1)*L/R = 4.01 sec 
+\vspace{10mm}
+d\\
+We won't have to send the whole file again if only a segment gets corrupted. and further more we can split the different packages across multiple links \\
+
+\vspace{10mm}
+e\\
+We have to split the package up so there is some overhead at the server and at the client. and the overall transfer will be bigger as each package has their own header compared to only having one. \\
+
+\subsubsection{website}
+
+Try also to solve this problem: Suppose you would like to urgently deliver 300 terabytes of data from Boston to Los Angeles. You have available a 1 Gbps dedicated link for data transfer. Would you prefer to transmit the data via this link or instead use FedEx overnight delivery? Explain your answer. \\
+The overnight transfer will take 12 hours. assuming instant transfer to external storage cluster \\
+
+
+1 Gb/s = 0.125 GB/s
+The transfer takes 300.000 GB /0.125 GB/s /60/60/24 = 27.7777777778 days
+\\
+\vspace{10mm}
+
+And this problem: Imagine that you have trained your St. Bernard, Benny, to carry a box of five 8mm tapes instead of a flask of brandy. (When your disk fills up, you consider that an emergency). These tapes each contain 7 gigabytes. The dog travel to your side, wherever you may be, at 12 km/hour. For what range of distances does Benny have a higher travel rate than a transmission line whose data rate (excluding overhead) is 100 Mbps. \\
+Hint: Try to calculate the data rate of Benny as a function of x, where x is the number of km to travel \\
+
+a) $5*7 Gbyte = 5* 7 *10^9 * 8 = 2.8 *10^11 bits$
+	$12 \frac{km}{Hour} = 10 \frac{m}{s}$
+	$f(x) = \frac{2.8 * 10^11}{3/10*x}$
+	$9.3 km$
+\subsection{TA 2}
+
+\subsubsection{p 1}
+\begin{enumerate}[label=(\alph*)]
+\item False
+\item True
+\item False
+\item False
+\item False
+\end{enumerate}
+\subsubsection{p2}
+\begin{enumerate}[label=(\alph*)]
+\item sms GSM and MAP (part of SS7)
+\item Imessage APN Apple snowflake protocol
+\item whatsapp IP/TCP XMPP (application layer)
+\end{enumerate}
+
+	
+\subsubsection{p6}
+\begin{enumerate}[label=(\alph*)]
+\item both can (you put close in the header) 8.1.2
+\item None 
+\item they can, but a client should not maintain more than 2 connections with a server.
+\item This can happen if a timeout happens, 8.1.4 
+This can be forces, but should not happen as the server should ALWAYS respond. unless and network or client failure is suspected.
+
+\end{enumerate}
+
+\subsubsection{p10}
+\begin{enumerate}[label=(\alph*)]
+\item $t = (1+5*50)*10^3*8 \ bits   =  2,008 * 10^6$ bits \\
+		$ \frac{2.008*10^6 bits}{10^6 bits/s} = 2.008 sec $
+		$5*2rt + 2rt + t $ = $ 5*2*100ms + 2*100ms + t = 3.208 $
+		
+\item $3*2rt + 2rt + t $ = $ 3*2*100ms + 2*100ms + t = 2.808 $
+
+\item $1*2rt + 2rt + t $ = $ 1*2*100ms + 2*100ms + t = 2.408 $
+
+\item $5*rt + 2rt + t $ = $ 5*100ms + 2*100ms + t = 2.708 $
+
+\end{enumerate}
+
+\end{document}

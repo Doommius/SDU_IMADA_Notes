@@ -1,0 +1,161 @@
+Words to use:
+centroid - geometric center
+medoid - smallest average distance to all other objects.
+
+
+1. Frequent Pattern Mining
+	Summary
+		mathematical basics on sets, relations, and orders
+		the problem of frequent pattern mining
+		the problem of association rule mining
+		the “Apriori principle” (the anti-monotonicity property of frequent itemsets)
+		the Apriori algorithm for mining of frequent itemsets and association rules
+		pros and cons of support and confidence
+
+	Frequent Pattern Mining
+		Kinda know what this is some keywords may be.
+			Support. itemsets, apriori algorithm. association rule mining, pruning
+		Apriori algorithm
+			1. find frequent 1-itemsets first, then 2-itemsets, 	3-itemsets etc. (breadth-first search in the lattice)
+			2. for finding (k + 1)-itemsets Ck+1: consider only those as candidates, where all k-itemsets Ck ⊂ Ck+1 are frequent
+			3. count frequency of all k-itemset candidates in a single	database scan (hashing of the candidate itemsets)
+
+
+
+2. Feature Spaces and Distance Measures	
+	Summary
+		features and feature spaces
+		categories of features (categorical/nominal, ordinal, metric)
+		basic univariate feature descriptors (frequency (relative/absolute), mode, median, mean)
+		distances (Lp-norms, weighted, quadratic form)
+		feature (vector) descriptors for texts and for images
+
+	notes
+		Features from objects may be things like width, height, curvature parameters like ABC etc.
+		Characteristics of Features	
+			Normalinal (categories)
+				True, False, male, female.
+			Ordinal
+				There is no uniform distance, eg color, ranges, grades, etc.
+			Metric
+				Differences and relations between valyes are meaningful, and values can be discrete or continuous. eg. weight, age, units or the likes. 
+		Images
+			Distribution of colors.
+			Texture
+			Shapes
+		Color histogram.
+
+
+
+3. Basics of Clustering and k-means Clustering
+
+	What is Clustering?
+	Why do we need heuristic approaches to “solve” the clustering problem?
+	Basic heuristic ideas for identifying “partitions” into k clusters
+		selection of representative points
+		optimization approaches for assignment of points to representatives:
+			minimization of variance
+			k-means [Forgy, 1965, Lloyd, 1982, MacQueen, 1967]
+			k-medoids
+			k-modes
+	common ideas and differences between these approaches
+	pros and cons of these approaches
+
+4. Basics of Classification (Hypothesis Space, Bias, Generalization, Evaluation)
+	What is Classification?
+	hypothesis-space and bias
+	Why is a bias unavoidable for learning and generalization?
+	evaluation procedures (cross-validation, bootstrap, leave-one-out)
+	quality measures for classifiers:
+		confusion matrix
+		accuracy & error (apparent vs. true)
+		precision & recall
+	a simple classifier: k-nearest neighbors
+		properties, challenges, variants
+		lazy learning
+5. k Nearest Neighbor Classification (Geometric and Probabilistic Interpretation)
+
+6. The Bayesian Framework of Learning
+	Axioms of probability:
+		sample space
+		event
+		probability function
+		probability space
+	independence and conditional probability
+	probabilistic interpretation of quality measures for association rules
+	Bayes’ rule
+
+Bayesian Learning:
+	k nearest neighbor classifier as an application of Bayes’ rule for learning
+	The principle of Bayesian learning:
+		prior and posterior probabilities
+		data as evidence to adapt probability estimates and to
+		select hypotheses
+		MAP hypothesis
+		the MDL principle and Bayesian reasoning
+	Bayes optimal classifier
+	Naïve Bayes classifier
+
+7. Bayesian Learning Methods (Parametric and Non-Parametric Learning)
+	parametric learning
+		approximate some density function of a given family (e.g. Gaussian)
+	non-parametric
+		no assumption on family of density function, identify areas of high density
+
+8. Density-Estimates and Density-based Clustering (Flat and Hierarchical)
+	(DBscan etc.)
+	Hierarchical
+		Root, Leaf, Inner node.
+	Single link, complete link, Average Link
+9. Outlier Detection
+Summary (Learning with distributions)
+	discrete random variables and some discrete distributions with their parameters
+	expectation, variance, standard deviation, covariance, correlation
+	continuous distributions (uniform and normal) and their parameters
+	Bayesian learning with distributions
+	algebraic vs. probabilistic view on data
+		EM clustering and a probabilistic interpretation of k-means
+		LDA
+	parametric vs. non parametric learning
+	non-parametric density estimation
+	basic ideas of density-based clustering and the algorithm DBSCAN
+		core point
+		(direct) density-reachability
+		density-connectivity
+		border points
+		noise
+	variants
+		include border points?
+		SNN-based clustering
+		GDBSCAN
+	dendrogram as representation of a hierarchical clustering solution
+	distances for clusters and objects and the basic agglomerative greedy algorithm
+	density-based hierarchical clustering
+		formalization
+		algorithm OPTICS
+		cluster order
+			construction
+			interpretation
+			parameters
+	probabilistic parametric model for outlier detection
+	non-parametric models:
+		distance-based models
+			DB-outlier model
+			kNN-based model
+		density-based model
+			LOF: motivation, model
+			pointers to the literature: many variants of LOF
+	evaluation of outlier detection
+	problems and challenges
+10. Linear and Non-Linear Separation (Decision Trees, Neural Networks, and Support
+Vector Machines)
+
+
+
+
+
+
+
+
+
+

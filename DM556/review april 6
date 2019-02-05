@@ -1,0 +1,25 @@
+which xact properties does crash recovery enforce
+
+isolated.
+dualbility
+
+what is the force/no-force policy (buffer management)? 
+	when we commit we force the page to be flushed to the disk.
+
+what is the steal/no-steal policy (buffer management)
+	no-steal
+		
+
+When should a log record be flushed to the disk (write-ahead logging)
+	if we're waiting for something to be flushed, so we can undo
+	When we commit, so we can redo
+
+why do we need checkpoints in the logging system?
+	So we don't have to check the entire log. we therefor make checkpoints when we commit, and things are flushed to the disk.
+
+	what should be done during checkpointing
+	
+
+
+
+

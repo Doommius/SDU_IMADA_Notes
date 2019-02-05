@@ -1,0 +1,370 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{Datamining (DM555))}
+\rhead{Mark Jervelund (Mjerv15)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+
+%\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+%\tableofcontents
+%\newpage
+%\setcounter{page}{1}
+%\renewcommand{\thepage}{\arabic{page}}
+%\newpage
+\section{1.	Frequent Pattern Mining}
+	
+	Summary \\
+\hspace{10mm}		mathematical basics on sets, relations, and orders \\
+\hspace{10mm}		the problem of frequent pattern mining \\
+\hspace{10mm}		the problem of association rule mining \\
+\hspace{10mm}		the “Apriori principle” (the anti-monotonicity property of frequent itemsets) \\
+\hspace{10mm}		the Apriori algorithm for mining of frequent itemsets and association rules \\
+\hspace{10mm}		pros and cons of support and confidence \\	
+
+\subsection{keywords}
+
+What is frequent pattern mining.
+purpose
+
+Association rule mining\\
+\hspace{10mm}	rules with low support may occur by chance. \\
+Apriori algorithm\\
+\hspace{10mm}	Breadth wide search. \\
+\hspace{10mm}	Problem \\
+Maximun frequent itemset\\
+Closed frequent itemset\\
+
+Support\\
+\hspace{10mm}	The frequency of the item set.\\
+
+Pruning\\
+confidence \\
+\hspace{10mm}	Measures the reliability of the rule,
+\vspace{10mm}
+		Apriori algorithm\\
+\hspace{5mm}			1. find frequent 1-itemsets first, then 2-itemsets, 	3-itemsets etc. \\
+\hspace{15mm} (breadth-first search in the lattice)\\
+\hspace{5mm}			2. for finding (k + 1)-itemsets Ck+1: consider only those as candidates,
+\\ \hspace{15mm} where all k-itemsets Ck $ \in $ Ck+1 are frequent\\
+\hspace{5mm}			3. count frequency of all k-itemset candidates in a single	database scan \\ \hspace{15mm} (hashing of the candidate itemsets)\\
+
+\subsection{Example}
+support = 2 \\
+\begin{tabular}{|c|c||c|c|}
+ \hline 
+ 1 & BE & a & 2 \\ 
+ \hline 
+ 2 & ABCE & b & 3 \\ 
+ \hline 
+ 3 & BCD & c & 2 \\ 
+ \hline 
+ 4 & ACE & d & 2 \\ 
+ \hline 
+ 5 & DE & e & 4 \\ 
+ \hline 
+ \end{tabular}  
+\begin{tabular}{|c|c|}
+\hline 
+AB & 1 \\ 
+\hline 
+\textbf{AC} & 2 \\ 
+\hline 
+AD & 0 \\ 
+\hline 
+\textbf{AE} & 2 \\ 
+\hline 
+\textbf{BC} & 2 \\ 
+\hline 
+BD & 1 \\ 
+\hline 
+\textbf{BE} & 2 \\ 
+\hline 
+CD & 1 \\ 
+\hline 
+CE & 0 \\ 
+\hline 
+DE & 1 \\ 
+\hline 
+\end{tabular} 
+\begin{tabular}{|c|c|}
+\hline 
+ABC & 1 \\ 
+\hline 
+ABE & 1 \\ 
+\hline 
+\textbf{ACE} & 2 \\ 
+\hline 
+BCD & 1 \\ 
+\hline 
+\end{tabular} 
+
+\newpage
+\section{2. Feature Spaces and Distance Measures}
+	Summary\\
+\hspace{10mm}		features and feature spaces\\
+\hspace{10mm}		categories of features (categorical/nominal, ordinal, metric)\\
+\hspace{10mm}		basic univariate feature descriptors (frequency (relative/absolute), mode, median, mean)\\
+\hspace{10mm}		distances (Lp-norms, weighted, quadratic form)\\
+\hspace{10mm}		feature (vector) descriptors for texts and for images\\
+
+\subsection{keywords}
+Introduction \\
+What is s freature space \\
+\hspace{10mm}		Features from objects may be things like width, height, curvature parameters like ABC etc.\\
+Characteristics of Features	\\
+\hspace{10mm}			Normalinal (categories)\\
+\hspace{15mm}				True, False, male, female. \\
+\hspace{10mm}			Ordinal \\
+\hspace{15mm}				There is no uniform distance, eg color, ranges, grades, etc. \\
+\hspace{10mm}			Metric \\
+\hspace{15mm}				Differences and relations between valyes are meaningful, \\
+\hspace{15mm} 				and values can be  discrete or continuous. eg. weight, age, units or the likes. \\
+\hspace{5mm}		Text\\
+\hspace{10mm}		bag of words \\
+\hspace{15mm}		problems with bended works, and pointless words like, it, the etc. \\
+\hspace{15mm}		Problems with very high diamention \\	
+\hspace{5mm} Images\\
+\hspace{10mm}			Distribution of colors. \\
+\hspace{10mm}			Texture \\
+\hspace{10mm}			Shapes \\
+\hspace{10mm}		    Color histogram. \\
+ Distance \\
+\hspace{10mm}		Euclidean norm \\
+\hspace{10mm}		manhattan norm \\
+\hspace{10mm} 		Maximum norm, (chebyshev dist) \\
+	
+	
+\subsection{Example}
+Maybe draw a historgram or something?
+
+
+
+\newpage
+\section{3.	Basics of Clustering and k-means Clustering}
+	What is Clustering? \\
+	Why do we need heuristic approaches to “solve” the clustering problem? \\
+	Basic heuristic ideas for identifying “partitions” into k clusters \\
+\hspace{10mm}		selection of representative points \\
+\hspace{10mm}		optimization approaches for assignment of points to  representatives: \\
+\hspace{10mm}			minimization of variance \\
+\hspace{15mm}			k-means [Forgy, 1965, Lloyd, 1982, MacQueen, 1967] \\
+\hspace{15mm}			k-medoids\\
+\hspace{15mm}			k-modes\\
+	common ideas and differences between these approaches\\
+	pros and cons of these approaches\\
+	
+\subsection{Keywords}
+\hspace{10mm} what is clustering ? \\
+\hspace{10mm} purpose ? \\
+\hspace{10mm} Unsupervised Learning \\
+\hspace{10mm} Catagoires of clustering \\
+\hspace{15mm} Partitioning \\
+\hspace{15mm} Density based \\
+\hspace{15mm} Hierachically based \\
+\hspace{10mm} k-means clusering \\
+
+\subsection{Example}
+
+\newpage
+\section{4.	Basics of Classification (Hypothesis Space, Bias, Generalization, Evaluation) }
+	What is Classification? \\
+	hypothesis-space and bias \\
+	Why is a bias unavoidable for learning and generalization? \\
+	evaluation procedures (cross-validation, bootstrap, leave-one-out) \\
+	quality measures for classifiers: \\
+\hspace{10mm}		confusion matrix \\
+\hspace{10mm}		accuracy \& error (apparent vs. true) \\
+\hspace{10mm}		precision \& recall \\
+	a simple classifier: k-nearest neighbors \\
+\hspace{10mm}		properties, challenges, variants \\
+\hspace{10mm}		lazy learning \\
+
+\subsection{Keywords}
+
+Introdution \\
+What is Classification
+Purpose
+hypothesis-space and bias
+Why is a bias unavoidable for learning and generalization?
+
+
+evaluation procedures (cross-validation, bootstrap, leave-one-out)
+quality measures for classifiers:
+\hspace{10mm}	confusion matrix \\
+\hspace{10mm}	accuracy \& error (apparent vs. true) \\
+\hspace{10mm}	precision \& recall \\
+a simple classifier: k-nearest neighbors \\
+\hspace{10mm}	properties, challenges, variants \\
+\hspace{10mm}	lazy learning \\
+
+\subsection{Example}
+
+
+\newpage
+\section{5.	k Nearest Neighbor Classification (Geometric and Probabilistic Interpretation)}
+
+Introduciton\\
+What is classification\\
+What is KNN\\
+\hspace{10mm}Geometric - distance, vector, etc \\
+
+\hspace{10mm}Probabilistic - random, mutually independent and identically distributed\\
+Instance based learning \\
+decision set \\
+Generalization \\
+Evaluation \\
+\hspace{10mm} Possibly draw a matrix \\
+
+
+\subsection{Example}
+
+
+\newpage
+\section{6.	The Bayesian Framework of Learning}
+	Axioms of probability:\\
+\hspace{10mm}		sample space\\
+\hspace{10mm}		event\\
+\hspace{10mm}		probability function\\
+\hspace{10mm}		probability space\\
+	independence and conditional probability\\
+	probabilistic interpretation of quality measures for association rules\\
+	Bayes’ rule\\
+	
+\hspace{10mm}		k nearest neighbor classifier as an application of Bayes’ rule for learning\\
+	The principle of Bayesian learning:\\
+\hspace{10mm}		prior and posterior probabilities\\
+\hspace{10mm}		data as evidence to adapt probability estimates and to\\
+\hspace{10mm}		select hypotheses \\
+\hspace{10mm}		MAP hypothesis\\
+\hspace{10mm}		the MDL principle and Bayesian reasoning\\
+	Bayes optimal classifier\\
+	Naïve Bayes classifier\\
+	\vspace{10mm}
+	
+	Notes\\
+	Bayers rule \\
+	\hspace{10mm} \begin{equation}
+	P(A|B) = \frac{P(B|A)\cdot P(A)}{P(B)}
+	\end{equation}
+	
+	
+	
+	
+	
+\subsection{Example}
+A doctor sees a patient with a fever and a rash \\
+80\% of patient with flu, 45\% of allergy patients, and
+90\% of infection patients have these symptoms. \\
+The doctor knows that 50\% of the patients she sees
+have flu, 40\% have allergy, and 10\% have an infection.
+\begin{equation}
+Pr(doctor\_knowns\_flu|has\_Flu) = \dfrac{\dfrac{8}{10}\cdot \dfrac{5}{10}}{\dfrac{8}{10}\cdot \dfrac{5}{10} + \dfrac{8}{10}\cdot \dfrac{5}{10}} = 0.5 \rightarrow 50 \%
+\end{equation}
+
+\begin{equation}
+Pr(B|A) = \dfrac{ Pr(A|B) \cdot Pr(B) }
+{Pr(A|B)\cdot Pr(B) + Pr(A|\overline{B}) \cdot Pr(\overline{B})}
+\end{equation}
+
+
+\newpage
+\section{7.	Bayesian Learning Methods (Parametric and Non-Parametric Learning)}
+	parametric learning
+		approximate some density function of a given family (e.g. Gaussian)
+	non-parametric
+		no assumption on family of density function, identify areas of high density
+\subsection{Example}
+
+
+
+\newpage
+\section{8	Density-Estimates and Density-based Clustering (Flat and Hierarchical)}
+	(DBscan etc.)
+	Hierarchical
+		Root, Leaf, Inner node.
+	Single link, complete link, Average Link
+\subsection{Example}
+
+
+
+
+\newpage
+\section{9.	Outlier Detection}
+Summary (Learning with distributions)\\
+	discrete random variables and some discrete distributions with their parameters\\
+	expectation, variance, standard deviation, covariance, correlation
+	continuous distributions (uniform and normal) and their parameters
+	Bayesian learning with distributions
+	algebraic vs. probabilistic view on data
+		EM clustering and a probabilistic interpretation of k-means
+		LDA
+	parametric vs. non parametric learning
+	non-parametric density estimation
+	basic ideas of density-based clustering and the algorithm DBSCAN
+		core point
+		(direct) density-reachability
+		density-connectivity
+		border points
+		noise
+	variants
+		include border points?
+		SNN-based clustering
+		GDBSCAN
+	dendrogram as representation of a hierarchical clustering solution
+	distances for clusters and objects and the basic agglomerative greedy algorithm
+	density-based hierarchical clustering
+		formalization
+		algorithm OPTICS
+		cluster order
+			construction
+			interpretation
+			parameters
+	probabilistic parametric model for outlier detection
+	non-parametric models:
+		distance-based models
+			DB-outlier model
+			kNN-based model
+		density-based model
+			LOF: motivation, model
+			pointers to the literature: many variants of LOF
+	evaluation of outlier detection
+	problems and challenges
+\subsection{Example}
+
+\newpage
+\section{10. Linear and Non-Linear Separation (Decision Trees, Neural Networks, and Support
+Vector Machines)}
+
+\subsection{Example}
+\end{document}

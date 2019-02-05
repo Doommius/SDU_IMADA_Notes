@@ -1,0 +1,170 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amssymb,amsmath,amsthm}
+
+\newtheorem{theorem}{Theorem}
+
+\usepackage{mathtools} % Bonus
+\DeclarePairedDelimiter\norm\lVert\rVert
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+\title{DM556/866 DBMS}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{DM869)}
+\rhead{Mark Jervelund (Mjerv15)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+\begin{titlepage}
+\centering
+    \vspace*{9\baselineskip}
+    \huge
+    \bfseries
+     Advanced Topics in Concurrent Systems \\ DM869 \\
+    \normalfont 
+    Mark Jervelund  \\
+    Mark@jervelund.com\\
+    Doommius.com/notes.php 	\\
+    \vspace*{9\baselineskip}
+    \normalfont
+	\includegraphics[scale=1]{SDU_logo}
+    \vfill\ 
+    \vspace{5mm}
+    IMADA \\
+
+    \textbf{\datedate} \\[2\baselineskip]
+\end{titlepage}
+
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+\section{Introduction to inference systems}
+
+Rules
+
+\begin{theorem}
+
+$\frac{•}{num(Z)}[Zero]$
+
+\end{theorem}
+
+\begin{theorem}
+
+$\frac{num(Z)}{num(Sx)}[Succ]$
+
+\end{theorem}
+\subsubsection{num(Z)}
+Num(Z) is derivable iff x encodes a nautral number, if any derivation for number x has exatly height n, then x encodes n
+proff by induction, on the structure pf the given deviration for num(x)
+
+Care Zero
+The derivation starts with rule[Zero] hence X must be >, the height must be 1
+
+case one
+Num(Z) is derivable iff x encodes a nautral number, if any derivation for number x has exatly height n+1, then x encodes n
+proff by induction, on the structure pf the given deviration for num(x)
+
+Care Zero
+The derivation starts with rule[Zero] hence X must be n+1, the height must be n+1
+
+\subsubsection{succ}
+Case Zero
+
+The derivation rulestarts with rule[succ] hence X=Sy for somey, we have a derivation for num(Y), Its height, Say m.
+
+By induction HP, y encodes m-1 thus Sy, encodes m-1
+
+
+\subsubsection{Add}
+\begin{theorem}
+
+$\frac{add(w,x,y)}{add(Sw, X, Sy)}[Succ]$
+
+\end{theorem}
+
+\includegraphics[scale=0.4]{draw.io/fig1.png}
+
+add(W,X,Y) is derivable iff W+X = Y
+
+Prove by induction on the derication of add(W,X,Y)
+
+Case +$\Z$
+There is no inductive step
+
+W = Z, X = x = Y, O+X=X$ \check{}$
+
+Case +S W= Sw, X = x, Y = Sy,
+
+We have a serivation for add(w,x,y)
+We can apply the inductive hypothesis(ind. HP)
+w+x=y, W=1+w, Y=1+y, we conclude that 1+w+x=1+y, W+X =Y
+
+
+\subsubsection{sub}
+\begin{theorem}
+
+$\frac{num(Z)}{num(Sx)}[Succ]$
+
+\end{theorem}
+
+sub(w,x,y) def, rules s.t. sub(q,x,y) is derivable iff w-x=y.
+
+It can be proved that there is no proof for this.
+
+
+
+\subsubsection{if then}
+
+\begin{theorem}
+
+$\frac{if x+y=z}{then w-x=y}\frac{add(x,y,w)}{sub(w,x,y)}$
+
+\end{theorem}
+
+\newpage
+
+\section{Conculus of the cumunication system}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

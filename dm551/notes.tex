@@ -1,0 +1,253 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{MnSymbol}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\usepackage{enumitem}
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{Computer Architecture (DM548))}
+\rhead{Mark Jervelund (Mjerv15)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+\section{Course description}
+To describe the services an operating system provides to
+users, processes, and other systems\\
+To discuss the various ways of structuring an operating
+system\\
+To explain how operating systems are installed and
+customized and how they boot\\
+\newpage
+
+%  			\binom{n}{k}
+%  \begin{enumerate}[label=(\alph*)]    \end{enumerate}
+
+\section{TA 2}
+
+\subsection{6.3}
+\subsubsection{10}
+$ \sum\limits^n_{i=1}\binom{10}{i},i \% 2 \neq  	 0 $
+\subsubsection{12}
+\begin{enumerate}[label=(\alph*)]
+\item $2^{10}$\\
+\item $C \binom{10}{2}$
+\item $1 + \sum\limits^3_{i=1} C\binom{10}{i}$
+\item $ C\binom{10}{5} $
+
+\end{enumerate}
+\subsubsection{20}
+$ |A| = 7, |B| = 9 $\\
+
+$|\{C \subseteq A \cupdot B ||C|=5 \} =  C\binom{16}{5} = 4368 $
+\\
+\begin{enumerate}[label=(\alph*)]
+\item $ C\binom{16}{5} - C\binom{9}{5} = 4242 $
+\item $ C\binom{16}{5} - C\binom{9}{5} - {C\binom{7}{5}} $
+\end{enumerate}
+
+
+\subsubsection{24}
+Vandermonde's Identity \\
+
+$ \binom{m-n}{k} = \sum\limits_{j=0}^k \binom{m}{j}\binom{n}{k-j} $
+\begin{enumerate}[label=(\alph*)]
+
+\item $ \sum\limits_{j=1}^5 \binom{A}{j}\binom{B}{5-j} = \sum\limits_{j=0}^5 \binom{A}{j}\binom{B}{5-j}-\binom{A}{O}\binom{B}{5}$  \\
+$\binom{A+B}{5} - \binom{B}{5}  $\\ $ C \binom{16}{5} - C\binom{9}{5} $
+\item $\sum\limits_{j=1}^{k-1} \binom{A}{j}\binom{B}{k-j} = \binom{A+B}{5} - \binom{A}{0}\binom{B}{5}-\binom{A}{5}\binom{B}{0} $
+
+
+\end{enumerate}
+\subsection{6.4}
+\subsubsection{4}
+$ (W+Z)^n - \binom{n}{k} $
+\begin{enumerate}[label=(\alph*)]
+\item $\binom{200}{99}*2^101*(-3)^99 $
+
+\end{enumerate}
+\subsubsection{8}
+\begin{enumerate}[label=(\alph*)]
+\item forgot
+
+\end{enumerate}
+\subsubsection{12}
+$ \binom{n-1}{k-1} \binom{n}{k+1} \binom{n+1}{k} = \binom{n-1}{k} \binom{n}{k-1} \binom{n+1}{k+1} $
+\subsubsection{14}
+
+\subsubsection{16}
+
+\subsubsection{20}
+
+\subsubsection{22}
+
+
+\subsection{TA 4 - 7.3}
+
+\subsubsection{2}
+
+
+
+\subsubsection{4}
+
+\subsubsection{8}
+
+\subsubsection{10}
+
+\subsubsection{Exam 2015-2}
+a \\
+Pick 5 elements from the set of numbers \{1,2,3,4,5,6,7,8\}, pick the numbers so at least one pair of numbers x+y = 9 \\
+Prove that $\ni x,y \in B$ st. x+y = 9\\
+
+b \\
+k+1 elements - A = \{1,...,2k\} \\
+$\ni x,y \in B$ st. x,y = 2k+1\\
+
+solution:\\
+write $(xi, yi) for (i, 2k+1-i)$ where $i \in {1,2,...k}$ \\
+There are K pairs and$ A=\{1,..,2k \} = \{x_i| 1 \leq i \leq k \} \cup \{y_i| 1 \leq i \leq k \} $\\
+$x_i+y_i = 2k+1$ \\
+"k Boxes" k+1 items by PHP that is a box with 2 items\\
+
+\subsubsection{Exam 2015-2}
+Particle 1-dim position at time t will be written as f(t), f(0) = 0, \\
+
+Every second the particle can move forward, or not move at all.\\
+The possibility that the particle has moved is \\
+\begin{equation}
+P(f(t+1)=f(t)) = q
+\end{equation}
+\begin{equation}
+P(f(t+1)=f(t)+1) = 1-q
+\end{equation}
+write $P_n(r)=P(f(n)=r)$ prob of being in position r at time n \\
+
+\vspace{5mm}
+a) \\
+Prove that $P_n(r) = C(n,r)\cdot p^r\cdot q^{n-r} $
+\\
+\begin{enumerate}
+\item $P_0(0) = q = \binom{0}{0} \cdot p^0\cdot q^0$ \\
+\item $P_0(1) = 0 = \binom{0}{1} $
+\item $P_1(0) = q = \binom{1}{0} \cdot p^0\cdot q^1$ \\
+\item $P_1(1) = p = \binom{1}{1} \cdot p^1\cdot q^0$ \\
+\end{enumerate}
+
+a) \\ 
+Algebraic approach\\
+Prove by induction over the number of time units t\\
+Base Case:
+\begin{equation}
+n = 0, -> see a
+\end{equation}
+ind step: t=n+1
+\begin{equation}
+P_{n+1}(r+1) = P_n(r)*p +P_n(r+1)*q
+\end{equation}
+
+\begin{equation}
+P_{n+1}(r+1) = \binom{n}{r}\cdot p^r \cdot q^{n-r}\cdot p +\binom{n}{r+1}\cdot p^{r+1} \cdot q^{n-r-2}\cdot p =p^{r+1}\cdot q^{n-r} [\binom{n}{r}+\binom{n}{r+1}] = \binom{n+1}{r+1} \cdot p^{r+1}\cdot q^{n-r}
+\end{equation}
+
+\begin{equation}
+ = \binom{n}{0} \cdot p^0 \cdot q^n \cdot q = \binom{n+1}{0} P^0 \cdot q^{n+1}
+\end{equation}
+\vspace{5mm}
+
+
+b) \\
+2 dim space, f(0) = (0,0)
+
+\begin{equation}
+P(f(t+1)=f(t)+\binom{1}{0} ) = p
+\end{equation}
+\begin{equation}
+P(f(t+1)=f(t)+\binom{1}{0}) = q = 1-p
+\end{equation}
+
+Write $Q_n(r,s) $ for the prob. of being in position (r,s) at time n \\
+
+Claim is that\\
+\[
+    Q_n(r,s)=\left\{
+                \begin{array}{ll}
+                  P_n(r) if n = r+s\\
+                  Otherwise 0\\
+                \end{array}
+              \right.
+  \]
+  
+  test
+  
+  \[
+    P(f(t+1)=f(t)+=\left\{
+                \begin{array}{ll}
+                  \binom{0}{0} ) = 0\\
+                  \binom{1}{1} ) = 0\\
+                  \binom{-1}{0})= 0 \\
+                  \binom{0}{-1})= 0 \\
+                \end{array}
+              \right.
+  \]
+  
+  
+
+c) \\
+
+
+
+
+\section{test}
+\begin{equation}
+    x = \begin{cases}
+                  r = \frac{3}{10}\\
+                  e = \frac{3}{10}\\
+                  c = \frac{2}{10}\\
+                  u = \frac{1}{10}\\
+                  n = \frac{1}{10}\\
+        \end{cases}
+     y =  \begin{cases}
+                  r = \frac{1}{8}\\
+                  e = \frac{1}{8}\\
+                  l = \frac{1}{8}\\
+                  a = \frac{1}{8}\\
+                  t = \frac{1}{8}\\
+                  i = \frac{1}{8}\\
+                  o = \frac{1}{8}\\
+                  n = \frac{1}{8}\\
+            \end{cases}
+\end{equation}  
+  
+
+\end{document}

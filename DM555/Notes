@@ -1,0 +1,74 @@
+notes for data mining
+introduction
+	the definition of KDD
+	the KDD process model
+		focusing
+			get the data
+			organize data (file/database)
+			select relevant data
+		preprocessing
+			integrate heterogeneous data
+			check for completeness
+			check for consistency
+		transformation
+			discretize numeric attributes
+			infer new attributes
+			select relevant attributes
+		data mining
+			generate patterns or modells
+		evaluation
+			assess “interestingness” for the user
+			validate models statistically
+
+	paradigmatic data mining methods: clustering, outlier detection, classification, regression, frequent pattern mining and association rules
+
+	categories of data mining techniques: supervised, unsupervised, semi-supervised	
+		supervised =  you train the model with training data.
+			classification	
+					
+		unsupervised = you get the model to categories the data.
+			clustering, outlier detection, frequent pattern mining, regression, association rules
+	
+	preprocessing: typical tasks
+
+	transformation: data representation and similarity measures (motivating examples)
+
+Frequent Pattern Mining
+	Frequent pattern mining is a large research field, for an overview see the collection of topics edited by Aggarwal and Han [2014].
+	Another important algorithm for frequent pattern mining is FP-Growth [Han et al., 2000].
+	Frequent patterns have been defined in other application scenarios such as, e.g., graphs, spatiotemporal data, sequential data (for example protein sequences, as in the work of Birzele and Kramer [2006]).
+	The principle of anti-monotonicity for pruning has been applied in many other application areas (e.g., in subspace clustering [Zimek et al., 2014]).
+
+
+feature spaces
+	features and feature spaces
+	categories of features (categorical/nominal, ordinal, metric)
+	basic univariate feature descriptors (frequency (relative/absolute), mode, median, mean)
+	distances (Lp-norms, weighted, quadratic form)
+	feature (vector) descriptors for texts and for images
+
+Clustering
+	What is Clustering?
+	Why do we need heuristic approaches to “solve” the clustering problem?
+	Basic heuristic ideas for identifying “partitions” into k clusters
+		selection of representative points
+		optimization approaches for assignment of points to representatives:
+			minimization of variance
+			k-means [Forgy, 1965, Lloyd, 1982, MacQueen, 1967]
+			k-medoids
+			k-modes
+	common ideas and differences between these approaches
+	pros and cons of these approaches
+
+Classification
+	What is Classification?
+	hypothesis-space and bias
+	Why is a bias unavoidable for learning and generalization?
+	evaluation procedures (cross-validation, bootstrap, leave-one-out)
+	quality measures for classifiers:
+		confusion matrix
+		accuracy & error (apparent vs. true)
+		precision & recall
+	a simple classifier: k-nearest neighbors
+		properties, challenges, variants
+		lazy learning

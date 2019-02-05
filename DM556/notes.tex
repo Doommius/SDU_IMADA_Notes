@@ -1,0 +1,180 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{DBMS (DM556))}
+\rhead{Mark Jervelund (Mjerv15)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+\section{Latex guide}
+$
+Set \ A = \emptyset 
+$
+\\
+$
+A \mapsto B
+$
+\\
+$
+\mid
+$
+
+
+\section{Course description}
+
+
+\section{Questions from BB}
+Review questions:
+
+1. What is a clustered index? How many clustered or unclustered indexes can you build on a table? (Section 8.2.1)
+
+2. What issues are considered in using clustered indexes? What is an index only evaluation method? (Section 8.5.2)
+
+1. Explain the general external merge sort algorithm. Discuss the length of initial runs, how memory is utilized in subsequent merging passes and the cost of the algorithm.
+2. Discuss the use of replacement sort to increase the average length of initial runs. How does this affect the cost of external sorting? 
+
+
+\section{Questions from Lecture}
+which xact properties does crash recovery enforce\\
+\hspace{10mm}	isolated.\\
+\hspace{10mm}	dualbility\\
+
+what is the force/no-force policy (buffer management)?  \\
+\hspace{10mm}	when we commit we force the page to be flushed to the disk. \\
+
+what is the steal/no-steal policy (buffer management)\\
+\hspace{10mm}	no-steal \\
+		
+
+When should a log record be flushed to the disk (write-ahead logging) \\
+\hspace{10mm}	if we're waiting for something to be flushed, so we can undo \\
+\hspace{10mm}	When we commit, so we can redo \\
+
+why do we need checkpoints in the logging system? \\
+\hspace{10mm}	So we don't have to check the entire log. we therefor make checkpoints when we commit, and things are flushed to the disk. \\
+
+what should be done during checkpointing \\
+	
+
+
+
+
+
+
+	
+
+\section{Currency control part 1 - Lecture 9.}
+Book chapture 16 \& 17
+\\
+The problem is that a DBMS supports multiple users, and arbitrary interleaving commands can lead to an inconsistent result.\\
+
+\begin{lstlisting}[frame=single]
+user 1 : loads the value from account into a. | a = 1000
+user 1 : a = a -100.                          | a = 1000 - 1000 = 900
+user 1 - wait
+user 2 : loads the value from account into b. | b = 1000
+user 2 : b = b + 100                          | b = 1000 + 100 = 1100
+user 2 : stores value b in account            | account = 1100
+user 2 done
+user 1 : stores value a in account            | account = 900
+\end{lstlisting}
+so the added value is lost.
+
+
+\subsection{Formal definition of transaction properties}
+ACID\\
+A - Atomicity: Either all actions in the xact happen, or none of them happen. \\
+C - Consistency - If each Xact is consistent, and the DB starts consistent, It ends up consistent. \\
+\hspace{10mm} Its the programmers task to ensure that Xact is consistent. \\
+I - Isolation - Execution of one Xact is isolated from that of the other Xacts.\\
+D -	Durability - If a Xact commits, its effects persist.\\
+\hspace{10mm} If a command has been comitted it 
+
+\subsection{Atomicity and Durability of transaction.}
+There are only 2 outcomes of a command, either it commits or it aborts(fails)\\
+
+To ensure this the DBMS uses logging to log all actions and can rollback, or rollforeward to fix any errors that may occur.
+
+\subsection{Isolation}
+User can submit Xacts. but each Xacts excecutes as if they were running by them selves. \\
+The simplest approach is to run them all serially\\
+\hspace{10mm} Low throughput, (missed overlapping of CPU and IO)
+
+It is possible to interleave actions by ordering them useing a serializable schduler to make a sequence.\\
+
+
+\subsection{Timestamp based}
+
+
+
+\section{distributed databases}
+
+
+
+
+External Sorting 
+
+
+
+
+
+\section{Notes 2018}
+
+\subsection{Lecture 2}
+What is a run what is a pass (when discussing external sorting)
+
+
+
+\subsection{Lecture 7}
+
+What are the types of noSQL databases
+
+
+What isues with relational databases does nosql databases try to solve.
+
+What is the CAP therom
+
+What is BASE
+
+Expain why trasaction need in the nosql might be less that in RDBMS
+
+	
+\section{•}	
+
+
+
+\end{document}
