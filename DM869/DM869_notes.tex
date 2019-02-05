@@ -23,7 +23,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{amssymb,amsmath,amsthm}
-
+\usepackage{mathtools}
 \newtheorem{theorem}{Theorem}
 
 \usepackage{mathtools} % Bonus
@@ -156,14 +156,48 @@ $\frac{if x+y=z}{then w-x=y}\frac{add(x,y,w)}{sub(w,x,y)}$
 
 \section{Conculus of the cumunication system}
 
+C is a channel
+
+C = new channel ("IP eg 10.130.10.42")
+
+C.open(); connect
+C.send(42);
+
+x: c.recv()
+P:
+
+
+Def. a labelled transition sstem is (S, L, $\rightarrow$)
+\begin{itemize}
+\item S is a set of steates (processes)
+\item K us a set of lables (Actions)
+\item $\rightarrow \subseteq S\times L\times S $ is trasition relation 
+\end{itemize}
+
+Natation S $ \xrightarrow[\text{}]{\text{e}} $ S' means (S,e, S')$ \in \rightarrow$ 
+
+
+$P::= \emptyset$ \hspace{20mm}//Termination program
+
+$\overline{C}.P$ \hspace{24mm}//send on channel c and continue as P 
+
+$\overline{C}.P $\hspace{25mm}// Recieve on channel c and continue as P 
+
+
+$ \frac{}{C.P \xrightarrow[\text{}]{\text{c}}P}  $ [Send]
+
+$ \frac{}{ \overline{C}.P \xrightarrow[\text{}]{\overline{ \text{c} }}P}  $ [Recieve]
+
+$ \frac{P \xrightarrow[\text{}]{{ \text{c} }}P' \hspace{5mm} Q\xrightarrow[\text{}]{{ \text{a} }}Q'}{P|Q \xrightarrow[\text{}]{{ \text{t} }}P'| Q'}  $ [Com]
 
 
 
 
+How can i see that two programs are running at the same time.
 
+P | Q \hspace{21mm}// P and Q urn concurrently
 
-
-
+$c.P | \overline{C}.Q \rightarrow P | Q$ \hspace{2mm} //If we have two nodes, c, and $\overline{c}$ and c wants to send to $\overline{c}$ and $\overline{c}$ want's to recieve from c, this is syncronys transmition. eg, a communication can't fail.
 
 
 
