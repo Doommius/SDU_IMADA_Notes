@@ -1,0 +1,309 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{Computer Architecture (DM548))}
+\rhead{Mark Jervelund (Mjerv15)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+\section{Course description}
+To describe the services an operating system provides to
+users, processes, and other systems\\
+To discuss the various ways of structuring an operating
+system\\
+To explain how operating systems are installed and
+customized and how they boot\\
+\newpage
+\section{Question 1 - Operating System Services - ch 2}
+\subsection{Questions from lecture}
+
+
+\textbf{What is a system call.\\}
+\hspace{10mm} Programming interface to the services provided by the operating system \\ \vspace{5mm}
+
+
+\textbf{What groups of system calls are there. \\}
+\hspace{10mm}File malipulation, process control, security and protection, communication, I/O device manipulation \& information managetment\\ \vspace{5mm}
+
+
+
+\textbf{why would you use a system call API.\\}
+\hspace{10mm}Ease of use, Reduce failure, reuseability/portablility \\ \vspace{5mm}
+
+
+\textbf{What ways are there to pass parameters to the os.\\}
+\hspace{10mm} Stack + reference, register, memory -> send reference \\  \vspace{5mm}
+
+
+
+\textbf{How can an operateing system be structured(archichture wise)\\}
+\hspace{10mm} Layered structure, module based, microkernal \& hybrid systems\\ \vspace{5mm}
+
+ 
+\textbf{what code is first read when you turn on your computer\\}
+\hspace{10mm}Bootstrap code located in EPROM \\ \vspace{5mm}
+
+\newpage
+\section{Question 2 - Process Concept and Multithreaded Programming - ch 3 \& 4}
+
+\subsection{Questions from lecture}
+\textbf{What state can a process by in?\\}
+\hspace{10mm}New.\\
+\hspace{10mm}Ready.\\
+\hspace{10mm}running.\\
+\hspace{10mm}waiting.\\
+\hspace{10mm}terminated.\\
+\vspace{5mm}
+
+\textbf{What is a process control block?\\}
+\hspace{10mm}A block where the OS store information about a program.\\ 
+\hspace{10mm}Used for content switching and stores the following information:\\
+\hspace{20mm}Process state\\
+\hspace{20mm}Process number\\
+\hspace{20mm}Process counter\\
+\hspace{20mm}Registers\\
+\hspace{20mm}Memory limits\\
+\hspace{20mm}List of openfiles\\
+
+
+\vspace{5mm}
+\textbf{Describe ways to do IPC\\}
+\hspace{10mm}Message parsing and memory shareing. \\
+\vspace{5mm}
+
+
+
+\textbf{What os the difference betwen a process and a thread\\}
+\hspace{10mm}A process is a thing we need to exceute, and thread is a subtask of a process.\\
+\vspace{5mm}
+
+
+
+\textbf{What advantages is there when using threads?\\}
+\hspace{10mm}Threading lets you work on multiple cores at the same time, therefor letting you run a job faster.\\
+\vspace{5mm}
+
+
+
+\textbf{Differnence between parallelism and concurency?\\}
+
+\hspace{10mm}	Parallelism - same task spread on muliple threads\\
+\hspace{10mm}	Concurency - program running with multiple threads\\
+\hspace{10mm}  	We can have Concurency without Parallelism but not the other way around\\
+\vspace{5mm}
+
+
+
+\textbf{What are the most common API's for user level threads\\}
+\hspace{10mm} Boost (maybe builds on pthread) \\
+\hspace{10mm} Pthread \\
+\hspace{10mm} Java thread \\
+\hspace{10mm} Winthread \\
+\vspace{5mm}
+
+
+
+
+\textbf{What are the implicit threading methods.\\}
+\hspace{10mm} Thead pools \\
+\hspace{10mm} Openmp \\
+\hspace{10mm} Grand Central Dispatch \\
+
+\newpage
+
+\section{Question 3 - Process Scheduling - ch 5}
+
+\subsection{Questions from lecture}
+\textbf{When is it Relevent for the scheduler to take  decision.\\}
+\hspace{10mm}When a new process queued, and a new processes is started.\\
+\hspace{10mm}4 cases\\
+\hspace{20mm}when a process running state to waiting.\\
+\hspace{20mm}when a process terminates.\\
+\hspace{20mm}When a process is queued\\
+\hspace{20mm}When a process goes from waiting to ready\\ \vspace{5mm}
+
+\textbf{What is dispatch latency.\\}
+\hspace{10mm} time it takes for a interupting process to become active \\
+\hspace{10mm} move memory and registers from the running task, move new tasks there and start it \\\vspace{5mm}
+
+
+
+\textbf{What scheduling ctiteria can we use.\\}
+\hspace{10mm} maximize CPU util, low latency for take critical jobs jobs.\\
+\hspace{10mm} runtime, priority, CPU bound, I/p bound \\\vspace{5mm}
+
+
+
+\textbf{Describe the scheduling algortirhms: FCFS, SJF, Shortest remaining time fist, RR.\\}
+\hspace{10mm} First come first servce\\
+\hspace{10mm} Shortest job first \\
+\hspace{10mm} Shortest time remaining first \\
+\hspace{10mm} Round robin\\
+\hspace{10mm}give each process the same amount of time and loop over them until they're done. circular queue\\\vspace{5mm}
+
+
+
+
+\textbf{Describe priority schduling and aging\\}
+\hspace{10mm} The longer it has been in the queue the higher the priority the job has\\
+
+
+\textbf{What is the difference betweeen asymmetric and symmetric multiprocessing\\} \vspace{5mm}
+
+\hspace{10mm} Asymmmetric means tasks wont wait for other things \\
+\hspace{10mm} Not all processes has the some capapicities\\
+\hspace{10mm} All the kernals can do the same.\\ \vspace{5mm}
+
+
+
+\textbf{What is a memory stall\\}
+\hspace{10mm} Waiting for memory ? \\\vspace{5mm}
+
+
+\textbf{What is the difference between soft and hard real-time systems.\\}
+\hspace{10mm} Soft -  Don't time life critital systems while hard real time systems have.\\
+\vspace{5mm}
+
+\textbf{Describe rate montonic scheduling and earlist deadline scheduling\\}
+\hspace{10mm} rate montonic scheduling - Schedule jobs in intervals, like a, b, c.\\
+\hspace{10mm} earlist deadline scheduling - Schedule the process with the first deadline first.\\
+
+\newpage
+\section{Question 4 - Synchronization - Lecture 5}
+
+\subsection{Questions from lecture}
+
+\textbf{Describe the terms "race condition" and "Critical section"\\}
+
+\hspace{10mm} When two proceses want to access a shared resource. that may be unstable if its done in a \\ \hspace{10mm} non-locked way\\
+\hspace{10mm} 
+Race condition is when multiple processes/threads are competing about the same resources and \\ \hspace{10mm}  a undesired output may happen. \\ \vspace{5mm}
+\hspace{10mm}  Critical section is a section of code that sensitive to race conditions.\\
+
+
+
+\textbf{What should a solution to the critical section satisfy \\}
+\hspace{10mm}  Mutual exclution, progress, and \\
+\hspace{10mm}  that only one thread can be active in the critical section at the time. \\\vspace{5mm}
+
+
+
+
+\textbf{What is preemptive vs. non preemptive \\}
+
+\hspace{10mm}  preemptive is the act is  temporarily interrupting a process\\
+
+\hspace{10mm}  non-preemptive -  When a process enters the state of running, the state of that process is not \\ \hspace{10mm} deleted from the scheduler until it finishes its service time.\\ \vspace{5mm}
+
+
+
+
+\textbf{Describe "test and set" and "compare and swap". \\}
+
+\hspace{10mm}  Two different ways of implementing a mutex lock, that are garenttted to be excuted in an atomic \\ \hspace{10mm} way.\\
+
+\hspace{10mm} Test and set - \\
+
+\hspace{10mm}  Compare and swap can only be used by one function, its checks for a codition and sets swaps \\ \hspace{10mm}  two value if the condition is met.\\  \vspace{5mm}
+
+
+
+
+\textbf{What is a mutex and a semaphore \\}
+
+\hspace{10mm}  a Mutex lock is a lock where only the process holding the lock is allowed to perform actions in \\ \hspace{10mm}  	the locked section. \\
+\hspace{10mm}  A mutex contains a boolean and is acquired and released.\\
+
+
+\hspace{10mm}  A binary semaphore is the same as a mutex. \\
+
+\hspace{10mm}  a counting semaphore is when the lock uses a counter if multiple processes can be active within \\
+\hspace{10mm}  the lock. \\ \vspace{5mm}
+
+
+\textbf{Describe some classic problems of synchronization. \\}
+
+\hspace{10mm}  Readers writers problems.\\
+\hspace{10mm} dining philosopher problem. \\ \vspace{5mm}
+
+
+\textbf{What is a monitor \\}
+\hspace{10mm}  We can put functions into the monitor and only one process can be active within the monitor \\
+\hspace{10mm} at the time, else the process will have to wait in the queue.
+
+
+\newpage
+\section{Question 5 - Deadlocks - Lecture 6}
+\subsection{Questions from lecture}
+which 4 conditions most hold for a deadlock\\
+\hspace{10mm} and discribe them \\
+\hspace{10mm} mutual exclusion\\
+\hspace{20mm} Two processes lock each other out due to interupt  \\
+\hspace{10mm} hold and wait\\
+\hspace{20mm} Processes is waiting for recourses to be released by other process \\
+\hspace{10mm} circular wait\\
+\hspace{20mm} two or more processes are waiting for each other to release resources \\
+\hspace{10mm} no preemption\\
+\hspace{20mm} cant remmeber \\
+
+
+Describe the resource graph\\
+\hspace{10mm} Graph the shows the dependency of recources and processes \\
+
+
+What methods are there to handle deadlocks \\
+\hspace{10mm} avoid deadlock \\
+\hspace{10mm} allow deadlocks and recover \\
+\hspace{10mm} ignore them  \\
+
+
+What is a safe state \\
+\hspace{10mm} A state where deadlocks cant occur \\
+
+
+Describe the general idea of bankers algoritm \\
+\hspace{10mm} each process says how many recources they require, and the schduler assigns the so no deadlocks occur\\
+
+
+How can a deadlock be deteched \\
+\hspace{10mm} multiple processes are waiting for each other, and this can be deteched with a resource graph \\
+
+
+How can you recover from a deadlock\\
+\hspace{10mm} kill processes that are in the deadlock until its resolved. \\
+
+\end{document}
