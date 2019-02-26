@@ -1,0 +1,347 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{MnSymbol}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\usepackage{enumitem}
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{Paralle computing (DM818))}
+\rhead{Mark Jervelund (Mjerv15)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+%\section{Course description}
+%\newpage
+\section{Exam}
+
+\subsection{General}
+First speak about the sequential version and then parallel version.
+
+monadic serial d formulations
+Psudo polynomial (n*c), as c can be any number eg 1000 tril or so.
+
+\subsection{Isoeff-analysis}
+You'll always have to be able to preform a iso eff analasis. so know this shit. \\
+we write parallel runtime as
+\begin{equation}
+t_p = \frac{W+T_o(w,p)}{p}
+\end{equation}
+resulting in a speedup of
+\begin{equation}
+S = \frac{W}{T_p} = \frac{W\cdot p}{W+T_o(W,p)}
+\end{equation}
+fianlly this gives of the expression for efficiency
+\begin{equation}
+E = \frac{S}{p} = \frac{W}{W+\frac{T_o(W,p)}{W}}= \frac{1}{1+\frac{T_o(W,p)}{W}}
+\end{equation}
+For a desired E we can 
+\begin{equation}
+E = \frac{1}{1+\frac{T_o(W,p)}{W}}
+\end{equation}
+\begin{equation}
+\frac{T_o(W,p)}{W} = \frac{1-E}{E}
+\end{equation}
+\begin{equation}
+W = \frac{1-E}{E}\cdot T_o(W,p)
+\end{equation}
+let K = E/(E-1), this is the isoeff function
+\begin{equation}
+W = K\cdot T_o(W,p)
+\end{equation}
+   
+\newpage
+\section{
+1. Single Processor Machines: Memory Hierarchies and Processor Features (Case Study:
+Tuning Matrix Multiply - based on slide set) }
+\subsection{Introduction}
+Motication behind using Memory Hierarchies and Processor Features. most applications run at below 10 \% of peak proformance. \\
+The proformance is lost mainly in the memory system due to memory poorly optimized code for the memory system.\\
+
+
+Explain the different memory types and their place in the Hierarchies.\\
+\begin{itemize}
+\item tape, network/cloud, disk, ram, cache, registers
+\item cache
+	
+\begin{itemize}
+\item Different levels
+\item TLB \\ misses, hits and costs,
+\item Prefectching 
+\end{itemize}
+\item Ram
+\begin{itemize}
+\item Between on CPU storage and disk, the cache used to be on external too, but was moved to CPU due to locality.\\
+Main memory is the main active storage, relatively cheap.
+\end{itemize}
+Disk
+\begin{itemize}
+\item	Today there a 3 types possibly 4.
+\item	SSD (PCIE) 1/5 compared to other forms,high speed, very low volume, high cost.
+\item	SSD (PCIE) High speed, medium volume. high cost 
+\item	SSD SATA medium speed and high volume, and medium price
+\item	Disk SATA low speed, high volume and cheap
+\item	The PCI-e disk required 4-8 channels where most motherboards/CPUs only support 48 channels or so, recently 64 channels have been released on the AMD side. but they required dedicated contacts on the socket so not viable for 1000 channels or so.
+\end{itemize}
+
+\end{itemize}
+Processes freatures
+\begin{itemize}
+\item   Branch predictions (works slower due to meltdown and spectre)
+\item    Vector operations \\
+		 		AVX, SSE,
+\item    ILP (Instruction-level parallelism)
+\end{itemize}
+
+Matmul case study.\\
+	Naive\\
+    
+\begin{itemize}
+\item  Computational intensity q = f/m
+\item read B n times, read A once, and read and write C once
+\item $m = n^3 + 3 \cdot n^2$
+\item $f = 2n^3$
+\item $q = f/m = 2 for large n$
+\end{itemize}
+	Blocked version\\
+    
+\begin{itemize}
+\item explain how the blocking is done.
+\item m = $(N\cdot n^2)\cdot 2 + 2\cdot n^2$
+\item f = $2n^3$
+\item q = f/q = n/N = b for large n
+\item limit is that all blocks must fit in cache, mem = ($3\cdot b^2$)
+\end{itemize}
+	Recursive
+    
+\begin{itemize}
+\item cache-oblivius
+\end{itemize}
+
+Strassen
+	faster $O(n^{2.81})$ but requires more memory
+    
+\subsection{Explain} 
+medium Computational intensity (q) for blocked multiplication.
+
+   
+    
+
+    
+    
+\newpage
+\section{
+2. Parallel Programming Platforms (mainly Chapter 2 and corresponding slide sets) }
+\subsection{introduction}
+\begin{itemize}
+\item shared memory
+\item shared address space
+\item message passing
+\item data parallel
+\item hybrid
+\item cluster of SMP's or gpu's
+\item grid
+\end{itemize}
+models
+\begin{itemize}
+\item Opemmp/pthrad
+\item MPI
+\end{itemize}
+network topologies\\
+ring. grid, hypercube, tree\\
+Diameter. longest shortest path between a pair of notes. \\
+
+
+\subsection{Explain} 
+Why is graph embedding important. What is a graph embedding? \\
+Maybe make exsamples how things are mapped ? \\
+
+
+
+
+\newpage
+\section{3. Basic Communication Operations (Chapter 4) }
+\subsection{introduction}
+Explain why basic communication operations are important, give an example where they are applied\\
+\hspace{5mm}      Basic communication operations \\
+\hspace{5mm}      Different networks, array, ring, grid, mesh, hypercube, e-cube routing \\
+      
+\begin{itemize}
+\item One to all and all to one Broadcast and reduction\\
+\hspace{5mm}	ring, array, mesh or hyber-cube \\
+\hspace{5mm}    cost $ T = (T_S + T_w \cdot m) log (p) $
+\item All to all Broadcast and reduction \\
+\hspace{5mm}	array and ring cost $T = (T_S + T_w \cdot m) (p -1) $ \\
+\hspace{5mm}    mesh cost $T = 2 \cdot T_S \cdot(\sqrt{p}-1)+ T_w \cdot m \cdot (p -1) $ \\
+\hspace{5mm}    Hyper-cube $T = t_S \cdot log (p) + T_w \cdot m \cdot(p-1) $
+\item All-reduce and prefix-sum \\
+\hspace{5mm}		all-reduce = all to one followed by and one to all\\
+\hspace{5mm}        Faster why to do this using a hyber-cube all-to-all pattern $T = (T_S + T_w \cdot m) log (p)$ \\
+\hspace{5mm}        prefix sums(aka Scan)  \\
+\hspace{5mm}        original is \{3,1,4,0,2 \} the result would be \{3,4,8,8,10 \}
+\item Scatter and gather \\
+\hspace{5mm}	Cost $T = t_S \cdot log (p) + t_w \cdot m \cdot (p-1)$
+\item All to all Personalized communication
+\hspace{5mm}		Used in transpose of matrix, FFT, sample sort and some database join operations \\
+\hspace{5mm}        ring $T = (t_s + t_w \cdot m \cdot p / 2)(p-1)$ \\
+\hspace{5mm}        mesh two ring, first x then y axsis. $T = (2\cdot t_s + t_w \cdot m \cdot p )(\sqrt[]{p}-1)$\\
+\hspace{5mm}        hypercube $T = t_q \cdot m(p-1)$ (Lower bound eg. not optimal) \\
+\hspace{5mm}        hypercube optimal, each node talks directly to each other in p-1 steps cost cost for this is $(t_s+t_W\cdot m) \cdot (p-1)$
+\item Circular shift \\
+\hspace{5mm}	ring or array $T= ts+t_q \cdot m$ \\
+\hspace{5mm}    mesh $(T= ts+t_w \cdot m) \cdot (\sqrt[]{p}+1)$ \\
+\hspace{5mm}    hyper-cube upperbound of $(t_s+t_w \cdot m)$
+\item Improvements \\
+\hspace{5mm}	One to all boardcast can be done via a scatter and then a all to all reducing the cost to $2 \cdot (t_s \cdot log (p) + t_q \cdot m)$ \\
+\hspace{5mm}    all to one reduction can be proformed by doing a all to all followed by a father, dual to the previus mentioned one to all \\
+\hspace{5mm}    all reduce can be proformed by doing a all to one followed by a one to all boardcast which can be done in $T \approx 2 \cdot (t_s \cdot log(p) + t_w \cdot m $
+\item all port communication \\
+\hspace{5mm}		each node has multiple ports, eg. on a hyper cube each node has d ports.
+\end{itemize}
+
+\subsection{Explain} 
+Medium: Explain an all-to-all broadcast in  \{ring, grid, hypercube, tree\} \\
+\hspace{5mm}      What is the runtime?\textbf{}      
+
+\newpage
+\section{
+4. Dense Matrix Algorithms (Chapter 8) }
+\subsection{introduction}
+   
+\subsection{matrix vector}
+\subsubsection{1-d}
+       Communication operations? all to all for vector.\\
+       Runtime? $\frac{n^2}{p}+t_s \cdot log (p) + T_w\cdot n$\\
+       Isoefficiency function? $P^2$\\
+       Maximal number of processing elements that can be used cost-optimally? $p \in n $\\
+\subsubsection{2-d}
+       Communication operations? one to one to align vector, one to all broadcast for vector in coloum, all to one reduction in each row.\\
+       Runtime? $\frac{n^2}{p}+t_s \cdot log (p) + T_w\cdot \frac{n}{\sqrt[]{p}}log (p)$\\
+       Isoefficiency function? $ p log^2 p$\\
+       Maximal number of processing elements that can be used cost-optimally? $p log^2 n \in n^2$\\
+\vspace{5mm}
+      2-dim faster $T_p$, scales better, and can be used for p>n processor nodes.
+\subsection{matrix matrix}
+\subsubsection{Naive}
+       comunications: all to all in rows and in columns \\
+       Tp is $\frac{n^3}{p}+t_s log(p)+2t_w\cdot \frac{n^2}{\sqrt[]{p}}$\\
+       Iso Eff $p^{\frac{3}{2}}$\\
+       Cost optial only for $p \in n^2$
+\subsubsection{Cannon}
+	   comunications: circular shifts in x/y dimentions, first to align A and B, and Then to shift A(x) and b(y) \\
+       Tp is $\frac{n^3}{p}+2 log(p) \cdot t_s +2t_w\cdot \frac{n^2}{\sqrt[]{p}}$\\
+       Iso Eff $p^{\frac{3}{2}}$\\
+       Cost optial only for $p \in n^2$ \\
+       uses less ram compared to naive ($n^2 \cdot p^{\frac{1}{2}}$ compared  to $ n^2$)\\
+\subsubsection{DNS}
+	   comunications: one to one and one to all in subgroups and followed by a all to one reduction for the result. \\
+       Tp is $\frac{n^3}{p}+ t_s \cdot log(p) +t_w\cdot \frac{n^2}{p^\frac{2}{3}} log (p)$\\
+       Iso Eff $p \ log (p^3)$\\
+       Cost optial only for $n^3 = p \ log (p^3)$ \\
+       
+       \vspace{5mm}
+       
+       Sequential runtime of Gaussian elimination? Explain.\\
+       Parallel Gaussian elimination with a row-wise data partitioning. What is the max. efficiency that can be achieved? Can this approach be improved?\\
+       Pipelined approach for Gaussian elimination. Runtime? Maximal Efficiency?\\
+
+\newpage
+\section{
+5. Sorting (Chapter 9)}
+\subsection{introduction}
+    What is a sorting network? Why is this relevant to understand parallel sorting (on a HC)?\\
+    What is a bitonic sequence?\\
+    Explain bitonic sort (n elements, p processors).  What is the depth of the corresponding sorting network.\\
+    How is the runtime of a "bitonic sort" based sorting algorithm on a HC? Isoefficiency function?\\
+    How is the runtime of a "bitonic sort" based sorting algorithm on a mesh? Isoefficiency function?\\
+    Explain Odd-Even-Transposition sort.\\
+    Explain parallel Quicksort. Parallel Runtime? Isoefficiency function? $p log^2 p$ \\
+    
+    
+    
+\newpage
+\section{
+6. Graph Algorithms (Chapter 10)}
+\subsection{introduction}
+
+
+   Explain (very briefly) Dijkstra / Prim's algorithm. Explain the parallel version. Communication operations? Parallel runtime?
+   Isoefficiency function(s)?\\
+
+   Explain an algorithm for all-pairs-shortest paths based on matrix matrix multiplication. Runtime? Parallel runtime? Can we do better?\\
+
+   Explain Floyd-Warshalls algorithm for all-pairs-shortest paths based on matrix matrix multiplication. Communication operations?
+   Runtime? Parallel runtime? Isoefficiency function(s)? \\
+   
+
+
+    
+    
+    
+    
+    
+    
+    
+    \newpage
+\section{
+7. Search Algorithms for Discrete Optimization Problems (Chapter 11)}
+\subsection{introduction}
+   Explain a decentralised overall load-balancing strategy? Why decentralised? Why not master-slave? \\
+   Explain a load balancing strategy based on i.) ARR, ii.) GRR, iii.) Random Polling(RP)\\
+   Explain alpha-splitting. How do we "split" work when we are running a tree search? Which nodes to keep? Which to send?\\
+   Explain how to infer the Overhead function $(T_O = V(p) log W)$. What is V(p)?\\
+   Worst case for V(p) for ARR/GRR/RP? How to handle the RP case?\\
+   How accurate is the $T_O$ prediction based on the experimental results given in the bok/lecture?\\
+   Is a parallel search algo as presented here potentially expanding more/less tree nodes?\\
+
+
+
+
+
+
+
+\newpage
+\section{
+8. Dynamic Programming (Chapter 12)}
+\subsection{introduction}
+	what is dynamic programming\\
+    	Decompose problem and solve subproblem recursively.\\
+        
+        
+   Feel free to also explain Floyd(-Warshall)'s algo if you chose this questions\\
+   Give an example for a monadic/polyadic - serial/non-serial DP formulation.\\
+   Explain how to solve the 0/1 Knapsack problem in parallel.\\
+   Explain how to solve the LCS problem in parallel (note: detailed solutions in blackboard!) What is the best efficiency that can be achieved? How?\\
+   Explain how to solve the matrix paranthesization problem in parallel. Sequential/Parallel runtime?\\
+\end{document}
