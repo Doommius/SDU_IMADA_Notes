@@ -9,5 +9,6 @@
 *.fmt
 *.fot
 *.cb
+*.pdf
 *.cb2
 .*.lb
