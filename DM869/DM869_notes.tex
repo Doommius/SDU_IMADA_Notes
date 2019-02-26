@@ -43,6 +43,8 @@
 \rfoot{Page  \thepage \, of \pageref{LastPage}}
 \counterwithin*{equation}{section}
 
+\DeclareUnicodeCharacter{344}{TEST}
+
 \begin{document}
 \begin{titlepage}
 \centering
@@ -69,6 +71,12 @@
 \newpage
 \setcounter{page}{1}
 \renewcommand{\thepage}{\arabic{page}}
+
+\section{notes}
+
+w.r.t With regards to
+
+s.t. such that
 \section{Introduction to inference systems}
 
 Rules
@@ -200,5 +208,199 @@ P | Q \hspace{21mm}// P and Q urn concurrently
 $c.P | \overline{C}.Q \rightarrow P | Q$ \hspace{2mm} //If we have two nodes, c, and $\overline{c}$ and c wants to send to $\overline{c}$ and $\overline{c}$ want's to recieve from c, this is syncronys transmition. eg, a communication can't fail.
 
 
+
+
+Spec R spec 1 .... Secn Rimpl
+
+R should be an equvalence relation between two processes
+	-transitive: reason about chain refinemnt
+	Reflexivity PRP
+	Symmytry Spec R impl. -> Impl R spec
+	
+	
+Def
+A cotntect is any term generated
+$
+C:= [-] | \alpha .C | C+P | (P|C)
+$
+
+$
+P::= \alpha . P | O | P+P' | (P|P')
+$
+
+
+
+Def
+A trace is a sequence$  \alpha_1 ....... \alpha_n \in ACT $
+
+(ACT)* is the finite word containing all possible programs
+
+
+
+
+The set of traces of a process P is the set of traces(P) $\{\alpha_1 ..... \alpha_n\}$
+
+
+\begin{equation}
+Traces(User) = \{\in;  \overline{P}; \overline{P}.enter; \overline{P}.enter.exit; .....\} = \{\in\} \cup \{\overline{P}t | \in traces (U_1)\}  
+\end{equation}
+		     
+		     
+Def a Relation R is a visimulation if
+Whenever two processes PRQ it holds that :
+We have two conditions
+	if P can proform some transition 
+
+	\begin{equation}
+		\text{if } p  \xrightarrow[\text{}]{{ \alpha }} P' \text{ then there is } Q  \xrightarrow[\text{}]{{ \alpha }} Q' \wedge R'RQ'
+	\end{equation}
+	\begin{equation}
+	\text{if }Q  \xrightarrow[\text{}]{{ \alpha }} Q' \text{ then there is } P  \xrightarrow[\text{}]{{ \alpha }} P \wedge ' R'RQ'
+	\end{equation}
+
+
+Def P,Q are called Bisimilar (P ~ Q) iff there is a bisimulation r st. PRQ
+
+
+Desiderata for behavioval eq.
+
+-Equvilance relation
+
+-Congruence (w.r.t to the syntax for out programming language)
+
+def. A relation R over CCS processes is a bisimulation if whenever $(P,Q) \in R$ it hold that for any lable $\alpha$ :
+\begin{theorem}
+1) If $p \xrightarrow[\text{}]{{ \alpha}} p'$ then there is q' s.t. $Q \xrightarrow[\text{}]{{ \alpha}} Q'$ and $(P',Q') \in R$
+\end{theorem}
+\begin{theorem}
+2) symmetric of 1)
+\end{theorem}
+
+
+
+
+
+P and Q are called bisimilar (P ~ Q) if there a bisimulation R. S.t. $(P, Q) \in R$
+
+
+Lemma: Bisimularirt ~ is an equivilance relation
+
+Proof
+	-Reflexivity $\forall P$, P ~ P $p \xrightarrow[\text{}]{{ {\alpha} }} p'$ , $p \xrightarrow[\text{}]{{ {\alpha} }} p'$
+		-	$I \subseteq ~$
+		-Prove that I is a bisimulartion: $(P,Q) \in I$ => P=Q => $p \xrightarrow[\text{}]{{ {\alpha} }} p'$ then $Q \xrightarrow[\text{}]{{ {\alpha} }} p'$  $(P',P') \in I $
+		
+	-Symmetry:
+		P~Q => Q~P.
+			- By def. of bisimilairty there is a bisimulation R such that $(P,Q) \in R$
+				Claim $R^-1$ (The relation where you flip every pair) = $\{(x,y)|(y,z) \in R\}$ is a bisimulatin
+					$(Q,P) \in R^-1$ is bisimular, You can conclude Q~P
+					
+
+Given that R is a bisimulation then $R^{-1}$ is a bisimulation for any R.
+let $(s,t) \in R^{-1}$. 
+1) For any $S \xrightarrow[\text{}]{{ {\alpha} }} S'$,let T' be any s.t. $(S',T') \in R $(There is at least one since R is a Bisiulation).
+	(Since S is in relation with T by our definition, by this point by construction.)
+	It follows that $T \xrightarrow[\text{}]{{ {\alpha} }} T'$, $(S',T') \in R^{-1}$ by The above formula. this proves the first conditioning of the def. of bisumulation.
+
+2.) Likewise: given $T \xrightarrow[\text{}]{{ {\alpha} }} T'$, there is a transition $S \xrightarrow[\text{}]{{ {\alpha} }} S'$ s.t. $(T', S') \in R$ hence $(T', S') \in R^{-1}$
+
+-Transitivity: P~Q, Q~S => P~S, 
+	\textbf{The strategy here is to show that it is similar to what we did before.}
+	-From P~Q it follows that $\exists R_1$ s.t. $R_1$ is a bisumulation and $(P,Q) \in R_1$
+	-From Q~S it follows that $\exists R_2$ s.t.$ R_1$ is a bisumulation and $(Q,S) \in R_2$
+
+	Define $R = R_1 \dot R_2 = \{(x,<) | \exists y. (x,y) \in R_1 \wedge (y,z) \in R_2 \}$
+	If R is a bisimulation by constrction ($P,S) \in R$ hence P~S
+	
+
+
+$(T_1, T_2) \in R$
+\textbf{If t1 can preform an action, then t2 can do the same with the same lables.}
+1) let $T_1 \xrightarrow[\text{}]{{ {\alpha} }} T_2$, by construction of R. $T_3$ s.t. 
+($T_1, T_3) \in R_1$, therefor $T'_3$ s.t. $T_3 \xrightarrow[\text{}]{{ {\alpha} }} T_3' \wedge (T'_1, T'_3) \in R_1$
+$(T_3, T_2) \in R_2$, since $R_2$ is a bimiulation, $T_2 \xrightarrow[\text{}]{{ {\alpha} }} T_2'$ s.t. $(T'_3, T'_2) \in R$
+\textbf{Inset picture here}
+
+$T'_1 R_1 T'_3 R_2 T'_2 => T'_1 R T'_2$
+
+2) $T_2 \xrightarrow[\text{}]{{ \alpha }} T_2', $
+
+\underline{Lemma:} ~Is a bisimulartion
+	See notes
+	
+\underline{Lemma:} ~ is a congruence
+	$\forall C, P~Q => C[P] ~C[Q]$
+	The result is a result for a weaker/eqivilant one.
+	Proof: by structual induction
+		Let P~Q, Proceed by strucurtal induction on C,
+		\underline{Base:} C~C, (No holes) It follow by reflexivity of ~
+			if C= [\_] then C[P] = P~Q = C[Q]
+		\underline{induction case:}
+			\begin{itemize}
+			\item $C = \alpha.[_] \alpha.P ~ \alpha.Q$
+			\item $C = S|[_] S|P ~S|Q$
+			\item $C = [_]|S S|P ~S|Q$
+			\item $C = S+[_]$
+			\item $C = [_]+S$
+			\item $C = [_]\textbackslash L$
+			\end{itemize}
+
+	Lemma: If P~Q then:
+	1) a.P ~ a.Q
+	2) $\forall S S|P ~S|Q$
+	3) $\forall S+P ~ S+Q$
+	
+1) P~Q => a.P ~A.Q let R be a Bisimulation s.t. $(P,Q) \in R$. Def. $R' = R \cup \{ (a.P, a,Q) \}$
+	The two conditions
+	\begin{itemize}
+	\item $a.P \xrightarrow[\text{}]{{ {\alpha} }} p$ the other process can only reply with $a.Q \wedge a.Q\xrightarrow[\text{}]{{ {\alpha} }} Q$. $(P,Q) \in R'$, 
+	\end{itemize}
+2)$P~Q => \forall S, S|P | S|Q. $Let R be a bisimulation $(P,Q) \in R. $
+	-Def. R as the following relation$ R = \{ (S|P,S|Q) | P~Q,$ P,Q,S are CCS Processes \}
+		Assume that $S|P \xrightarrow[\text{}]{{ {\alpha} }} S'|P'$. Derivations for $S|P \xrightarrow[\text{}]{{ {\alpha} }} S'|P'$ have thererfo: the first rule applied is 1) Lpar, 2) Rpar, 3, com
+
+1) Lpar
+	\begin{equation}
+	\frac{S\xrightarrow[\text{}]{{ {\alpha} }} S'}{S|P \xrightarrow[\text{}]{{ {\alpha} }} S'|P} (P = P') \frac{S\xrightarrow[\text{}]{{ {\alpha} }} S'}{S|q \xrightarrow[\text{}]{{ {\alpha} }} S'|Q}
+\end{equation}	 
+
+$(S'|P, S'|Q) \in R$ by def of R
+
+2) Rpar
+	\begin{equation}
+	\frac{P\xrightarrow[\text{}]{{ {\alpha} }} P'}{S|P \xrightarrow[\text{}]{{ {\alpha} }} S|P'} (S = S') \text{ Since } P~Q \exists {Q\xrightarrow[\text{(*)}]{{ {\alpha} }} Q'} P' \underset{~}{\dag}Q'
+\end{equation}
+
+\begin{equation}
+\text{From}(\star) \frac{Q\xrightarrow[\text{}]{{ {\alpha} }} Q'}{S|Q \xrightarrow[\text{}]{{ {\alpha} }} S|Q'} \text{And from (\dag)} (S|P̈́', S|Q') \in R
+\end{equation}	
+3) com
+\begin{equation}
+\frac{S\xrightarrow[\text{}]{{ {\alpha} }} S'\text{ } P\xrightarrow[\text{}]{{ \overline{\alpha} }} P'}{S|P \xrightarrow[\text{}]{{ {\tau} }} S'|P'} \text{ Since } P ~ Q, Q\xrightarrow[(\star)]{{ \overline{\alpha} }} Q' \text{  } P' \underset{(\dag)}{~} Q'
+\end{equation}	
+
+\begin{equation}
+\text{From }(\star)  \frac{S\xrightarrow[\text{}]{{ {\alpha} }} S'\text{ } Q\xrightarrow[\text{}]{{ \overline{\alpha} }} Q'}{S|Q \xrightarrow[\text{}]{{ {\tau} }} S|Q'} \text{ And from } (\dag) (S'|P',S'|Q') \in R.
+\end{equation}	
+
+Likewise $S|Q \xrightarrow[\text{}]{{ {\alpha} }}  S'|Q'$.... 
+
+
+
+PFor S+P ~ S+Q use the relation
+\textbf{Picture from phone}
+
+
+
+P|Q ~Q|P prove that R = \{ (P|Q, Q|P) \} is a bisimular
+
+
+For an LTS (S, ACT, ->) It's saturation is the LTS S, ACT, =>) where => is the least relation s.t.
+
+We can ignore internail computation
+\begin{equation}
+\frac{•}{S \rightarrow{[\text{}]{{ {\tau} }} S}} \frac{S_1 \rightarrow{[\text{}]{{ {\tau} }} S'_1 \text{  }S'_1 \xrightarrow{[\text{}]{{ {\alpha} }} S'_2}\text{  }S'_2 \xrightarrow{[\text{}]{{ {\alpha} }} S_2}}{\text{  }S_1 \rightarrow{[\text{}]{{ {\alpha} }} S_2}
+\end{equation}
 
 \end{document}
