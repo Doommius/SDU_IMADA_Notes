@@ -4,6 +4,8 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage {tikz}
+\usetikzlibrary {positioning}
 \usepackage[english]{babel}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -93,25 +95,26 @@ $\frac{num(Z)}{num(Sx)}[Succ]$
 
 \end{theorem}
 \subsubsection{num(Z)}
-Num(Z) is derivable iff x encodes a nautral number, if any derivation for number x has exatly height n, then x encodes n
+Num(Z) is derivable iff x encodes a nautral number, if any derivation for number x has exatly height n, then x encodes n \\
 proff by induction, on the structure pf the given deviration for num(x)
-
-Care Zero
+\\
+\hspace{5mm}
+Care Zero\\
 The derivation starts with rule[Zero] hence X must be >, the height must be 1
-
-case one
-Num(Z) is derivable iff x encodes a nautral number, if any derivation for number x has exatly height n+1, then x encodes n
-proff by induction, on the structure pf the given deviration for num(x)
-
-Care Zero
+\\ \hspace{5mm}
+case one\\
+Num(Z) is derivable iff x encodes a nautral number, if any derivation for number x has exatly height n+1, then x encodes n\\
+proff by induction, on the structure pf the given deviration for num(x)\\
+\hspace{5mm}
+Care Zero\\
 The derivation starts with rule[Zero] hence X must be n+1, the height must be n+1
 
 \subsubsection{succ}
-Case Zero
+Case Zero\\
 
-The derivation rulestarts with rule[succ] hence X=Sy for somey, we have a derivation for num(Y), Its height, Say m.
+The derivation rulestarts with rule[succ] hence X=Sy for somey, we have a derivation for num(Y), Its height, Say m.\\
 
-By induction HP, y encodes m-1 thus Sy, encodes m-1
+By induction HP, y encodes m-1 thus Sy, encodes m-1\\
 
 
 \subsubsection{Add}
@@ -121,22 +124,22 @@ $\frac{add(w,x,y)}{add(Sw, X, Sy)}[Succ]$
 
 \end{theorem}
 
-\includegraphics[scale=0.4]{draw.io/fig1.png}
+\includegraphics[scale=0.4]{draw.io/fig1.png}\\
 
-add(W,X,Y) is derivable iff W+X = Y
+add(W,X,Y) is derivable iff W+X = Y\\
 
-Prove by induction on the derication of add(W,X,Y)
+Prove by induction on the derication of add(W,X,Y)\\
 
-Case +$\Z$
-There is no inductive step
+Case +$\Z$\\
+There is no inductive step\\
 
-W = Z, X = x = Y, O+X=X$ \check{}$
+W = Z, X = x = Y, O+X=X$ \check{}$\\
 
-Case +S W= Sw, X = x, Y = Sy,
+Case +S W= Sw, X = x, Y = Sy,\\
 
-We have a serivation for add(w,x,y)
-We can apply the inductive hypothesis(ind. HP)
-w+x=y, W=1+w, Y=1+y, we conclude that 1+w+x=1+y, W+X =Y
+We have a serivation for add(w,x,y)\\
+We can apply the inductive hypothesis(ind. HP)\\
+w+x=y, W=1+w, Y=1+y, we conclude that 1+w+x=1+y, W+X =Y\\
 
 
 \subsubsection{sub}
@@ -146,9 +149,9 @@ $\frac{num(Z)}{num(Sx)}[Succ]$
 
 \end{theorem}
 
-sub(w,x,y) def, rules s.t. sub(q,x,y) is derivable iff w-x=y.
+sub(w,x,y) def, rules s.t. sub(q,x,y) is derivable iff w-x=y.\\
 
-It can be proved that there is no proof for this.
+It can be proved that there is no proof for this.\\
 
 
 
@@ -164,81 +167,87 @@ $\frac{if x+y=z}{then w-x=y}\frac{add(x,y,w)}{sub(w,x,y)}$
 
 \section{Conculus of the cumunication system}
 
-C is a channel
+C is a channel\\
 
-C = new channel ("IP eg 10.130.10.42")
+ Odense U153
+DM869: Advanced topics in concurrent systems, forår 19. h1e  
+Lessons
+C = new channel ("IP eg 10.130.10.42")\\
 
-C.open(); connect
-C.send(42);
+C.open(); connect\\
+C.send(42);\\
 
-x: c.recv()
-P:
+x: c.recv()\\
+P:\\
 
 
-Def. a labelled transition sstem is (S, L, $\rightarrow$)
+Def. a labelled transition sstem is (S, L, $\rightarrow$)\\
 \begin{itemize}
 \item S is a set of steates (processes)
 \item K us a set of lables (Actions)
 \item $\rightarrow \subseteq S\times L\times S $ is trasition relation 
 \end{itemize}
 
-Natation S $ \xrightarrow[\text{}]{\text{e}} $ S' means (S,e, S')$ \in \rightarrow$ 
+Natation S $ \xrightarrow[\text{}]{\text{e}} $ S' means (S,e, S')$ \in \rightarrow$ \\
 
 
-$P::= \emptyset$ \hspace{20mm}//Termination program
+$P::= \emptyset$ \hspace{20mm}//Termination program\\
 
-$\overline{C}.P$ \hspace{24mm}//send on channel c and continue as P 
+$\overline{C}.P$ \hspace{24mm}//send on channel c and continue as P \\
 
-$\overline{C}.P $\hspace{25mm}// Recieve on channel c and continue as P 
-
-
-$ \frac{}{C.P \xrightarrow[\text{}]{\text{c}}P}  $ [Send]
-
-$ \frac{}{ \overline{C}.P \xrightarrow[\text{}]{\overline{ \text{c} }}P}  $ [Recieve]
-
-$ \frac{P \xrightarrow[\text{}]{{ \text{c} }}P' \hspace{5mm} Q\xrightarrow[\text{}]{{ \text{a} }}Q'}{P|Q \xrightarrow[\text{}]{{ \text{t} }}P'| Q'}  $ [Com]
+$\overline{C}.P $\hspace{25mm}// Recieve on channel c and continue as P \\
 
 
+$ \frac{}{C.P \xrightarrow[\text{}]{\text{c}}P}  $ [Send]\\
 
+$ \frac{}{ \overline{C}.P \xrightarrow[\text{}]{\overline{ \text{c} }}P}  $ [Recieve]\\
 
-How can i see that two programs are running at the same time.
-
-P | Q \hspace{21mm}// P and Q urn concurrently
-
-$c.P | \overline{C}.Q \rightarrow P | Q$ \hspace{2mm} //If we have two nodes, c, and $\overline{c}$ and c wants to send to $\overline{c}$ and $\overline{c}$ want's to recieve from c, this is syncronys transmition. eg, a communication can't fail.
+$ \frac{P \xrightarrow[\text{}]{{ \text{c} }}P' \hspace{5mm} Q\xrightarrow[\text{}]{{ \text{a} }}Q'}{P|Q \xrightarrow[\text{}]{{ \text{t} }}P'| Q'}  $ [Com]\\
 
 
 
 
-Spec R spec 1 .... Secn Rimpl
+How can i see that two programs are running at the same time.\\
 
-R should be an equvalence relation between two processes
-	-transitive: reason about chain refinemnt
-	Reflexivity PRP
-	Symmytry Spec R impl. -> Impl R spec
+P | Q \hspace{21mm}// P and Q urn concurrently\\
+
+$c.P | \overline{C}.Q \rightarrow P | Q$ \hspace{2mm} //If we have two nodes, c, and $\overline{c}$ and c wants to send to $\overline{c}$ and $\overline{c}$ want's to recieve from c, this is syncronys transmition. eg, a communication can't fail.\\
+
+
+
+
+Spec R spec 1 .... Secn Rimpl\\
+
+R should be an equvalence relation between two processes\\
+\begin{itemize}
+\item transitive: reason about chain refinemnt
+\item	Reflexivity PRP
+\item	Symmytry Spec R impl. -> Impl R spec
+\end{itemize}
 	
 	
-Def
-A cotntect is any term generated
+	
+Def\\
+A cotntect is any term generated\\
 $
 C:= [-] | \alpha .C | C+P | (P|C)
-$
+$\\
 
 $
 P::= \alpha . P | O | P+P' | (P|P')
-$
+$\\
 
 
 
-Def
-A trace is a sequence$  \alpha_1 ....... \alpha_n \in ACT $
+Def\\
+A trace is a sequence$  \alpha_1 ....... \alpha_n \in ACT $\\
 
-(ACT)* is the finite word containing all possible programs
-
-
+(ACT)* is the finite word containing all possible programs\\
 
 
-The set of traces of a process P is the set of traces(P) $\{\alpha_1 ..... \alpha_n\}$
+
+
+The set of traces of a process P is the set of traces(P) $\{\alpha_1 ..... \alpha_n\}$\\
 
 
 \begin{equation}
@@ -246,10 +255,10 @@ Traces(User) = \{\in;  \overline{P}; \overline{P}.enter; \overline{P}.enter.exit
 \end{equation}
 		     
 		     
-Def a Relation R is a visimulation if
-Whenever two processes PRQ it holds that :
-We have two conditions
-	if P can proform some transition 
+Def a Relation R is a visimulation if\\
+Whenever two processes PRQ it holds that :\\
+\textbf{We have two conditions}\\
+	if P can proform some transition \\
 
 	\begin{equation}
 		\text{if } p  \xrightarrow[\text{}]{{ \alpha }} P' \text{ then there is } Q  \xrightarrow[\text{}]{{ \alpha }} Q' \wedge R'RQ'
@@ -262,11 +271,14 @@ We have two conditions
 Def P,Q are called Bisimilar (P ~ Q) iff there is a bisimulation r st. PRQ
 
 
-Desiderata for behavioval eq.
+\subsubsection{Desiderata for behavioval eq.}
 
--Equvilance relation
+\begin{itemize}
+\item -Equvilance relation
 
--Congruence (w.r.t to the syntax for out programming language)
+\item -Congruence (w.r.t to the syntax for out programming language)
+\end{itemize}
+
 
 def. A relation R over CCS processes is a bisimulation if whenever $(P,Q) \in R$ it hold that for any lable $\alpha$ :
 \begin{theorem}
@@ -277,67 +289,68 @@ def. A relation R over CCS processes is a bisimulation if whenever $(P,Q) \in R$
 \end{theorem}
 
 
+P and Q are called bisimilar (P ~ Q) if there a bisimulation R. S.t. $(P, Q) \in R$ \\
 
 
+Lemma: Bisimularirt ~ is an equivilance relation\\
 
-P and Q are called bisimilar (P ~ Q) if there a bisimulation R. S.t. $(P, Q) \in R$
+\textbf{Proof} \\
+\begin{itemize}
 
 
-Lemma: Bisimularirt ~ is an equivilance relation
-
-Proof
-	-Reflexivity $\forall P$, P ~ P $p \xrightarrow[\text{}]{{ {\alpha} }} p'$ , $p \xrightarrow[\text{}]{{ {\alpha} }} p'$
+\item	-Reflexivity $\forall P$, P ~ P $p \xrightarrow[\text{}]{{ {\alpha} }} p'$ , $p \xrightarrow[\text{}]{{ {\alpha} }} p'$
 		-	$I \subseteq ~$
-		-Prove that I is a bisimulartion: $(P,Q) \in I$ => P=Q => $p \xrightarrow[\text{}]{{ {\alpha} }} p'$ then $Q \xrightarrow[\text{}]{{ {\alpha} }} p'$  $(P',P') \in I $
+\item		-Prove that I is a bisimulartion: $(P,Q) \in I$ => P=Q => $p \xrightarrow[\text{}]{{ {\alpha} }} p'$ then $Q \xrightarrow[\text{}]{{ {\alpha} }} p'$  $(P',P') \in I $
 		
-	-Symmetry:
+\item	-Symmetry:
 		P~Q => Q~P.
 			- By def. of bisimilairty there is a bisimulation R such that $(P,Q) \in R$
 				Claim $R^-1$ (The relation where you flip every pair) = $\{(x,y)|(y,z) \in R\}$ is a bisimulatin
 					$(Q,P) \in R^-1$ is bisimular, You can conclude Q~P
 					
+\end{itemize}
+Given that R is a bisimulation then $R^{-1}$ is a bisimulation for any R.\\
+let $(s,t) \in R^{-1}$. \\
+1) For any $S \xrightarrow[\text{}]{{ {\alpha} }} S'$,let T' be any s.t. $(S',T') \in R $(There is at least one since R is a Bisiulation).\\
+\hspace{5mm}	(Since S is in relation with T by our definition, by this point by construction.)\\
+\hspace{5mm}	It follows that $T \xrightarrow[\text{}]{{ {\alpha} }} T'$, $(S',T') \in R^{-1}$ by The above formula. this proves the first conditioning of the def. of bisumulation. \\
 
-Given that R is a bisimulation then $R^{-1}$ is a bisimulation for any R.
-let $(s,t) \in R^{-1}$. 
-1) For any $S \xrightarrow[\text{}]{{ {\alpha} }} S'$,let T' be any s.t. $(S',T') \in R $(There is at least one since R is a Bisiulation).
-	(Since S is in relation with T by our definition, by this point by construction.)
-	It follows that $T \xrightarrow[\text{}]{{ {\alpha} }} T'$, $(S',T') \in R^{-1}$ by The above formula. this proves the first conditioning of the def. of bisumulation.
+2.) Likewise: given $T \xrightarrow[\text{}]{{ {\alpha} }} T'$, there is a transition $S \xrightarrow[\text{}]{{ {\alpha} }} S'$ s.t. $(T', S') \in R$ hence $(T', S') \in R^{-1}$\\
 
-2.) Likewise: given $T \xrightarrow[\text{}]{{ {\alpha} }} T'$, there is a transition $S \xrightarrow[\text{}]{{ {\alpha} }} S'$ s.t. $(T', S') \in R$ hence $(T', S') \in R^{-1}$
+-Transitivity: P~Q, Q~S => P~S, \\
+\hspace{5mm}	\textbf{The strategy here is to show that it is similar to what we did before.}\\
+\hspace{5mm}	-From P~Q it follows that $\exists R_1$ s.t. $R_1$ is a bisumulation and $(P,Q) \in R_1$\\
+\hspace{5mm}	-From Q~S it follows that $\exists R_2$ s.t.$ R_1$ is a bisumulation and $(Q,S) \in R_2$\\
 
--Transitivity: P~Q, Q~S => P~S, 
-	\textbf{The strategy here is to show that it is similar to what we did before.}
-	-From P~Q it follows that $\exists R_1$ s.t. $R_1$ is a bisumulation and $(P,Q) \in R_1$
-	-From Q~S it follows that $\exists R_2$ s.t.$ R_1$ is a bisumulation and $(Q,S) \in R_2$
-
-	Define $R = R_1 \dot R_2 = \{(x,<) | \exists y. (x,y) \in R_1 \wedge (y,z) \in R_2 \}$
-	If R is a bisimulation by constrction ($P,S) \in R$ hence P~S
+\hspace{5mm}	Define $R = R_1 \dot R_2 = \{(x,<) | \exists y. (x,y) \in R_1 \wedge (y,z) \in R_2 \}$ \\
+\hspace{5mm}	If R is a bisimulation by constrction ($P,S) \in R$ hence P~S \\
 	
 
 
-$(T_1, T_2) \in R$
-\textbf{If t1 can preform an action, then t2 can do the same with the same lables.}
-1) let $T_1 \xrightarrow[\text{}]{{ {\alpha} }} T_2$, by construction of R. $T_3$ s.t. 
-($T_1, T_3) \in R_1$, therefor $T'_3$ s.t. $T_3 \xrightarrow[\text{}]{{ {\alpha} }} T_3' \wedge (T'_1, T'_3) \in R_1$
-$(T_3, T_2) \in R_2$, since $R_2$ is a bimiulation, $T_2 \xrightarrow[\text{}]{{ {\alpha} }} T_2'$ s.t. $(T'_3, T'_2) \in R$
+$(T_1, T_2) \in R$ \\
+\textbf{If t1 can preform an action, then t2 can do the same with the same lables.}\\
+1) let $T_1 \xrightarrow[\text{}]{{ {\alpha} }} T_2$, by construction of R. $T_3$ s.t. \\
+($T_1, T_3) \in R_1$, therefor $T'_3$ s.t. $T_3 \xrightarrow[\text{}]{{ {\alpha} }} T_3' \wedge (T'_1, T'_3) \in R_1$ \\
+$(T_3, T_2) \in R_2$, since $R_2$ is a bimiulation, $T_2 \xrightarrow[\text{}]{{ {\alpha} }} T_2'$ s.t. $(T'_3, T'_2) \in R$\\
 \textbf{Inset picture here}
 
-$T'_1 R_1 T'_3 R_2 T'_2 => T'_1 R T'_2$
+$T'_1 R_1 T'_3 R_2 T'_2 => T'_1 R T'_2$ \\
 
-2) $T_2 \xrightarrow[\text{}]{{ \alpha }} T_2', $
+2) $T_2 \xrightarrow[\text{}]{{ \alpha }} T_2', $\\
 
-\underline{Lemma:} ~Is a bisimulartion
-	See notes
+\underline{Lemma:} ~Is a bisimulartion \\
+\hspace{5mm}	See notes \\
 	
-\underline{Lemma:} ~ is a congruence
-	$\forall C, P~Q => C[P] ~C[Q]$
-	The result is a result for a weaker/eqivilant one.
-	Proof: by structual induction
-		Let P~Q, Proceed by strucurtal induction on C,
-		\underline{Base:} C~C, (No holes) It follow by reflexivity of ~
-			if C= [\_] then C[P] = P~Q = C[Q]
-		\underline{induction case:}
-			\begin{itemize}
+\vspace{5mm}
+\underline{Lemma:} ~ is a congruence \\
+\hspace{5mm}	$\forall C, P~Q => C[P] ~C[Q]$ \\
+\hspace{5mm}	The result is a result for a weaker/eqivilant one.\\
+\hspace{5mm}	Proof: by structual induction\\
+\hspace{10mm}		Let P~Q, Proceed by strucurtal induction on C, \\
+\hspace{5mm}		\underline{Base:} C~C, (No holes) It follow by reflexivity of ~\\
+\hspace{10mm}			if C= [\_] then C[P] = P~Q = C[Q]\\
+\hspace{5mm}		\underline{induction case:}\\
+\hspace{5mm}			\begin{itemize}
 			\item $C = \alpha.[_] \alpha.P ~ \alpha.Q$
 			\item $C = S|[_] S|P ~S|Q$
 			\item $C = [_]|S S|P ~S|Q$
@@ -346,28 +359,37 @@ $T'_1 R_1 T'_3 R_2 T'_2 => T'_1 R T'_2$
 			\item $C = [_]\textbackslash L$
 			\end{itemize}
 
-	Lemma: If P~Q then:
-	1) a.P ~ a.Q
-	2) $\forall S S|P ~S|Q$
-	3) $\forall S+P ~ S+Q$
-	
-1) P~Q => a.P ~A.Q let R be a Bisimulation s.t. $(P,Q) \in R$. Def. $R' = R \cup \{ (a.P, a,Q) \}$
+\hspace{5mm}	Lemma: If P~Q then: \\
+\begin{itemize}
+\item	1) a.P ~ a.Q
+\item	2) $\forall S S|P ~S|Q$
+\item	3) $\forall S+P ~ S+Q$
+\end{itemize}
+
+\begin{itemize}
+\item 1) P~Q => a.P ~A.Q let R be a Bisimulation s.t. $(P,Q) \in R$. Def. $R' = R \cup \{ (a.P, a,Q) \}$
 	The two conditions
 	\begin{itemize}
 	\item $a.P \xrightarrow[\text{}]{{ {\alpha} }} p$ the other process can only reply with $a.Q \wedge a.Q\xrightarrow[\text{}]{{ {\alpha} }} Q$. $(P,Q) \in R'$, 
 	\end{itemize}
-2)$P~Q => \forall S, S|P | S|Q. $Let R be a bisimulation $(P,Q) \in R. $
-	-Def. R as the following relation$ R = \{ (S|P,S|Q) | P~Q,$ P,Q,S are CCS Processes \}
+\item 2)$P~Q => \forall S, S|P | S|Q. $Let R be a bisimulation $(P,Q) \in R. $ \\
+	-Def. R as the following relation$ R = \{ (S|P,S|Q) | P~Q,$ P,Q,S are CCS Processes \} \\
 		Assume that $S|P \xrightarrow[\text{}]{{ {\alpha} }} S'|P'$. Derivations for $S|P \xrightarrow[\text{}]{{ {\alpha} }} S'|P'$ have thererfo: the first rule applied is 1) Lpar, 2) Rpar, 3, com
+\end{itemize}	
 
-1) Lpar
+\begin{itemize}
+\item 1) Lpar
 	\begin{equation}
 	\frac{S\xrightarrow[\text{}]{{ {\alpha} }} S'}{S|P \xrightarrow[\text{}]{{ {\alpha} }} S'|P} (P = P') \frac{S\xrightarrow[\text{}]{{ {\alpha} }} S'}{S|q \xrightarrow[\text{}]{{ {\alpha} }} S'|Q}
 \end{equation}	 
+\begin{equation}
+(S'|P, S'|Q) \in R\text{ by def of R }
+\end{equation}
 
-$(S'|P, S'|Q) \in R$ by def of R
 
-2) Rpar
+
+
+\item 2) Rpar
 	\begin{equation}
 	\frac{P\xrightarrow[\text{}]{{ {\alpha} }} P'}{S|P \xrightarrow[\text{}]{{ {\alpha} }} S|P'} (S = S') \text{ Since } P~Q \exists {Q\xrightarrow[\text{(*)}]{{ {\alpha} }} Q'} P' \underset{~}{\dag}Q'
 \end{equation}
@@ -375,7 +397,7 @@ $(S'|P, S'|Q) \in R$ by def of R
 \begin{equation}
 \text{From}(\star) \frac{Q\xrightarrow[\text{}]{{ {\alpha} }} Q'}{S|Q \xrightarrow[\text{}]{{ {\alpha} }} S|Q'} \text{And from (\dag)} (S|P̈́', S|Q') \in R
 \end{equation}	
-3) com
+\item 3) com
 \begin{equation}
 \frac{S\xrightarrow[\text{}]{{ {\alpha} }} S'\text{ } P\xrightarrow[\text{}]{{ \overline{\alpha} }} P'}{S|P \xrightarrow[\text{}]{{ {\tau} }} S'|P'} \text{ Since } P ~ Q, Q\xrightarrow[(\star)]{{ \overline{\alpha} }} Q' \text{  } P' \underset{(\dag)}{~} Q'
 \end{equation}	
@@ -386,7 +408,7 @@ $(S'|P, S'|Q) \in R$ by def of R
 
 Likewise $S|Q \xrightarrow[\text{}]{{ {\alpha} }}  S'|Q'$.... 
 
-
+\end{itemize}
 
 PFor S+P ~ S+Q use the relation
 \textbf{Picture from phone}
@@ -400,7 +422,230 @@ For an LTS (S, ACT, ->) It's saturation is the LTS S, ACT, =>) where => is the l
 
 We can ignore internail computation
 \begin{equation}
-\frac{•}{S \rightarrow{[\text{}]{{ {\tau} }} S}} \frac{S_1 \rightarrow{[\text{}]{{ {\tau} }} S'_1 \text{  }S'_1 \xrightarrow{[\text{}]{{ {\alpha} }} S'_2}\text{  }S'_2 \xrightarrow{[\text{}]{{ {\alpha} }} S_2}}{\text{  }S_1 \rightarrow{[\text{}]{{ {\alpha} }} S_2}
+\frac{•}{S \rightarrow{[\text{}]{{ {\tau} }} S}} 
+\frac{S_1 \rightarrow{[\text{}]{{ {\tau} }}} S'_1 \text{  }S'_1 \xrightarrow{[\text{}]{{ {\alpha} }}} S'_2\text{  }S'_2 \xrightarrow{[\text{}]{{ {\alpha} }} S_2}} {S_1 \rightarrow{[\text{}]{{ {\alpha} }}} S_2}
 \end{equation}
+
+
+
+\subsection{March 4th 2019}
+
+\subsubsection{Assignment 1}
+$P=\overline{in}(b).out(\neg b).p $\\
+$Q= \overline{in\_O}.out\_1.Q+\overline{in\_1}.out\_O.Q$\\
+\vspace{5mm}
+\begin{itemize}
+\item Write(d1)
+\item write\_O
+\item write\_1
+\end{itemize}
+\begin {center}
+\begin {tikzpicture}[-latex ,auto ,node distance =3 cm ,on grid ,semithick ,state/.style ={ circle, top color =white, bottom color = blue, text=black ,minimum width =1 cm}]
+\node[state] (C)
+{$1$};
+\node[state] (A) [above left=of C] {$0$};
+\node[state] (B) [below right =of C] {$2$};
+\path (C) edge [bend left =35] node[below =0.15 cm] {$1/2$} (A);
+\path (A) edge [bend right = -35] node[below =0.15 cm] {$1/2$} (C);
+\path (C) edge [bend left =35] node[below =0.15 cm] {$1/2$} (B);
+\path (B) edge [bend right = -35] node[below =0.15 cm] {$1/2$} (C);
+\end{tikzpicture}
+\end{center}
+
+
+\subsubsection{Assignment 2}
+$P=\overline{inA}(x).\overline{inB}(y).out(x\wedge y).p$
+
+
+
+\subsection{March 4th 2019}
+
+Shared memory vs Message parsing. 
+
+why it's bad etc.
+
+What's blocking, nonblocking, etc...
+
+
+Detributed logic,  
+
+\newpage
+\subsection{March 11th 2019}
+
+\subsubsection{What is the general context of the paper? (try to describe both
+the general field (programming, distributed systems, etc.) and the specific
+application (functional implementations, consensus algorithms, etc.))}
+
+The problem of ditributing and replicating the and to guarenteed the data across the services.
+
+To fill the gab between currently programming langues, designs and frameworks regarding service orientated microservies.
+
+\subsubsection{What are the problems the authors want to address?}
+
+"The adoption of SOC, however, has led to a problem of fragmentation."
+
+We have a problem now where everyone has their own implementation in their own language.
+
+\includegraphics[scale=0.5]{standards.png}
+
+\subsubsection{Why are those problems important (impact, theoretical and/or
+practical needs, etc.)?}
+
+
+
+\subsubsection{What are the main contributions of the paper?}
+
+
+
+\subsubsection{Are there alternatives? In which way do they differ from this
+contribution?}
+
+
+
+\subsubsection{Is the paper well-written, i.e., is it clear from the paper how
+to respond to the previous points?}	
+
+
+
+\subsubsection{Form and prepare to discuss your opinion on the paper, e.g., do
+you think the contributions solve the problems? To which extent (completely,
+what parts)? Why?}
+	
+	\newpage
+\subsection{March 14th 2019 - Choreographies in practice}
+
+\newcounter{titles}\stepcounter{titles}
+\newcommand{\itemTitle}{\arabic{titles}\stepcounter{titles})\ }
+
+\textbf{\itemTitle What is the general context of the paper?} 
+Try to describe both the general field (programming, distributed systems,
+etc.) and the specific application (functional implementations, consensus
+algorithms, etc.))
+
+\{distributed,programming languages, Concurrently, systems\}
+	\vspace{5mm}
+	
+\textbf{\itemTitle What are the problems the authors want to address?}
+
+Expressiveness of choreographic programming, 
+The correct notation disallows mismatched I/o to communicate, which can cause problems such as deadlocks and so on..
+
+\vspace{5mm}
+
+\textbf{\itemTitle Why are those problems important (impact, theoretical
+and/or practical needs, etc.)?}
+a lot of people are working on the issues within choreographic programming.
+
+As they allow a program to be correct based on construction.
+\vspace{5mm}
+
+\textbf{\itemTitle What are the main contributions of the paper?}	
+Describing of a design methodology that guaranteed correctness by design/construction and is able to help implement concurrent processes.
+
+\vspace{5mm}
+
+
+\textbf{\itemTitle How do the authors substantiate their contributions?} E.g., 
+(running) examples, formalization, theorems, case studies, benchmarks,
+statistics, \dots
+Syntax of PC, and the syntax of PP \\
+They provide examples for quick sort, Gaussian elimination and fast Fourier transformation. they also give the compilation of the programs using EPP. \\
+Theorem 
+
+\vspace{5mm}
+\textbf{\itemTitle Are there alternatives? In which way do they differ from this
+contribution?} \\
+
+From what is listed in the paper this is the first attempt to solve it in this way, the closets thing they could find is the Chor language but it only supports toy examples. but there has been other work done in MPST that have explored the use of this as a protocol specification for the coordination of message exchanges in some real world scenarios.
+
+\vspace{5mm}
+
+
+
+\textbf{\itemTitle Is the paper well-written, i.e., is it clear from the paper how
+to respond to the previous points?}
+
+It's pretty clear, i had to google some words but that was due to my inexperience in the topic.
+\vspace{5mm}
+
+\textbf{\itemTitle What is your opinion on the paper?} E.g., do you think the
+contributions solve the problems? To which extent (completely, what parts)?
+Why?
+
+I follow and like of the ideas and solutions. I've worked with MPI and i know how prone this format can be to deadlocks and other issues with data, and communication.
+
+
+\subsection{March 18th 2019 - Programming with Correlation sets}
+
+\textbf{\itemTitle What is the general context of the paper?} 
+Try to describe both the general field (programming, distributed systems,
+etc.) and the specific application (functional implementations, consensus
+algorithms, etc.))
+
+Programming languages, SOC, software engineering and Distributed systems.
+
+
+\textbf{\itemTitle What are the problems the authors want to address?}
+
+Keeping data and sessions insulated in correlation sets related to web applications.
+
+
+\textbf{\itemTitle Why are those problems important (impact, theoretical
+and/or practical needs, etc.)?}
+
+Privacy, 
+
+
+\textbf{\itemTitle What are the main contributions of the paper?}
+
+\begin{itemize}
+\item Tree model{Process or messages}
+\item Formal language for processes.
+\item Fl, Processes, Services,  networks.
+\item Type system.
+\item Implementation in Jolie
+\item Example of use by decentralized authentication protocol.
+\end{itemize}
+
+\textbf{\itemTitle How do the authors substantiate their contributions?} E.g., 
+(running) examples, formalisations, theorems, case studies, benchmarks,
+statistics, \dots
+
+\stdLines
+
+\textbf{\itemTitle Are there alternatives? In which way do they differ from this
+contribution?}
+
+WS-BPEL did something related to this.
+
+\textbf{\itemTitle Is the paper well-written, i.e., is it clear from the paper how
+to respond to the previous points?}
+
+\stdLines
+
+\textbf{\itemTitle What is your opinion on the paper?} E.g., do you think the
+contributions solve the problems? To which extent (completely, what parts)?
+Why?
+
+
+
+
+\section{Presentation}
+
+1. General thing. (Me)
+Introduction
+	Who are we, 
+	The papers,
+	jolie,
+		What, why, who	
+		Language basics
+			Behaviors, deployment,
+				
+			
+		Starting slightly in the correlation sets and handing it further?
+
+2. Alex - Type system
+
+3. Tony - Semantics
 
 \end{document}
