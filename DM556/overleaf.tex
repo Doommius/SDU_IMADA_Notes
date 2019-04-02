@@ -1,0 +1,462 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+\title{DM556/866 DBMS}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{DBMS (DM556) 2018)}
+\rhead{Mark Jervelund (Mjerv15)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+\section{Latex guide}
+$
+Set \ A = \emptyset 
+$
+\\
+$
+A \mapsto B
+$
+\\
+$
+\mid
+$
+
+
+\section{Course description}
+
+
+\section{Questions from BB}
+Review questions:
+
+1. What is a clustered index? How many clustered or unclustered indexes can you build on a table? (Section 8.2.1)
+
+2. What issues are considered in using clustered indexes? What is an index only evaluation method? (Section 8.5.2)
+
+1. Explain the general external merge sort algorithm. Discuss the length of initial runs, how memory is utilized in subsequent merging passes and the cost of the algorithm.
+2. Discuss the use of replacement sort to increase the average length of initial runs. How does this affect the cost of external sorting? 
+
+
+\section{Questions from Lecture}
+which xact properties does crash recovery enforce\\
+\hspace{10mm}	isolated.\\
+\hspace{10mm}	dualbility\\
+
+what is the force/no-force policy (buffer management)?  \\
+\hspace{10mm}	when we commit we force the page to be flushed to the disk. \\
+
+what is the steal/no-steal policy (buffer management)\\
+\hspace{10mm}	no-steal \\
+		
+
+When should a log record be flushed to the disk (write-ahead logging) \\
+\hspace{10mm}	if we're waiting for something to be flushed, so we can undo \\
+\hspace{10mm}	When we commit, so we can redo \\
+
+why do we need checkpoints in the logging system? \\
+\hspace{10mm}	So we don't have to check the entire log. we therefor make checkpoints when we commit, and things are flushed to the disk. \\
+
+what should be done during checkpointing \\
+	
+
+
+
+
+
+
+	
+
+\section{Currency control part 1 - Lecture 9.}
+Book chapture 16 \& 17
+\\
+The problem is that a DBMS supports multiple users, and arbitrary interleaving commands can lead to an inconsistent result.\\
+
+\begin{lstlisting}[frame=single]
+user 1 : loads the value from account into a. | a = 1000
+user 1 : a = a -100.                          | a = 1000 - 1000 = 900
+user 1 - wait
+user 2 : loads the value from account into b. | b = 1000
+user 2 : b = b + 100                          | b = 1000 + 100 = 1100
+user 2 : stores value b in account            | account = 1100
+user 2 done
+user 1 : stores value a in account            | account = 900
+\end{lstlisting}
+so the added value is lost.
+
+
+\subsection{Formal definition of transaction properties}
+ACID\\
+A - Atomicity: Either all actions in the xact happen, or none of them happen. \\
+C - Consistency - If each Xact is consistent, and the DB starts consistent, It ends up consistent. \\
+\hspace{10mm} Its the programmers task to ensure that Xact is consistent. \\
+I - Isolation - Execution of one Xact is isolated from that of the other Xacts.\\
+D -	Durability - If a Xact commits, its effects persist.\\
+\hspace{10mm} If a command has been comitted it 
+
+\subsection{Atomicity and Durability of transaction.}
+There are only 2 outcomes of a command, either it commits or it aborts(fails)\\
+
+To ensure this the DBMS uses logging to log all actions and can rollback, or rollforeward to fix any errors that may occur.
+
+\subsection{Isolation}
+User can submit Xacts. but each Xacts excecutes as if they were running by them selves. \\
+The simplest approach is to run them all serially\\
+\hspace{10mm} Low throughput, (missed overlapping of CPU and IO)
+
+It is possible to interleave actions by ordering them useing a serializable schduler to make a sequence.\\
+
+
+\subsection{Timestamp based}
+
+
+
+\section{distributed databases}
+
+
+
+
+External Sorting 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\newpage
+
+\section{Questions from lectures 2018}
+
+\subsection{Lecture 1}
+
+
+\subsection{Lecture 2}
+What is a run what is a pass (when discussing external sorting)\\
+
+- What is the difference between a clustered and an unclustered index?\\
+ -- Clustered indexes are when the elements itself are also sorted. Unclustered indexes are sorted indexes on unsorted data.\\
+ 
+ - What cost model are we considering? I.e. what are we optimizing for and why?\\
+ -- I/O cost, it takes so long time to read and write data.\\
+ 
+ - What are the elements of access time\\
+ -- access time = seek time + rotational delay + delay time\\
+ 
+ - What is the task of a buffer manager\\
+ -- Read data into memory for processing + backing to disk for persistency\\
+ 
+ - And how does it process a page request\\
+ -- slides-01.pdf, page 67\\
+ 
+ - Describe the clock replacement policy\\
+ -- First time read, page is set to 0. Next time, if still 0, replace that page. If 1, set to 0. Pin count also has to be 0.
+
+\subsection{Lecture 3}
+
+\subsection{Lecture 4}
+
+- Which is more powerful SQL or realtion algrebra\\
+ -- SQL, because it has more operations eg. GROUP BY\\
+ 
+ - Describe the role of the query optimizer\\
+ -- Checking if the same operations can be optimized to reduce the number of operations and thus speeding up the request.\\
+ 
+ - What is a reduction factor?\\
+ 
+ - What plan are a syste, r optimizer considering and why?\\
+ 
+ - Describe in short, how dynamic programming is used to enumerate plans\\
+ 
+ - How are nested queries handled?\\
+
+\subsection{Lecture 5}
+
+- Explain the ACID properties.\\
+ -- A: Atomicity, "all or nothing" if one transaction fails, the entire transaction fails. \\
+ -- C: Consistency, Any transaction will bring the database from one consistent state to another. \\
+ -- I: Isolation, All transactions are isolated, which means that they cannot overlap with other transactions. \\
+ -- D: Durability,The durability property ensures that once a transaction has been committed, it will remain so, even in the event of power loss, crashes, or errors.\\
+ 
+ - What is a serializable schedule?\\
+ -- Same effect as a serial schedule. Guarantees I, isolation.\\
+ 
+ - What is Conflict-serializability?\\
+ -- \\
+ 
+ - What is 2PL and Strict 2PL, and what do they guarantee?\\
+ 
+ - Explain phantoms and unrepeatable reads.\\
+ 
+ - Describe different lock methods.\\
+ 
+ - What is index locking?\\
+
+\subsection{Lecture 6}
+
+What information is added to objects in timestamp based approaches?
+Read time stamp(RTS), Write time-stamp(WTS) and a commit bit(C)
+
+What is the basic idea in multi version timestamp CC
+Let writer write a new version while readers use an appropriate old copy.
+
+What is the Thomas write rule
+We can disregard rwites that have never been seen.
+
+
+What are the phases in the kung-robinson model
+Read - Validate - Write
+
+Under what circumstances in optimistic CC a good choice
+Read-dominated workloads + system that has lots of extra resources.
+
+What is the most predominant concurrency control system
+Locking.
+
+
+\subsection{Lecture 7 NOSQL-1}
+
+\subsubsection{what are the types of noSQL databases }
+Graph, document, key and column
+
+
+\subsubsection{What issues with relational databases does nosql databases try to solve.}
+Scalability, performance.
+
+\subsubsection{What is the CAP theorem}
+Consistency, availability, and partition tolerance, 
+
+\subsubsection{What is BASE}
+\textcolor{red}{Google this}
+B Basically
+A Availability,
+S Stability, 
+E eventual consistency,
+\subsubsection{Explain why transaction need in the NOSQL might be less that in RDBMS}
+
+
+\subsection{Lecture 8 - NO-SQL 2}
+\begin{itemize}
+\item What is the recommended way to model data in a column based database system\\
+\ \ \ \ \ Model it after the queries that you plan on running on it.
+
+
+\item What does it mean that a database is "eventually consistent"
+\ \ \ \ \ When we have multiple nodes. it may take a while for all nodes to get all information. 
+
+\item What are the design choices that make the Cassandra optimized for fast writes\\
+\ \ \ \ \ Appending new information instead of updating old values, this is done via timestamps,
+
+\item What partitioning strategy is used in Cassandra/column based databases \\
+\ \ \ \ \ Hashing that points to nodes, this allows the program to distribute data.
+
+
+\item What is a graph database used/designed for \\
+\ \ \ \ \ transitive relations, relations between data.
+
+\item How has the tutorial sessions been that last two weeks \\
+\ \ \ \ \ Everything is broken on windows.
+
+\end{itemize}
+
+
+\subsection{Lecture 9 - Crash recovery}
+	Which of the ACID properties do the recovery manager hep maintain?
+    
+    Describe the force and no steal policies and describe which combination we would prefer to use
+    
+    Describe the WAL protocol
+    What are the phases in ARIES
+    What is the content of a log record
+    
+    What is a CLR(Compensation log record)
+    
+    
+\subsection{Lecture 11 - parallel}
+
+	What is the goal of a parallel databases.
+    
+    How can parallelization be used in databases
+    
+    Why is shared nothing architecture databases attractive.
+    
+   	Name 3 partition methods
+    
+    Describe fragmentation is distributed databases
+    
+    Explain bloom join
+    
+    
+    
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\newpage    
+\section{Exam Topics}
+
+Storage and Indexing
+
+Relational Operator Evaluation
+
+Query Optimization
+
+External Sorting
+
+Concurrency Control with Locking
+
+Concurrency Control without Locking
+
+Crash Recovery
+
+Database Tuning
+
+Distributed Query Processing
+
+Distributed Transactions
+
+
+
+
+
+
+
+
+
+\section{Key Words}
+
+
+\subsection{External Sorting}
+We first sort the data in n sized chunks. read 
+\subsubsection{one way merge sort}
+\subsubsection{External merge sort}
+\subsubsection{Optimization of general external merge sort}
+\subsubsection{B+ Tree}
+\subsubsection{Clustered index}
+\subsubsection{Unclustered index}
+
+
+\newpage
+\subsection{Relational operator evaluation}
+
+
+\subsubsection{System catalog (breifly)}
+     * Minimum information (system-wide, table, etc.)
+     * Other (Cardinality, Size, etc.)
+     * Catalog storage in DBMS
+\subsubsection{Access paths (~)}
+     * Index
+     * Iteration
+     * Partitioning
+\subsubsection{Access Path Selectivity}
+ \subsubsection{Select (important to explain IO cost)}
+     * Index / No index
+     * Sorted / unsorted
+     * Cost(s) (Only most efficient implementations)
+\subsubsection{Join (important to explain IO cost)}
+     * Nested loops (and improvements)
+     * Partitioning (Sort-merge, Hash)
+     * Cost(s) (Only most efficient implementations)
+\subsubsection{Project (important to explain IO cost)}
+     * Same as with select and join
+\subsubsection{Set operators}
+     * Cross product / Intersection as join
+     * Union -- duplicate removal
+     
+     
+     
+     
+\subsection{Query Optimization}
+
+\subsubsection{What is query optimization and why?}
+\subsubsection{Relational Algebra Equivalences.}
+\subsubsection{Query optimization techniques.}
+	* Two main query optimization techniques (1. Heuristic reordering of the relational algebra operations. 2. Systematic estimating the cost of the different execution plans, and choosing one with the lowest cost.) 
+\subsubsection{Nested Loop Join, Sort-Merge Join, Hash Join}
+
+
+\newpage
+\subsection{Storage and Indexing}
+
+\subsubsection{Storage}
+    * Data on External Storage (Important points to keep in mind: Disks, tapes and records)
+    * Physical characteristics of disks and tapes, and how do they affect the design of database systems.
+    * Levels of Redundancy (RAID levels)
+\subsubsection{Indexes}
+    * B+ Tree Indexes
+    * Hash-Based Indexes
+    * Clustered vs. Unclustered Index
+    * Choice of Indexes
+    
+    
+    
+    \newpage
+\subsection{Concurrency control without locking}
+
+\subsubsection{Short introduction}
+- Why concurrency control?
+- Advantages of a lock-free scheme
+- (Optimistic CC)
+
+\subsubsection{Object based TimeStamp CC}
+- Thomas Write Rule
+- Recoverability (?)
+
+\subsubsection{Multiversion TimeStamp CC}
+- Read\_old\_versions
+- Write\_new\_copy
+
+\subsubsection{Kung-Robinson}
+- 3 phases: READ; VALIDATE; WRITE
+- Validation 3 tests \& serial validation
+
+
+8 - Concurrency control with locking
+
+Short introduction
+- Goal of database tuning
+
+Index selection
+- Go through guidelines
+
+Query Tuning
+- The idea
+- How to speed up important queries
+
+
+
+
+
+
+
+
+
+\end{document}
+
