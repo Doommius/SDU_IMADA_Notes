@@ -59,12 +59,156 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
+\chapter{Exercises 2019}
+
+\section{Week 1}
+
+\subsection{page 84, question 1,6}
+
+\subsubsection{a}
+
+{w|w begins with a 1 and ends with a 0} \\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_2)   {$q_0$}; 
+   \node[state] (q_0)  [right=of q_2] {$q_1$}; 
+   \node[state,accepting](q_1) [right=of q_0] {$q_2$};
+    \path[->] 
+    (q_0) edge [bend left]node {1} (q_1)
+          edge [loop above] node {1} (q_0)
+    (q_1) edge [bend left]node  {1} (q_0)
+          edge [loop above] node {0} ()
+    (q_2) edge node {1} (q_0);
+\end{tikzpicture}
+
+
+\subsubsection{b}
+{w|w contains at least 3 1's}\\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right=of q_0] {$q_1$};
+   \node[state](q_2) [right=of q_1] {$q_2$};
+   \node[state,accepting](q_3) [right=of q_2] {$q_3$};
+    \path[->] 
+    (q_0) edge [bend left]node {1} (q_1)
+          edge [loop above] node {0} ()
+    (q_1) edge [bend left]node  {1} (q_2)
+          edge [loop above] node {0} ()
+    (q_2) edge [bend left]node  {1} (q_3)
+          edge [loop above] node {0} ()
+    (q_3) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+
+
+\subsubsection{c}
+{w|w contains the substring 0101, (i.e. w = x0101y for some x and y)}
+\\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right=of q_0] {$q_1$};
+   \node[state](q_2) [right=of q_1] {$q_2$};
+   \node[state](q_3) [right=of q_2] {$q_3$};
+      \node[state,accepting](q_4) [right=of q_3] {$q_4$};
+    \path[->] 
+    (q_0) edge [bend left]node {0} (q_1)
+          edge [loop above] node {1} ()
+          
+    (q_1) edge [bend left]node  {1} (q_2)
+          edge [loop above] node {0} ()
+          
+    (q_2) edge [bend left]node  {0} (q_3)
+          edge [bend left] node {1} (q_0)
+          
+    (q_3) edge [bend left]node  {1} (q_4)
+          edge [bend left] node {0} (q_1)
+          
+    (q_4) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+
+\subsubsection{d}
+{w|w bas at length of at least 3 and it's third symbol is 0}
+\\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right=of q_0] {$q_1$};
+   \node[state](q_2) [right=of q_1] {$q_2$};
+   \node[state,accepting](q_3) [right=of q_2] {$q_3$};
+    \path[->] 
+    (q_0) edge [bend left]node {0,1} (q_1)
+    (q_1) edge [bend left]node  {0,1} (q_2)
+    (q_2) edge [bend left]node  {0} (q_3)
+    (q_3) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+
+\subsubsection{f}
+{w|w doesn't contain the substring 001} \\
+Accepts any string that doesn't contain the substring 001, and loops in rejecting state if this state is found, was unsure if the looping was needed but included it if it was the case.
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial,accepting] (q_0)   {$q_0$}; 
+   \node[state,accepting](q_1) [right=of q_0] {$q_1$};
+   \node[state,accepting](q_2) [right=of q_1] {$q_2$};
+   \node[state](q_3) [right=of q_2] {$q_3$};
+    \path[->] 
+    (q_0) edge node {1} (q_1)
+    (q_1) edge node  {1} (q_2)
+          edge [bend left] node {0} (q_0)
+    (q_2) edge node  {0} (q_3)
+    	edge [bend left] node {1} (q_1)
+    (q_3) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+
+\subsubsection{h}
+{w|w is any string except 11 and 111}\\
+accepts any string that isn't 11, 111 including the empty string $\epsilon $ \\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial,accepting] (q_0)   {$q_0$}; 
+   \node[state,accepting](q_1) [right=of q_0] {$q_1$};
+   \node[state](q_2) [right=of q_1] {$q_2$};
+   \node[state](q_3) [right=of q_2] {$q_3$};
+   \node[state,accepting](q_4) [right=of q_3] {$q_4$};
+    \path[->] 
+    (q_0) edge node {1} (q_1)
+   		  edge [bend left] node {0} (q_4)
+    (q_1) edge node  {1} (q_2)
+    	  edge [bend right] node {0} (q_4)
+    (q_2) edge node  {1} (q_3)
+    	  edge [bend left] node {0} (q_4)
+    (q_3) edge node {0,1} (q_4)
+    (q_4) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+
+\subsubsection{i}
+{w|w every odd position of w is a 1} \\
+accepts all states where \#1\#1\#1\#1\#1 is followed also accepts the empty string $ \epsilon $ \\
+
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial,accepting] (q_0)   {$q_0$}; 
+   \node[state,accepting](q_1) [right=of q_0] {$q_1$};
+   \node[state,accepting](q_2) [above right=of q_1] {$q_2$};
+   \node[state](q_4) [below right=of q_1] {$q_4$};
+   \node[state,accepting](q_3) [above right=of q_4] {$q_3$};
+    \path[->] 
+    (q_0) edge node {0,1} (q_1)
+    (q_1) edge [bend left]node  {1} (q_2)
+          edge [bend right] node {0} (q_4)
+    (q_2) edge [bend left] node  {1} (q_3)
+    	  edge [bend left] node {0} (q_1)
+    (q_3) edge [bend left] node {0} (q_4)
+   		  edge [bend left] node {1} (q_2)
+   	(q_4) edge [loop below] node {0,1} ();
+\end{tikzpicture}
+
+
 \chapter{Questions 2018}
 \newpage
 \section{1. Finite automata and regular languages}
 
 Introduction
 What is it
+
+	Finite automata, regular languages
+	
+regular languages
 
 Finite atomata
 
@@ -93,7 +237,7 @@ What is a push down
 What is a context free grammar
 a -> 0a1
 A -> B
-B -> #
+B -> \#
     ambiguity
     grammar
     variables
@@ -152,7 +296,7 @@ What is it and how to use it.
 
 \newpage
 \section{6. NP-completeness proofs – examples.}
-what is np_completeness
+what is np\_completeness
 
 Why we use it to reduce,
 
