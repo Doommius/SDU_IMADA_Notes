@@ -63,7 +63,7 @@
 
 \section{Week 1}
 
-\subsection{page 84, question 1,6}
+\subsection{page 84, question 1.7}
 
 \subsubsection{a}
 
@@ -199,6 +199,232 @@ accepts all states where \#1\#1\#1\#1\#1 is followed also accepts the empty stri
 \end{tikzpicture}
 
 
+\subsubsection{k}
+{w|w is only the empty string and 0} \\
+accepts "0" and the empty string $ \epsilon $ \\
+
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial,accepting] (q_0)   {$q_0$}; 
+   \node[state,accepting](q_1) [above right =of q_0] {$q_1$};
+   \node[state](q_2) [below right =of q_0] {$q_2$};
+
+    \path[->] 
+    (q_0) edge node {0} (q_1)
+    	  edge node  {1} (q_2)
+    (q_1) edge node {0,1} (q_2)
+   	(q_2) edge [loop below] node {0,1} ();
+\end{tikzpicture}
+
+\newpage
+\subsection{page 84, question 1.7}
+
+\subsubsection{d}
+The language {0} with two states,\\
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right =of q_0] {$q_1$};
+
+    \path[->] 
+    (q_0) edge node {0} (q_1);
+\end{tikzpicture}
+\subsubsection{e}
+the language 0*1*0* with 3 states \\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right =of q_0] {$q_1$};
+   \node[state](q_2) [right =of q_1] {$q_2$};
+
+    \path[->] 
+    (q_0) edge node {1} (q_1)
+    	edge [loop above]node  {0} (q_2)
+    (q_1) edge node {0} (q_2)
+    edge [loop above]node  {1} (q_2)
+   	(q_2) edge [loop above]node  {0} (q_2);
+\end{tikzpicture}
+\subsubsection{g}
+the language {$\epsilon$} with 1 state \\
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+\end{tikzpicture}
+
+
+\subsubsection{h}
+The language 0* with 1 state \\
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; ;
+
+    \path[->] 
+    (q_0) [loop above]edge node {0} ();
+\end{tikzpicture}
+
+
+\subsection{Solve the following problem,}
+
+A man is travelling with a wolf (w) and a goat (g). He also brings along a nice big
+cabbage (c). He encounters a small river which he must cross to continue his travel.
+Fortunately, there is a small boat at the shore which he can use. However, the boat
+is so small that the man cannot bring more than himself and exactly one more item
+along (from {w, g, c}). The man knows that if left alone with the goat, the wolf will
+surely eat it and the goat if left alone with the cabbage will also surely eat that. The
+man’s task is hence to device a transportation scheme in which, at any time, at most
+one item from {w, g, c} is in the boat and the result is that they all crossed the river
+and can continue unharmed.
+
+\subsubsection{a} Describe a solution to the problem which satisfies the rules of the “game”. You may use your answer to (b) to find a solution. \\
+
+\begin{itemize}
+\item First you carry the goat to the other side, and go back empty.
+\item The you ferry the wolf to the other side, and swap with the goat and bring the goat back.
+\item you then swap the goat with the cabbage and bring it to the other side.
+\item lastly you head back empty and bring the goat.
+\item you now have all the items on the other side of the river.
+\end{itemize}
+
+
+\subsubsection{b}
+The string all of the valid moves are 
+\begin{equation}
+\begin{split}
+(g(m(x(g(y(m(g)*)*)*)*)*)*)* \\
+x,y = (w|c) \\
+x \neq y
+\end{split}
+\end{equation}
+
+
+\vspace{5mm}
+This is due to the fact that it's legal moves in the game, like the man can bring the goat to the other side and bring it back too, it's bad move, but it's still a valid move. \\
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right =of q_0] {$q_1$};
+   \node[state](q_2) [right =of q_1] {$q_2$};
+   \node[state](q_3) [right =of q_2] {$q_3$};
+   \node[state](q_4) [below =of q_3] {$q_4$};
+   \node[state](q_5) [left =of q_4] {$q_5$};
+   \node[state](q_6) [left =of q_5] {$q_6$};
+   \node[state,accepting](q_7) [left =of q_6] {$q_7$};
+
+    \path[->] 
+    (q_0) edge node {g} (q_1)
+    (q_1) edge node {g} (q_0)
+   	      edge node {m} (q_2)
+    (q_2) edge node {m} (q_1)
+   	      edge node {w,c} (q_3)
+   	(q_3) edge node {w,c} (q_2)
+   	      edge node {g} (q_4)
+   	(q_4) edge node {g} (q_3)
+   	      edge node {w,c} (q_5)
+   	(q_5) edge node {w,c} (q_4)
+   	      edge node {m} (q_6)
+   	(q_6) edge node {m} (q_5)
+   	      edge node {g} (q_7)   	      
+   	(q_7) edge node {g} (q_6);
+\end{tikzpicture}
+
+
+
+
+\section{Week 2}
+
+\subsection{page 86, question 1.16}
+* is any number \\
+! is one or more \\
+
+\subsubsection{a}
+it accepts (bb)*a!(a|b)* \\
+
+the language 0*1*0* with 3 states \\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state,accepting](q_1) [above right =of q_0] {$q_1$};
+   \node[state](q_2) [below right =of q_0] {$q_2$};
+
+    \path[->] 
+    (q_0) edge node {a} (q_1)
+   		  edge [bend left]node {b} (q_2)
+    (q_1) edge [loop above]node {a,b} (q_1)
+   	(q_2) edge [bend left]node  {b} (q_0);
+\end{tikzpicture}
+
+\subsubsection{b}
+
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state,accepting](q_1) [above right =of q_0] {$q_1$};
+   \node[state,accepting](q_2) [below right =of q_0] {$q_2$};
+
+    \path[->] 
+    (q_0) edge node {a} (q_2)
+   		  
+    (q_1) edge node {a} (q_0)
+    	  edge [loop right]node {b} ()
+   	(q_2) edge [loop right]node  {a} ()
+   	      edge []node  {b} (q_1);
+\end{tikzpicture}
+
+\subsection{page 86, question 1.17}
+
+\subsubsection{a}
+The first task is to make a NFA recognizing (01u001u010)* \\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right =of q_0] {$q_1$};
+   \node[state](q_2) [right =of q_1] {$q_2$};
+   \node[state,accepting](q_3) [below =of q_2] {$q_3$};
+   \node[state,accepting](q_4) [below =of q_1] {$q_4$};
+
+
+
+    \path[->] 
+    (q_0) edge node {0} (q_1)
+    (q_1) edge node {0} (q_2)
+    	  edge node {1} (q_3)
+   	(q_2) edge node {0} (q_3)
+   	(q_3) edge node {0,$\epsilon$} (q_4)
+   	(q_4) edge node {$\epsilon$} (q_0);
+\end{tikzpicture}
+\\
+
+\subsubsection{b}
+After converting this to a DFA\\
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right =of q_0] {$q_1$};
+   \node[state](q_2) [right =of q_1] {$q_2$};
+   \node[state,accepting](q_3) [below =of q_2] {$q_3$};
+   \node[state,accepting](q_4) [below =of q_1] {$q_4$};
+
+
+
+    \path[->] 
+    (q_0) edge node {0} (q_1)
+    (q_1) edge node {0} (q_2)
+    	  edge node {1} (q_3)
+   	(q_2) edge node {0} (q_3)
+   	(q_3) edge node {0,$\epsilon$} (q_4)
+   	(q_4) edge node {$\epsilon$} (q_0);
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
 \chapter{Questions 2018}
 \newpage
 \section{1. Finite automata and regular languages}
@@ -209,7 +435,7 @@ What is it
 	Finite automata, regular languages
 	
 regular languages
-
+aboveabove
 Finite atomata
 
 Nondetermanistic
