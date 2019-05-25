@@ -1,4 +1,4 @@
-%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+% 	%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
 
 \documentclass[a4paper,10pt,titlepage]{report}
 
@@ -412,12 +412,134 @@ After converting this to a DFA\\
    	(q_4) edge node {$\epsilon$} (q_0);
 \end{tikzpicture}
 
+\subsection{page 86, question 1.18}
+Predefined terms
+\begin{equation}
+x = (0,1)^*
+\end{equation}
+\begin{equation}
+y = (0|1)
+\end{equation}
+
+\subsubsection{a}
+$1x0$
+\subsubsection{b}
+$x1x1x1x$
+\subsubsection{c}
+$x0101x$
+\subsubsection{d}
+$yy0x$
+\subsubsection{e}
+$(0(yy)*)|1y(yy)^*)$
+\subsubsection{f}
+$ 0^*(1+10)^* $
+\subsubsection{g}
+$ yyyyy $
+
+
+\subsection{page 86, question 1.19 a}
+
+Convert the following regex to a NFA via lemma 1.55\\
+\begin{equation}
+(0 \cup 1)^*000(0\cup 1)^* 
+\end{equation}
+\begin{center}
+
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+   \node[state](q_1) [right =of q_0] {$q_1$};
+   \node[state](q_2) [right =of q_1] {$q_2$};
+   \node[state,accepting](q_3) [right =of q_2] {$q_3$};
 
 
 
+    \path[->] 
+    (q_0) edge [loop above] node {0,1} (q_0)
+    	  edge node {0} (q_1)
+    (q_1) edge node {0} (q_2)
+   	(q_2) edge node {0} (q_3)
+   	(q_3) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+\end{center}
+
+\subsection{page 86, question 1.20}
+\subsubsection{a}
+\begin{equation}
+a^*b^*
+\end{equation}
+member
+aa, ab, aabb, aab, abbbb
+not member
+ba, abab, 
+\subsubsection{b}
+member
+abab, ababababab,
+not member
+aaba baba
+\subsubsection{c}
+member
+ab, aabb,
+not memeber
+ba, aabba
+\subsubsection{d}
+member
+aaa, aaaaaa
+not memeber
+a, aaaa
+\subsubsection{e}
+member
+
+not memeber
+\subsubsection{f}
+member
+
+not memeber
+\subsubsection{g}
+member
+ab, b
+not memeber
+abb, aab
+\subsubsection{h}
+member
+
+not memeber
+
+\subsection{page 86, question 1.21 b}
+
+The solution is 
+\begin{equation}
+((a|b)(a,bb)*b(a)?)*
+\end{equation}
+(a or b, followed by any number of (a,bb)* followed by a single b (as it matches uneven numbers of b and followed by 0 or 1 a*
+
+\subsection{page 86, question 1.29}
+
+\subsubsection{a}
+
+For the task a we have the sting 
+\begin{equation}
+0^n1^n2^n
+\end{equation}
+the first contradiction is that when we have a string eg. 000111222 and we split it so we have the floowing, x = 000, y = 111, z = 222 and we pump y so we have the string xyyz this violates the first condition of the pumping lemma, as we'll have more 1s then 0s and 2s.
+
+the string y only contains 1s which also causes a contradiction.
+
+and the 3rd case if we have the string x = 00, y = 011 and z = 1222 where we'll get out of order letters so we'll again reach a contradiction.
 
 
+\subsubsection{b}
 
+For assignment b i find it a bit odd, i may misunderstand the exercise but w/e
+
+We want to pump the language
+\begin{equation}
+a_2 = \{www|w \in \{a,b\}^*\}
+\end{equation}
+But from my understanding is the * a klein star? eg then one w and www are equivalent as \{a,b\} is all possibly strings in the library w. ? or is it understand such that w is equal to either a or b but any number of them eq $\{a|b\}^*$,\\
+How i choose to intercept it for now is that w is equal to either the string a* or b* and if this is the case then some of the same argumentation as for task a is valid.
+\\
+www can give us the string 111000111 and we can split it as follows. 111|1000|11111, This means that zyyx gives of a out of order 1 and we therefor get a contradiction wrt. to the pumping lemma.
 
 
 
