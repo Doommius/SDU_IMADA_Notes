@@ -10,10 +10,14 @@
 \usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
+\usepackage[normalem]{ulem}
 \usepackage{lastpage}
+\usepackage{multicol}
 \usepackage{listings}
+\usepackage{qtree}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{subfig}
 \usepackage{MnSymbol}
 \usepackage[document]{ragged2e}
 \usepackage[margin=1in]{geometry}
@@ -464,47 +468,73 @@ Convert the following regex to a NFA via lemma 1.55\\
 \end{center}
 
 \subsection{page 86, question 1.20}
+For each of the following expressions give two strings that are and two that are not in the languages. assume that the alphabet is \{a,b\}
+\begin{multicols}{2}
 \subsubsection{a}
 \begin{equation}
 a^*b^*
 \end{equation}
-member
-aa, ab, aabb, aab, abbbb
-not member
-ba, abab, 
+member\\
+aa, ab, aabb, aab, abbbb\\
+not member\\
+ba, abab, \\
 \subsubsection{b}
-member
-abab, ababababab,
-not member
-aaba baba
+\begin{equation}
+a(ba)^*b
+\end{equation}
+member\\
+abab, ababababab,\\
+not member\\
+aaba baba\\
 \subsubsection{c}
-member
-ab, aabb,
-not memeber
-ba, aabba
+\begin{equation}
+a^* \cup B^*
+\end{equation}
+member\\
+ab, aabb \\
+not member \\
+ba, aabba\\
 \subsubsection{d}
-member
-aaa, aaaaaa
-not memeber
-a, aaaa
+\begin{equation}
+(aaa)^*
+\end{equation}
+member\\
+aaa, aaaaaa \\
+not member\\
+a, aaaa\\
 \subsubsection{e}
-member
-
-not memeber
+\begin{equation}
+\sum^*a\sum^*b\sum^*a\sum^*
+\end{equation}
+member\\
+todo\\
+not member\\
+todo\\
 \subsubsection{f}
-member
-
-not memeber
+\begin{equation}
+aba \cup bab
+\end{equation}
+member \\
+todo\\
+not member\\
+todo\\
 \subsubsection{g}
-member
-ab, b
-not memeber
-abb, aab
+\begin{equation}
+(\epsilon \cup a)b
+\end{equation}
+member\\
+ab, b\\
+not member\\
+abb, aab\\
 \subsubsection{h}
-member
-
-not memeber
-
+\begin{equation}
+(a\cup ba \cup bb)\sum^*
+\end{equation}
+member\\
+todo\\
+not member\\
+todo \\
+\end{multicols}
 \subsection{page 86, question 1.21 b}
 
 The solution is 
@@ -536,42 +566,188 @@ We want to pump the language
 \begin{equation}
 a_2 = \{www|w \in \{a,b\}^*\}
 \end{equation}
-But from my understanding is the * a klein star? eg then one w and www are equivalent as \{a,b\} is all possibly strings in the library w. ? or is it understand such that w is equal to either a or b but any number of them eq $\{a|b\}^*$,\\
+But from my understanding is the * a kleen star? eg then one w and www are equivalent as \{a,b\} is all possibly strings in the library w. ? or is it understand such that w is equal to either a or b but any number of them eq $\{a|b\}^*$,\\
 How i choose to intercept it for now is that w is equal to either the string a* or b* and if this is the case then some of the same argumentation as for task a is valid.
 \\
 www can give us the string 111000111 and we can split it as follows. 111|1000|11111, This means that zyyx gives of a out of order 1 and we therefor get a contradiction wrt. to the pumping lemma.
 
 
+\subsection{page 88, question 1.30}
+The error There's a few things here, the first case from 1:73 fail right away as the string 0001111 is in the lang, the case of out of order fails as if we can get the string 00100111 ten we'll reach a contradiction but the case of 
 
 
 
+\subsection{page 89, question 1.36}
+
+For the language w there exist a DFA that accepts if, for the revere language $w^r$ the DFA which a reversed edges and the start state is now our accept state. 
+
+
+\section{week 3}
+
+\subsection{page 88, question 1.29(a),(b) and 1.30}
+
+Already done, see above.
+
+\subsection{page 89. question 1.35}
+\textbf{ILONA}
+As B is in bijection of A there for it's a regular.
+
+
+\subsection{page 91. question 1.51}
+\begin{multicols}{2}
+
+
+\subsubsection{a}
+This can be proved via the pumping lemma. where you can get out of order 1 and/or 0s and that causes a contradiction.
+
+\subsubsection{b}
+Same as a wrt. our of order.
+
+\subsubsection{c}
+
+This is this is either the unbounded string 0 or 1.
+
+\subsubsection{d}
+this is again wrt. out of order 0.1 eg. if we can get the string 01010 by umping as this is not in the lang.
+\end{multicols}
+\subsection{page 154. question 2.2}
+Give parse trees and derivations for each string using the following Context free gramma (CFG)  \\
+\begin{center}
+$ E \rightarrow E+T | T$ \\
+$ T \rightarrow E \times F | F $ \\
+$ F \rightarrow (E) | a$
+\end{center}
+
+
+\begin{figure}[h]%
+    \centering
+    \subfloat[a]{{\Tree[.E [.T [.F [a ]]]] }}%
+    \qquad
+    \subfloat[a+a]{{\Tree
+	[.E 
+		[.T [.F [a ]]]
+		+
+		[.E [.T [.F [a ]]]]
+	] }}%
+	\qquad
+    \subfloat[a+a+a]{{
+    \Tree
+	[.E 
+		[.T [.F [a ]]]
+		+
+		[.E [.T [.F [a ]]]
+			+
+			[.E [.T [.F [a ]]]		
+		]
+	]]
+	}}%
+	    \subfloat[((a))]{{
+	\Tree
+	[.E 
+		[.T [.F [( [.E [.T [.F [( [[.T [.F [a ]]]] ) ]]]] ) ]]]
+	]
+	}}%
+    \caption{2 Figures side by side}%
+    \label{fig:example}%
+\end{figure}
+
+\subsection{page 154. question 2.4}
+\begin{multicols}{2}
+\subsubsection{a}
+$ S \rightarrow TTT $\\
+$ T \rightarrow E1E $\\
+$ E \rightarrow FTF $\\
+$ F \rightarrow 0 | \epsilon $\\
+\subsubsection{b}
+$ S \rightarrow 0F0 | 1F1 $\\
+$ F \rightarrow F0F | F1F | \epsilon $\\
+\subsubsection{c}
+$ S \rightarrow EFE $\\
+$ E \rightarrow FEF | EFF | FFE | \epsilon $\\
+$ F \rightarrow 0 | 1$
+\subsubsection{d}
+$ S \rightarrow E0E $\\
+$ E \rightarrow FEF | \epsilon $\\
+$ F \rightarrow 0 | 1$
+\subsubsection{e}
+$ S \rightarrow E $\\
+$ E \rightarrow FEF | GEG | \epsilon $\\
+$ F \rightarrow 0 $
+$ G \rightarrow 1 $
+\subsubsection{f}
+$ S \rightarrow \epsilon $ \\
+
+
+\end{multicols}
+\newpage
+\subsection{2.6}
+Give the CFG that generates the following languages
+\begin{multicols}{2}
+
+\subsubsection{b}
+The complment of the langauges $ \{a^nb^n | n \geq 0 \} $
+
+$ S \rightarrow FG $\\
+$ G \rightarrow GbG $\\
+$ F \rightarrow FaF $
+
+\subsection{d}
+For the third one it's a unbounded string with up to k alternations of $0^*1^*0^*1^*0^*$
+
+This can simply be defined using the following grammar.
+
+$ S \rightarrow FG $\\
+$ E \rightarrow GE | FE | \epsilon $\\
+$ G \rightarrow 1G | \epsilon $\\
+$ F \rightarrow 0F | \epsilon $
+
+\end{multicols}
+
+
+\subsection{2.14}
+We start in the initial state \\
+$ S \rightarrow BAB | B | \epsilon $
+$ B \rightarrow 00 | \epsilon $
+
+From here we can eliminate the first $\epsilon$
+
+$ S \rightarrow BAB | B | \epsilon $
+$ B \rightarrow 00 \sout{| \epsilon }$
+
+• 2.4
+• 2.6(b),(d)
+• 2.14 and 2.16
+• 2.32.
+• 2.38.
+• 2.42 Hint for (d): first intersect the language with a suitably chosen regular language
+and then prove that the language you obtain is not context-free.
 
 \newpage
 \chapter{Questions 2018}
 \newpage
 \section{1. Finite automata and regular languages}
 
-Introduction
-What is it
+\subsection{Introduction}
+I'm going to talk about Finite automata and regular languages.
 
-	Finite automata, regular languages
+\subsubsection{Finite automata}
+	Finite automata is the simplest computational model that works via states and transitions, and therefor uses extremely limited memory. Using this model we can recognize and formulate regular languages, This can be a simple tasks a finding a substring, or used as a tool for designing more complex systems. \\
 	
-regular languages
-aboveabove
-Finite atomata
+A Finite atomata is defined as a tuple containing the set of states Q, The known alphabet $\sigma$, The transition function $\delta: Q \times \sigma \longrightarrow Q$the start state $q_1$ and the set of accept states F. \\
+	
+\subsubsection{Regular languages}
+	A regular languages is a sequence of letters in some alphabet defined by $\sum$ the empty alphabet is defined by the empty set $ \emptyset $, and contains letters and the empty string $ \epsilon $. they are also closed under the union $ \cup $, concatination $ \cap $, and kleene star $^*$, and the proceeding order is $^*, \cap, \cup$, A language is Regular is a Finite automata recognizes it.
+	
+\subsection{Pumping lemma for regular languages}
 
-Nondetermanistic
+The pumping lemma is a way for us to proof if a language is regular. en example would be the language.
+$0^n1^n | n \geq 0$
 
+The way you do this is to assume it's regular and make a counter argument. in this cases there are 3. the first case we can pump the language to have more 1's than 0s or(2) the other way around.. the third(3) is that we can get out of order letters if we pump a string containing both 0s and 1s, 
+	
+\subsection{Deterministic And Non-deterministic}
 
-NFA
-DFA
-
-
-Pumping lemma for regular languages
-
-
-
-
+The difference between deterministic and non-deterministic is the way they operate. they recognize the same class of languages as a NFA can be convert into a DFA and the same goes the other way around, it is not a efficiency operation as the algorithm is exponential. there is however some benefits to both. where the non-deterministic preforms branching and could potentially benefit the execution wrt. size, runtime. or recourse consumption.
 
 
 \newpage
@@ -698,6 +874,20 @@ As is average case.
 
 
 
+ 
+\end{document}
+
+
+
+
+%
+%
+%
+% Old STOP!, This is the "trash"
+% 
+%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \newpage
 \chapter{Questions 2017}
@@ -750,6 +940,7 @@ As is average case.
 \subsection{9. Adversary arguments – technique, examples.}
 \subsection{10. Approximation algorithms}
 
+%
 \newpage
 \chapter{Lectures}
 \subsection{Format}
@@ -844,6 +1035,4 @@ Information on theoretic lower bound technique.
     For general TSP and a fixed P, $\Delta $an alg with approx p
     \\
     Vertex cover has a 2-approx alg.
- 
-\end{document}
-
+    
