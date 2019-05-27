@@ -2,6 +2,10 @@
 
 \documentclass[a4paper,10pt,titlepage]{report}
 
+
+
+%Sensitive to import order.
+\usepackage[dvipsnames]{xcolor}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
@@ -15,6 +19,8 @@
 \usepackage{multicol}
 \usepackage{listings}
 \usepackage{qtree}
+
+\usepackage{cancel} 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{subfig}
@@ -42,11 +48,24 @@
 \pagestyle{fancy}
 \fancyhf{}
 
+
+
+
+%Commands
+
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
 \newcommand{\Z}{\mathbb{Z}}
 \lhead{Complexity and Computability (DM553 - Notes))}
 \rhead{Mark Jervelund (Mjerv15)}
 \rfoot{Page  \thepage \, of \pageref{LastPage}}
 \counterwithin*{equation}{section}
+
+
+
+
+
+
+
 
 \begin{document}
 
@@ -706,21 +725,83 @@ $ F \rightarrow 0F | \epsilon $
 
 \subsection{2.14}
 We start in the initial state \\
-$ S \rightarrow BAB | B | \epsilon $
-$ B \rightarrow 00 | \epsilon $
+$ A \rightarrow BAB | B | \epsilon $\\
+$ B \rightarrow 00 | \epsilon $ \\
+\vspace{5mm}
+From here we put a new start state S\\
+\vspace{5mm}
+$ S \rightarrow A$\\
+$ A \rightarrow BAB | B | \epsilon $\\
+$ B \rightarrow 00 | \epsilon $\\
+\vspace{5mm}
+From here we can eliminate the first $\epsilon$ \\
+\vspace{5mm}
+$ S \rightarrow A$\\
+$ A \rightarrow BAB | B | \epsilon \textcolor{OliveGreen}{|BA|AB}$\\
+$ B \rightarrow 00 $ $\textcolor{OliveGreen}{\cancel{ | \ \epsilon \ }}$\\
 
-From here we can eliminate the first $\epsilon$
+From here we can eliminate the $\epsilon$  in our 2nd rule, \\
+\vspace{5mm}
+$ S \rightarrow\Ccancel[red]{ | \ A \ |} \textcolor{red}{ BAB|\Ccancel[Cyan]{ B |}BA|AB|\epsilon} \textcolor{Cyan}{|CC}$\\
+$ A \rightarrow BAB | \Ccancel[Cyan]{ B |} {\Ccancel[red]{  \ \epsilon \ |}} \textcolor{OliveGreen}{BA|AB} \textcolor{Cyan}{|CC}$\\
+$ B \rightarrow \Ccancel[Cyan]{ 00 |}  \Ccancel[OliveGreen]{ \epsilon | } CC$\\
+$ \textcolor{Cyan}{C -> 0} $
+\subsection{page 156, question 2.16}
+Show that the class of context free languages are closed under the regular operations Concatenation, union and Star\\ 
+Using the following grammar \\
+\begin{itemize}
+\item $ S_1 \rightarrow aS_1b$
+\item $ S_1 \rightarrow \epsilon$
 
-$ S \rightarrow BAB | B | \epsilon $
-$ B \rightarrow 00 \sout{| \epsilon }$
+\item $ S_2 \rightarrow cS_2d$
+\item $ S_2 \rightarrow \epsilon$
+\end{itemize}
+\subsubsection{Concatenation}
+This is simply shown via 
 
-• 2.4
-• 2.6(b),(d)
-• 2.14 and 2.16
-• 2.32.
-• 2.38.
-• 2.42 Hint for (d): first intersect the language with a suitably chosen regular language
+Making s start symbol S, and have the two languages follow each other $S_1$ $S_2$ \\
+$S \rightarrow S_1S_2$
+\subsubsection{Union}
+This is simply shown via 
+
+Making s start symbol S, \\
+$S \rightarrow S_1 | S_2$
+\subsubsection{Star}
+This is simply shown via 
+
+Making s start symbol S, \\
+$S \rightarrow S_1S$
+
+
+\subsection{page 158, question 2.32}
+ Let $A/B=\{w|wx \in A$ for some $x \in B \}$, Show that if A is context free and B is regular, then A/B is context free.
+ 
+ "Proof. We can augment the memory of the PDA recognizing the CFL with the DFA recognizing the regular langauge and run both machines in parallel. We accept iff both machines accept.\ref{http://web.mit.edu/bmhuang/www/notes/18404-notes.pdf page 14, 4.3}\\
+ note the intersection of two CFL's and not necessarily a CFL.!
+ 
+ 
+ \subsection{page 158, question 2.38}
+ As each step has a most 2 sub rules we can calculate that at step 1 we increasing the string length by 2n-1 and as all rules do this our end case is 2n-1
+ 
+ \subsection{page 158, question 2.42}
+ • 2.42 Hint for (d): first intersect the language with a suitably chosen regular language
 and then prove that the language you obtain is not context-free.
+
+ \begin{multicols}{2}
+\subsubsection{a}
+A break wrt. out of order letters, and not n counts of some letter
+\subsubsection{b}
+For the lang b is has to be in the size of wrt. $n+n^2+n^3$ eg 3,14, 39, 84, 155 and you can pump it to a length not in this range,
+
+\subsubsection{c}
+i dont know
+\subsubsection{d}
+i dont know
+
+\end{multicols}
+ 
+ 
+
 
 \newpage
 \chapter{Questions 2018}
@@ -740,10 +821,17 @@ A Finite atomata is defined as a tuple containing the set of states Q, The known
 	
 \subsection{Pumping lemma for regular languages}
 
-The pumping lemma is a way for us to proof if a language is regular. en example would be the language.
+The pumping lemma is a way for us to proof if a language is regular. The theorem for the pumping lemma states that the 3 conditions for the lemma is\\
+\begin{itemize}
+\item for each $i \geq 0, xy^iz \in A $
+\item $ |y| > 0 $
+\item $ |xy| \leq p$ where p is the pumpking length. 
+\end{itemize} 
+
+
 $0^n1^n | n \geq 0$
 
-The way you do this is to assume it's regular and make a counter argument. in this cases there are 3. the first case we can pump the language to have more 1's than 0s or(2) the other way around.. the third(3) is that we can get out of order letters if we pump a string containing both 0s and 1s, 
+The way you do this is to assume it's regular and make a counter argument. with the pumping lemma we have 3 conditions that our counter argument most meet. the first case we can pump the language to have more 1's than 0s or(2) the other way around.. the third(3) is that we can get out of order letters if we pump a string containing both 0s and 1s, 
 	
 \subsection{Deterministic And Non-deterministic}
 
