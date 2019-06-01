@@ -164,7 +164,7 @@
 
 \subsubsection{f}
 {w|w doesn't contain the substring 001} \\
-Accepts any string that doesn't contain the substring 001, and loops in rejecting state if this state is found, was unsure if the looping was needed but included it if it was the case.
+Accepts any string that doesn't contain the substring 001, and loops in rejecting state if this state is found, was unsure if the looping was needed but included it if it was the case.\\
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
    \node[state,initial,accepting] (q_0)   {$q_0$}; 
    \node[state,accepting](q_1) [right=of q_0] {$q_1$};
@@ -178,6 +178,7 @@ Accepts any string that doesn't contain the substring 001, and loops in rejectin
     	edge [bend left] node {1} (q_1)
     (q_3) edge [loop above] node {0,1} ();
 \end{tikzpicture}
+\\
 
 \subsubsection{h}
 {w|w is any string except 11 and 111}\\
@@ -819,7 +820,7 @@ Give a CFG that generates B
 Read the input from end to front, pushing every 0 you meet onto the stack. if a 1 is found you continue parsing but instead pop a letter from the stack until it's empty, if you reach the beginning of the input before the stack is empty you reject.
 
 \subsection{2002 program 2}
-Let $\sum$ be a finite alphabet and let $L \subset \sum^+ $ be a regular language, Define a new language L'as the language of all words w \in \sum^* such that w is obtained from a word in L by deleting the first letter, is the language L' regular as well? prove your answer\\
+Let $\sum$ be a finite alphabet and let $L \subset \sum^+ $ be a regular language, Define a new language L'as the language of all words w $\in \sum^*$ such that w is obtained from a word in L by deleting the first letter, is the language L' regular as well? prove your answer\\
 
 
 
@@ -875,9 +876,9 @@ A CFG consist of a collection of substitution rules, a CFG operate on a set of v
  an exsample of such a rule is:
  $A \rightarrow 0A1$\\
  $A \rightarrow B$\\
- $B \rightarrow # $ \\
+ $B \rightarrow \# $ \\
  
-This above gramma should generate the string $0^n#1^n$ where n is any natural number including 0.
+This above gramma should generate the string $0^n\#1^n$ where n is any natural number including 0.\\
 
 The formal definistion of a CFG is a 4 tuple consisting of the set of variables V, the set of terminals $\sum$, the set of rules R and the start symbol S that is in V\\
 
@@ -983,17 +984,7 @@ As is average case.
 \newpage
 \section{11. Approximation algorithms}
 
-
-
-
-
-
-
-
-
-
-
-
+vertex cover
 
  
 \end{document}
