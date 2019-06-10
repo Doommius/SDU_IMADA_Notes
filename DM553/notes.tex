@@ -356,7 +356,7 @@ This is due to the fact that it's legal moves in the game, like the man can brin
 \section{Week 2}
 
 \subsection{page 86, question 1.16}
-* is any number \\
+* is zero or more \\
 ! is one or more \\
 
 \subsubsection{a}
@@ -609,8 +609,7 @@ For the language w there exist a DFA that accepts if, for the revere language $w
 Already done, see above.
 
 \subsection{page 89. question 1.35}
-\textbf{ILONA}
-As B is in bijection of A there for it's a regular.
+As B is in bijection of A therefor it's a regular.
 
 
 \subsection{page 91. question 1.51}
@@ -837,10 +836,39 @@ I'm going to talk about Finite automata and regular languages.
 \subsubsection{Finite automata}
 	Finite automata is the simplest computational model that works via states and transitions, and therefor uses extremely limited memory. Using this model we can recognize and formulate regular languages, This can be a simple tasks a finding a substring, or used as a tool for designing more complex systems. \\
 	
-A Finite atomata is defined as a tuple containing the set of states Q, The known alphabet $\sigma$, The transition function $\delta: Q \times \sigma \longrightarrow Q$the start state $q_1$ and the set of accept states F. \\
+A Finite atomata is defined as a tuple containing:
+\begin{itemize}
+\item The set of states Q, 
+\item The known alphabet $\Sigma$, 
+\item The transition function $\delta: Q \times \Sigma \longrightarrow Q$
+\item the start state $q_1$ 
+\item and the set of accept states F. \\
+\end{itemize} 
+
 	
 \subsubsection{Regular languages}
-	A regular languages is a sequence of letters in some alphabet defined by $\sum$ the empty alphabet is defined by the empty set $ \emptyset $, and contains letters and the empty string $ \epsilon $. they are also closed under the union $ \cup $, concatination $ \cap $, and kleene star $^*$, and the proceeding order is $^*, \cap, \cup$, A language is Regular is a Finite automata recognizes it.
+	A regular languages is a sequence of letters in some alphabet defined by $\sum$ the empty alphabet is defined by the empty set $ \emptyset $, and contains letters and the empty string $ \epsilon $. they are also closed under the union $ \cup $, concatination $ \cap $, and kleene star $^*$, and the proceeding order is $^*, \cap, \cup$, A language is Regular is a Finite automata recognizes it.\\
+	
+	Add definitions
+	
+	
+\section{Regular languages Closure under}
+TODO
+
+
+Union   
+
+Concatenation
+
+Intersection
+
+Klein star
+
+\subsection{Deterministic And Non-deterministic}
+
+The difference between deterministic and non-deterministic is the way they operate. they recognize the same class of languages as a NFA can be  convert into a DFA and the same goes the other way around, it is not a efficiency operation as the algorithm is exponential. there is however some benefits to both. where the non-deterministic preforms branching and could potentially benefit the execution wrt. size, runtime. or recourse consumption. \\
+
+The correct term here would that that a DFA Can simulate a NFA \\
 	
 \subsection{Pumping lemma for regular languages}
 
@@ -856,12 +884,11 @@ $0^n1^n | n \geq 0$
 
 The way you do this is to assume it's regular and make a counter argument. with the pumping lemma we have 3 conditions that our counter argument most meet. the first case we can pump the language to have more 1's than 0s or(2) the other way around.. the third(3) is that we can get out of order letters if we pump a string containing both 0s and 1s, 
 	
-\subsection{Deterministic And Non-deterministic}
 
-The difference between deterministic and non-deterministic is the way they operate. they recognize the same class of languages as a NFA can be  convert into a DFA and the same goes the other way around, it is not a efficiency operation as the algorithm is exponential. there is however some benefits to both. where the non-deterministic preforms branching and could potentially benefit the execution wrt. size, runtime. or recourse consumption. \\
 
-The correct term here would that that a DFA Can simulate a NFA \\
+\subsection{Example -> Pumping lemma or convert NFA to DFA}
 
+TODO exam with pumping lemma
 
 \newpage
 \section{2. Pushdown automata and context-free languages}
@@ -871,14 +898,27 @@ The correct term here would that that a DFA Can simulate a NFA \\
 I'm going to talk about Pushdown automata and context free languages. These topics are used in modern compilers to parse a programming language and is a useful tool in language processing wrt. human language as well as when interpreting one language to an other.
 \subsection{Pushdown automata}
 A pushdown automata is a type of automaton that employs a stack to help with the computation, this allows the PDA to recognize and run Context free grammars and all the languages below it.
+Add definitions
+\begin{itemize}
+\item The set of states Q, 
+\item The known alphabet $\Sigma$, 
+\item $\Gamma $ the stack alphabet
+\item The transition function $\delta: Q \times \Sigma_\epsilon \times Gamma_\epsilon\longrightarrow Q$
+\item the start state $q_0$ 
+\item the set of reject states states F
+\end{itemize} 
 \subsection{Context free grammar}
 A CFG consist of a collection of substitution rules, a CFG operate on a set of variables, terminals and a designated start symbol.
  an exsample of such a rule is:
- $A \rightarrow 0A1$\\
- $A \rightarrow B$\\
- $B \rightarrow \# $ \\
+ \begin{multicols}{3}
+\begin{itemize}
+\item $A \rightarrow 0A1$
+\item $A \rightarrow B$
+\item $B \rightarrow \# $
+\end{itemize}
+ \end{multicols}
  
-This above gramma should generate the string $0^n\#1^n$ where n is any natural number including 0.\\
+This above grammar should generate the string $0^n\#1^n$ $n \in \mathbb{N} $.\\
 
 The formal definistion of a CFG is a 4 tuple consisting of the set of variables V, the set of terminals $\sum$, the set of rules R and the start symbol S that is in V\\
 
@@ -903,21 +943,55 @@ The steps to convert a gramma to CNF is to:\\
 
 
 \subsection{Pumping lemma of CFL}
+TODO
+\subsection{Example with CFG -> CNF}
 
-
-
+TODO
 
 \newpage
 \section{3. Turing machines}
 
-Introduction
-    What is a turning machine
-        
-Multitape
+\subsection{Introduction}
+In this talk i'll talk about turning machines and their use in computer science, A turning machine is a theoretical form of computer in the same sense as the other models but it's the closets one to modern computers and we can use it for decide things wet. to run time, and compatibility of problems and algorithms.\\
 
-Nondetermanistic turning machine
-    Faster but less powerfull?
+\subsection{What is a turing machine}
+    What is a turing machine, The model itself is of a tape and a read/write head that can move left or right on the tape.\\
+\begin{itemize}
+\item Q is the set of states
+\item $\sum$ is the input alphabet not containing the blank symbol $\textvisiblespace$
+\item $\tau$ is the tape alphabet where  $\textvisiblespace \in \tau$ and $\sum \subseteq \tau $
+\item  $\delta: Q \times \tau \rightarrow Q \times \tau \times \{L,R\} $ is the transition function.
+\item $q_0 \in Q$ is the starte states
+\item $q_{accept} \in Q$ is the accept state
+\item $q_{reject} \in Q $is the reject state where $q_{reject} \neq q_{accept}$ 
+\end{itemize}
     
+
+\subsection{Different types of Turing machines}
+All turning machines are equal in power, show why.
+\subsubsection{Multitape}
+
+The idea is to show that a multitape turing machine $TM_m$ can be simulated on a equivalent single tape turing machine. this is done by storing the tapes on a single tape and discriminating them via the letter $\#$, \\
+
+And we use dot to mark the position of the read head on the underlying tapes. 
+If we reach the condition where one of the simulated readheads reaches a $ \# $ symbol on the right side of the simulated tape we write a \textvisiblespace \ and shift the contents of the tape by 1,  
+\subsubsection{Nondetermanistic turning machine}
+A ND turing machine can be simulated by running a tree search to find accepting state for the desired configuration. and we'll want to approach this in a breath first search as using a dept first can result in following a infinite branch that never reaches a accept state, therefor it's better running a breath first as we're guaranteed to find a accept state should one exist but the issue of looping still exists.
+
+We further call a non deterministic turing machine a decider if all branches halt on all input.
+
+\subsection{Enumerators}
+
+Is a turing machine attached to a printer, basically it generates all possible outputs for a set configuration.
+
+\subsubsection{Theorem 3.21}
+A language is only turing recognizable if and only if some enumerator enumerates it.
+
+
+
+\section{example/proof - Turing recognizable/decidable}
+
+TODO
 
 
 
@@ -931,7 +1005,7 @@ Examples of Decidability and undecidability
 
 
 
-
+ 
 \newpage
 \section{5. Reducibility}
 What is it and how to use it.
@@ -952,12 +1026,16 @@ qlique, subset sum, Hamiltonian circuit,
 
 
 
+
+
 \newpage
 \section{7. Proof that SATISFIABILITY is NP-complete (do not assume that
 there is a known NP-Complete problem — use the proof in Sipser’s
 book).}
 
-Cook-levin theorem - insipset, præsentation use slides on homepage.
+Cook-levin theorem - in sipset, presentation use slides on homepage.
+
+
 \newpage
 \section{8. Information-theoretic lower bounds (lower bounds proven by counting
 leaves in decision trees), especially the average case bounds for sorting
