@@ -79,8 +79,351 @@
 \setcounter{page}{1}
 \renewcommand{\thepage}{\arabic{page}}
 \section{Course description}
+\subsection{The aim of the course is to enable the student to }
+\begin{itemize}
+
+
+\item Apply formalisms of formal languages in order to formulate decision problems precisely
+\item Construct finite automata, regular expressions, push-down automata and context-free grammars as elements in an algorithmic solution of more complicated problems.\\
+
+\item Decide the complexity of new problems based on knowledge of the complexity of important examples of problems from the course.
+\item Judge whether a given problem may be solved by a computer or is undecidable.
+\item Argue that problems are NP-complete. 
+\item Judge the possibility to develop an approximation algorithm for a given NP-hard optimization problem.
+\item Give lower bounds for the complexity of problem that are similar in nature to those studied in the course.
+\end{itemize}
+
+These competencies are important both when one wishes to develop new 
+algorithms for a given problem and when one wants to judge whether a 
+given problem may be possible to solve efficiently (possibly only 
+approximately) by a computer.\\
+\vspace{5mm}
+
+The course builds on the knowledge 
+acquired in the courses DM507 Algorithms and data structures and DM551 
+Algorithms and probability.\\
+\vspace{5mm}
+The course forms the basis for doing a
+bachelor project as well as elective candidate level courses containing
+one or more of the following elements: complexity of algorithms, 
+approximation algorithms and computability.\\
+\vspace{5mm}
+Together with courses as above this course also provides a basis for doing a masters thesis on algorithmic  and complexity theoretic subjects.\\
+\vspace{5mm}
+In relation to the competence profile of the degree it is the explicit focus of the course to:
+\begin{itemize}
+\item Give the competence to analyze complexity of (decision) problems.
+\item Give knowledge about the computational power of different models of computation.
+\item Enable the student to construct finite automata and regular expressions for simple languages.
+\item Enable the student to construct push-down automata and context-free grammars for simple languages.
+\item Equip the students with important tools to prove that a given language cannot
+be recognized by a finite automation, a push-down automaton or a Turing
+machine.
+\item Enable the student to prove lower bounds for the complexity of algorithms for a given problem.
+\item Enable the student to develop new approximation algorithms.
+\item Give the student important tools for proving that a given decision problem is NP-complete or undecidable.
+\end{itemize}
+\subsection{Aims}
+\begin{itemize}
+\item Judge the complexity of (decision) problems.
+\item Judge the computational power of various models of computation.
+\item Construct finite automata and regular expressions for simple languages.
+\item Construct push-down automata and context-free grammars for simple languages.
+\item Prove that a given language, which in nature resembles those from the course,
+cannot be recognized by a finite automaton, a push-down automaton or a Turing machine.
+\item Prove lower bounds for the complexity of algorithms for a given problem which in nature resembles those from the course.
+\item Design new approximation algorithms for a given problem which in nature resembles those from the course.
+\item Prove that a given decision problem which in nature resembles those from the course is NP-complete or undecidable.
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
+\chapter{Questions 2018}
+\newpage
+\section{1. Finite automata and regular languages}
+
+\subsection{Introduction}
+I'm going to talk about Finite automata and regular languages.
+
+\subsection{Finite automata}
+	Finite automata is the simplest computational model that works via states and transitions, and therefor uses extremely limited memory. Using this model we can recognize and formulate regular languages, This can be a simple tasks a finding a substring, or used as a tool for designing more complex systems. \\
+	
+A Finite atomata is defined as a tuple containing:
+\begin{itemize}
+\item The set of states Q, 
+\item The known alphabet $\Sigma$, 
+\item The transition function $\delta: Q \times \Sigma \longrightarrow Q$
+\item the start state $q_1$ 
+\item and the set of accept states F. \\
+\end{itemize} 
+
+	
+\subsection{Regular languages}
+	A regular languages is a sequence of letters in some alphabet defined by $\sum$ the empty alphabet is defined by the empty set $ \emptyset $, and contains letters and the empty string $ \epsilon $. they are also closed under the union $ \cup $, concatination $ \cap $, and kleene star $^*$, and the proceeding order is $^*, \cap, \cup$, A language is Regular is a Finite automata recognizes it.\\
+	
+	Add definitions
+	
+	
+\subsection{Regular languages Closure under}
+TODO
+
+
+Union   
+
+Concatenation
+
+Intersection
+
+Klein star
+
+\subsection{Deterministic And Non-deterministic}
+
+The difference between deterministic and non-deterministic is the way they operate. they recognize the same class of languages as a NFA can be  convert into a DFA and the same goes the other way around, it is not a efficiency operation as the algorithm is exponential. there is however some benefits to both. where the non-deterministic preforms branching and could potentially benefit the execution wrt. size, runtime. or recourse consumption. \\
+
+The correct term here would that that a DFA Can simulate a NFA \\
+	
+\subsection{Pumping lemma for regular languages}
+
+The pumping lemma is a way for us to proof if a language is regular. The theorem for the pumping lemma states that the 3 conditions for the lemma is\\
+\begin{itemize}
+\item for each $i \geq 0, xy^iz \in A $
+\item $ |y| > 0 $
+\item $ |xy| \leq p$ where p is the pumpking length. 
+\end{itemize} 
+
+
+$0^n1^n | n \geq 0$
+
+The way you do this is to assume it's regular and make a counter argument. with the pumping lemma we have 3 conditions that our counter argument most meet. the first case we can pump the language to have more 1's than 0s or(2) the other way around.. the third(3) is that we can get out of order letters if we pump a string containing both 0s and 1s, 
+	
+
+
+\subsection{Example -> Pumping lemma or convert NFA to DFA}
+
+TODO exam with pumping lemma
+
+\newpage
+\section{2. Pushdown automata and context-free languages}
+
+
+\subsection{Introduction}
+I'm going to talk about Pushdown automata and context free languages. These topics are used in compilers to parse a programming language and is a useful tool in language processing as well as when interpreting one language to an other.
+\subsection{Pushdown automata}
+A pushdown automata is a type of automaton that employs a stack to help with the computation, this allows the PDA to recognize and run Context free grammars as well as the languages within(regular languages).\\
+
+The formal definition is:
+
+\begin{itemize}
+\item The set of states Q, 
+\item The known alphabet $\Sigma$ (Sigma) 
+\item The stack alphabet $\Gamma $ (Gamma)
+\item The transition function $\delta (delta): Q \times \Sigma_\epsilon \times \Gamma_\epsilon\longrightarrow Q$
+\item the start state $q_0$ 
+\item the set of reject states states F
+\end{itemize} 
+\subsection{Context free grammar}
+A CFG consist of a collection of substitution rules, a CFG operate on a set of variables, terminals and a designated start symbol.\\
+The formal definition is
+\begin{itemize}
+\item The finite set of variables V
+\item The finite set of terminals $\Sigma$ disjoint from V
+\item The finite set of rules R
+\item The start symbol $S \in V$
+\end{itemize}
+\subsubsection{Exsample}
+ \begin{multicols}{3}
+\begin{itemize}
+\item $A \rightarrow 0A1$
+\item $A \rightarrow B$
+\item $B \rightarrow \# $
+\end{itemize}
+\end{multicols}
+ 
+This above grammar should generate the string $0^n\#1^n$ $n \in \mathbb{N} $.\\
+
+A different examples that show ambiguity is the set of variables and terminals \{num,A,-\}\\
+With the rules\
+ \begin{multicols}{3}
+\begin{itemize}
+\item $A \rightarrow A-A $
+\item $A \rightarrow num$
+\end{itemize}
+\end{multicols}
+
+for the above grammar if we apply it to the string\\
+1-2-3 we can get the output 2 or -4 depending on how the grammar is parsed. (1-2)-3 vs 1-(2-3)\\
+We can handle this ambiguity in two manners either we introduce the terminals ( and ) to the language or we can rewrite or rules as to not have this issue.\\
+
+\subsection{Chomsky normal Form}
+Chomsky normal form is a simplified form that we can convert our grammars into which enables to decide things like if a string is generated by a grammar in polynomial time 2n-1\\
+
+The steps to convert a gramma to CNF is to:\\
+\begin{enumerate}
+\item eliminate all $\epsilon$ productions.
+\item Eliminate all productions where RHS is one variable
+\item Eliminate all productions longer than 2 variables
+\item move all terminals to productions where RHS is one terminal.
+\end{enumerate}
+\subsection{Example with CFG -> CNF}
+
+We start in the initial state \\
+$ A \rightarrow BAB | B | \epsilon $\\
+$ B \rightarrow 00 | \epsilon $ \\
+\vspace{5mm}
+From here we put a new start state S\\
+\vspace{5mm}
+$ S \rightarrow A$\\
+$ A \rightarrow BAB | B | \epsilon $\\
+$ B \rightarrow 00 | \epsilon $\\
+\vspace{5mm}
+From here we can eliminate the first $\epsilon$ \\
+\vspace{5mm}
+$ S \rightarrow A$\\
+$ A \rightarrow BAB | B | \epsilon \textcolor{OliveGreen}{|BA|AB}$\\
+$ B \rightarrow 00 $ $\textcolor{OliveGreen}{\cancel{ | \ \epsilon \ }}$\\
+
+From here we can eliminate the $\epsilon$  in our 2nd rule, \\
+\vspace{5mm}
+$ S \rightarrow\Ccancel[red]{ | \ A \ |} \textcolor{red}{ BAB|\Ccancel[Cyan]{ B |}BA|AB|\epsilon} \textcolor{Cyan}{|CC}$\\
+$ A \rightarrow BAB | \Ccancel[Cyan]{ B |} {\Ccancel[red]{  \ \epsilon \ |}} \textcolor{OliveGreen}{BA|AB} \textcolor{Cyan}{|CC}$\\
+$ B \rightarrow \Ccancel[Cyan]{ 00 |}  \Ccancel[OliveGreen]{ \epsilon | } CC$\\
+$ \textcolor{Cyan}{C -> 0} $
+
+\subsection{Pumping lemma of non-CFL}
+The pumping lemma is a way for us to proof if a language is regular. The theorem for the pumping lemma states that the 3 conditions for the lemma is\\
+\begin{itemize}
+\item for each $i \geq 0, uv^ixy^iz \in A $
+\item $ |vy| > 0 $
+\item $ |vxy| \leq p $
+\end{itemize}
+
+\subsubsection{Example}
+The way you do this is to assume it's regular and make a counter argument. with the pumping lemma we have 3 conditions that our counter argument most meet.\\
+
+$a^nb^nc^n | n \geq 0$
+
+\begin{itemize}
+\item if vy only contain the same symbol the string connot contain an equal number of letters as required
+\item when either v or y contains more than 1 type of symbol we get an out of order contradiction
+\end{itemize}
+
+\newpage
+\section{3. Turing machines}
+
+\subsection{Introduction}
+In this talk i'll talk about turning machines and their use in computer science, A turning machine is a theoretical form of computer in the same sense as the other models but it's the closets one to modern computers and we can use it for decide things wet. to run time, and compatibility of problems and algorithms.\\
+
+\subsection{What is a turing machine}
+    What is a turing machine, The model itself is of a tape and a read/write head that can move left or right on the tape.\\
+\begin{itemize}
+\item Q is the set of states
+\item $\sum$ is the input alphabet not containing the blank symbol $\textvisiblespace$
+\item $\tau$ is the tape alphabet where  $\textvisiblespace \in \tau$ and $\sum \subseteq \tau $
+\item  $\delta: Q \times \tau \rightarrow Q \times \tau \times \{L,R\} $ is the transition function.
+\item $q_0 \in Q$ is the starte states
+\item $q_{accept} \in Q$ is the accept state
+\item $q_{reject} \in Q $is the reject state where $q_{reject} \neq q_{accept}$ 
+\end{itemize}
+    
+
+\subsection{Different types of Turing machines}
+All turning machines are equal in power, show why.
+\subsubsection{Multitape}
+
+The idea is to show that a multitape turing machine $TM_m$ can be simulated on a equivalent single tape turing machine. this is done by storing the tapes on a single tape and discriminating them via the letter $\#$, \\
+
+And we use dot to mark the position of the read head on the underlying tapes. 
+If we reach the condition where one of the simulated readheads reaches a $ \# $ symbol on the right side of the simulated tape we write a \textvisiblespace \ and shift the contents of the tape by 1,  
+\subsubsection{Nondetermanistic turning machine}
+A ND turing machine can be simulated by running a tree search to find accepting state for the desired configuration. and we'll want to approach this in a breath first search as using a dept first can result in following a infinite branch that never reaches a accept state, therefor it's better running a breath first as we're guaranteed to find a accept state should one exist but the issue of looping still exists.
+
+We further call a non deterministic turing machine a decider if all branches halt on all input.
+
+\subsection{Enumerators}
+
+Is a turing machine attached to a printer, basically it generates all possible outputs for a set configuration.
+
+\subsubsection{Theorem 3.21}
+A language is only turing recognizable if and only if some enumerator enumerates it.
+
+
+
+\section{example/proof - Turing recognizable/decidable}
+
+TODO
+
+
+
+\newpage
+\section{4. Decidability}
+Introduction
+ If a language  defined by a DFA is decidable.
+
+
+Examples of Decidability and undecidability
+
+
+
+ 
+\newpage
+\section{5. Reducibility}
+What is it and how to use it.
+
+
+
+
+
+\newpage
+\section{6. NP-completeness proofs – examples.}
+what is np\_completeness
+
+Why we use it to reduce,
+
+Proff of np complete.
+qlique, subset sum, Hamiltonian circuit, 
+
+
+
+
+
+
+\newpage
+\section{7. Proof that SATISFIABILITY is NP-complete (do not assume that
+there is a known NP-Complete problem — use the proof in Sipser’s
+book).}
+
+Cook-levin theorem - in sipset, presentation use slides on homepage.
+
+
+\newpage
+\section{8. Information-theoretic lower bounds (lower bounds proven by counting
+leaves in decision trees), especially the average case bounds for sorting
+by comparisons.}
+As is average case.
+
+
+
+
+\newpage
+\section{9. Adversary arguments – technique, examples.}
+
+
+
+
+
+\newpage
+\section{10. Median problem – algorithm and lower bound.}
+
+
+
+
+
+\newpage
+\section{11. Approximation algorithms}
+
+vertex cover
+
+
 
 \chapter{Exercises 2019}
 
@@ -645,7 +988,7 @@ $ F \rightarrow (E) | a$
     \subfloat[a+a]{{\Tree
 	[.E 
 		[.T [.F [a ]]]
-		+Manuelly
+		+
 		[.E [.T [.F [a ]]]]
 	] }}%
 	\qquad
@@ -826,282 +1169,6 @@ Let $\sum$ be a finite alphabet and let $L \subset \sum^+ $ be a regular languag
 
 
 \newpage
-\chapter{Questions 2018}
-\newpage
-\section{1. Finite automata and regular languages}
-
-\subsection{Introduction}
-I'm going to talk about Finite automata and regular languages.
-
-\subsubsection{Finite automata}
-	Finite automata is the simplest computational model that works via states and transitions, and therefor uses extremely limited memory. Using this model we can recognize and formulate regular languages, This can be a simple tasks a finding a substring, or used as a tool for designing more complex systems. \\
-	
-A Finite atomata is defined as a tuple containing:
-\begin{itemize}
-\item The set of states Q, 
-\item The known alphabet $\Sigma$, 
-\item The transition function $\delta: Q \times \Sigma \longrightarrow Q$
-\item the start state $q_1$ 
-\item and the set of accept states F. \\
-\end{itemize} 
-
-	
-\subsubsection{Regular languages}
-	A regular languages is a sequence of letters in some alphabet defined by $\sum$ the empty alphabet is defined by the empty set $ \emptyset $, and contains letters and the empty string $ \epsilon $. they are also closed under the union $ \cup $, concatination $ \cap $, and kleene star $^*$, and the proceeding order is $^*, \cap, \cup$, A language is Regular is a Finite automata recognizes it.\\
-	
-	Add definitions
-	
-	
-\section{Regular languages Closure under}
-TODO
-
-
-Union   
-
-Concatenation
-
-Intersection
-
-Klein star
-
-\subsection{Deterministic And Non-deterministic}
-
-The difference between deterministic and non-deterministic is the way they operate. they recognize the same class of languages as a NFA can be  convert into a DFA and the same goes the other way around, it is not a efficiency operation as the algorithm is exponential. there is however some benefits to both. where the non-deterministic preforms branching and could potentially benefit the execution wrt. size, runtime. or recourse consumption. \\
-
-The correct term here would that that a DFA Can simulate a NFA \\
-	
-\subsection{Pumping lemma for regular languages}
-
-The pumping lemma is a way for us to proof if a language is regular. The theorem for the pumping lemma states that the 3 conditions for the lemma is\\
-\begin{itemize}
-\item for each $i \geq 0, xy^iz \in A $
-\item $ |y| > 0 $
-\item $ |xy| \leq p$ where p is the pumpking length. 
-\end{itemize} 
-
-
-$0^n1^n | n \geq 0$
-
-The way you do this is to assume it's regular and make a counter argument. with the pumping lemma we have 3 conditions that our counter argument most meet. the first case we can pump the language to have more 1's than 0s or(2) the other way around.. the third(3) is that we can get out of order letters if we pump a string containing both 0s and 1s, 
-	
-
-
-\subsection{Example -> Pumping lemma or convert NFA to DFA}
-
-TODO exam with pumping lemma
-
-\newpage
-\section{2. Pushdown automata and context-free languages}
-
-
-\subsection{Introduction}
-I'm going to talk about Pushdown automata and context free languages. These topics are used in modern compilers to parse a programming language and is a useful tool in language processing wrt. human language as well as when interpreting one language to an other.
-\subsection{Pushdown automata}
-A pushdown automata is a type of automaton that employs a stack to help with the computation, this allows the PDA to recognize and run Context free grammars and all the languages below it(Regular languages).
-
-\begin{itemize}
-\item The set of states Q, 
-\item The known alphabet $\Sigma$, 
-\item $\Gamma $ the stack alphabet
-\item The transition function $\delta: Q \times \Sigma_\epsilon \times \Gamma_\epsilon\longrightarrow Q$
-\item the start state $q_0$ 
-\item the set of reject states states F
-\end{itemize} 
-\subsection{Context free grammar}
-A CFG consist of a collection of substitution rules, a CFG operate on a set of variables, terminals and a designated start symbol.
- an exsample of such a rule is:
- \begin{multicols}{3}
-\begin{itemize}
-\item $A \rightarrow 0A1$
-\item $A \rightarrow B$
-\item $B \rightarrow \# $
-\end{itemize}
- \end{multicols}
- 
-This above grammar should generate the string $0^n\#1^n$ $n \in \mathbb{N} $.\\
-
-The formal definistion of a CFG is a 4 tuple consisting of the set of variables V, the set of terminals $\sum$, the set of rules R and the start symbol S that is in V\\
-
-A more advanced example could be the over the set of variables and terminals \{num,A,-\}\\
-Lets say we have the following rules \\
-$A \rightarrow A-A $\\
-$A \rightarrow num$\\
-
-for the above grammar if we apply it to the grammar\\
-1-2-3 we can get the output 2 or -4 depending on how the grammar is parsed. (1-2)-3 vs 1-(2-3)\\
-We can handle this ambiguity in two manners either we introduce the terminals ( and ) to the language or we can rewrite or rules as to not have this bias.\\
-
-
-
-\subsection{Pumping lemma of CFL}
-The pumping lemma is a way for us to proof if a language is regular. The theorem for the pumping lemma states that the 3 conditions for the lemma is\\
-\begin{itemize}
-\item for each $i \geq 0, uv^ixy^iz \in A $
-\item $ |vy| > 0 $
-\item $ |vxy| \leq p $
-\end{itemize}
-
-\subsubsection{example}
-The way you do this is to assume it's regular and make a counter argument. with the pumping lemma we have 3 conditions that our counter argument most meet.\\
-
-$a^nb^nc^n | n \geq 0$
-
-
-\begin{itemize}
-\item if vy only contain the same symbol the string connot contain an equal number of letters as required
-\item when either v or y contains more than 1 type of symbol we get an out of order contradiction
-\end{itemize}
-	
-	
-\subsection{Chomsky normal Form}
-Chomsky normal form is a simplified form that we can convert our grammars into which enables to decide things like if a string is generated by a grammar in polynomial time. \\
-
-The steps to convert a gramma to CNF is to:\\
-\begin{enumerate}
-\item eliminate all $\epsilon$ productions.
-\item Eliminate all productions where RHS is one variable
-\item Eliminate all productions longer than 2 variables
-\item move all terminals to productions where RHS is one terminal.
-\end{enumerate}
-\subsection{Example with CFG -> CNF}
-
-We start in the initial state \\
-$ A \rightarrow BAB | B | \epsilon $\\
-$ B \rightarrow 00 | \epsilon $ \\
-\vspace{5mm}
-From here we put a new start state S\\
-\vspace{5mm}
-$ S \rightarrow A$\\
-$ A \rightarrow BAB | B | \epsilon $\\
-$ B \rightarrow 00 | \epsilon $\\
-\vspace{5mm}
-From here we can eliminate the first $\epsilon$ \\
-\vspace{5mm}
-$ S \rightarrow A$\\
-$ A \rightarrow BAB | B | \epsilon \textcolor{OliveGreen}{|BA|AB}$\\
-$ B \rightarrow 00 $ $\textcolor{OliveGreen}{\cancel{ | \ \epsilon \ }}$\\
-
-From here we can eliminate the $\epsilon$  in our 2nd rule, \\
-\vspace{5mm}
-$ S \rightarrow\Ccancel[red]{ | \ A \ |} \textcolor{red}{ BAB|\Ccancel[Cyan]{ B |}BA|AB|\epsilon} \textcolor{Cyan}{|CC}$\\
-$ A \rightarrow BAB | \Ccancel[Cyan]{ B |} {\Ccancel[red]{  \ \epsilon \ |}} \textcolor{OliveGreen}{BA|AB} \textcolor{Cyan}{|CC}$\\
-$ B \rightarrow \Ccancel[Cyan]{ 00 |}  \Ccancel[OliveGreen]{ \epsilon | } CC$\\
-$ \textcolor{Cyan}{C -> 0} $
-\newpage
-\section{3. Turing machines}
-
-\subsection{Introduction}
-In this talk i'll talk about turning machines and their use in computer science, A turning machine is a theoretical form of computer in the same sense as the other models but it's the closets one to modern computers and we can use it for decide things wet. to run time, and compatibility of problems and algorithms.\\
-
-\subsection{What is a turing machine}
-    What is a turing machine, The model itself is of a tape and a read/write head that can move left or right on the tape.\\
-\begin{itemize}
-\item Q is the set of states
-\item $\sum$ is the input alphabet not containing the blank symbol $\textvisiblespace$
-\item $\tau$ is the tape alphabet where  $\textvisiblespace \in \tau$ and $\sum \subseteq \tau $
-\item  $\delta: Q \times \tau \rightarrow Q \times \tau \times \{L,R\} $ is the transition function.
-\item $q_0 \in Q$ is the starte states
-\item $q_{accept} \in Q$ is the accept state
-\item $q_{reject} \in Q $is the reject state where $q_{reject} \neq q_{accept}$ 
-\end{itemize}
-    
-
-\subsection{Different types of Turing machines}
-All turning machines are equal in power, show why.
-\subsubsection{Multitape}
-
-The idea is to show that a multitape turing machine $TM_m$ can be simulated on a equivalent single tape turing machine. this is done by storing the tapes on a single tape and discriminating them via the letter $\#$, \\
-
-And we use dot to mark the position of the read head on the underlying tapes. 
-If we reach the condition where one of the simulated readheads reaches a $ \# $ symbol on the right side of the simulated tape we write a \textvisiblespace \ and shift the contents of the tape by 1,  
-\subsubsection{Nondetermanistic turning machine}
-A ND turing machine can be simulated by running a tree search to find accepting state for the desired configuration. and we'll want to approach this in a breath first search as using a dept first can result in following a infinite branch that never reaches a accept state, therefor it's better running a breath first as we're guaranteed to find a accept state should one exist but the issue of looping still exists.
-
-We further call a non deterministic turing machine a decider if all branches halt on all input.
-
-\subsection{Enumerators}
-
-Is a turing machine attached to a printer, basically it generates all possible outputs for a set configuration.
-
-\subsubsection{Theorem 3.21}
-A language is only turing recognizable if and only if some enumerator enumerates it.
-
-
-
-\section{example/proof - Turing recognizable/decidable}
-
-TODO
-
-
-
-\newpage
-\section{4. Decidability}
-Introduction
- If a language  defined by a DFA is decidable.
-
-
-Examples of Decidability and undecidability
-
-
-
- 
-\newpage
-\section{5. Reducibility}
-What is it and how to use it.
-
-
-
-
-
-\newpage
-\section{6. NP-completeness proofs – examples.}
-what is np\_completeness
-
-Why we use it to reduce,
-
-Proff of np complete.
-qlique, subset sum, Hamiltonian circuit, 
-
-
-
-
-
-
-\newpage
-\section{7. Proof that SATISFIABILITY is NP-complete (do not assume that
-there is a known NP-Complete problem — use the proof in Sipser’s
-book).}
-
-Cook-levin theorem - in sipset, presentation use slides on homepage.
-
-
-\newpage
-\section{8. Information-theoretic lower bounds (lower bounds proven by counting
-leaves in decision trees), especially the average case bounds for sorting
-by comparisons.}
-As is average case.
-
-
-
-
-\newpage
-\section{9. Adversary arguments – technique, examples.}
-
-
-
-
-
-\newpage
-\section{10. Median problem – algorithm and lower bound.}
-
-
-
-
-
-\newpage
-\section{11. Approximation algorithms}
-
-vertex cover
 
  
 \end{document}
