@@ -19,7 +19,7 @@
 \usepackage{multicol}
 \usepackage{listings}
 \usepackage{qtree}
-
+\usepackage[export]{adjustbox}
 \usepackage{cancel} 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -163,25 +163,78 @@ A Finite atomata is defined as a tuple containing:
 	
 	Add definitions
 	
-	
-\subsection{Regular languages Closure under}
-TODO
-
-
-Union   
-
-Concatenation
-
-Intersection
-
-Klein star
 
 \subsection{Deterministic And Non-deterministic}
 
 The difference between deterministic and non-deterministic is the way they operate. they recognize the same class of languages as a NFA can be  convert into a DFA and the same goes the other way around, it is not a efficiency operation as the algorithm is exponential. there is however some benefits to both. where the non-deterministic preforms branching and could potentially benefit the execution wrt. size, runtime. or recourse consumption. \\
 
 The correct term here would that that a DFA Can simulate a NFA \\
-	
+
+\subsection{Regular languages Closure under}
+\begin{multicols}{2}
+
+
+Union\\
+Proof by construction of a NFA that recognize $A \cup A$,\\ 
+We make a new start stat $q_0$ and make a $\epsilon$ transition to $M_1$ and $M_2$\\
+The new machine is $q_0 \cup Q_1 \cup Q_2$ \\
+The accept states are $F = F_1 \cup F_2$\\
+The new transition function is\\
+
+\[
+\delta(q,a) = \left\{
+                \begin{array}{ll}
+                \delta_1(q,a) & q \in Q_1  \\
+\delta_2(q,a) & q \in Q_2 \\
+\{q_1,q_2\} & q = q_0$ and $a = \epsilon \\
+\emptyset & q = q_0$ and $a \neq \epsilon 
+\end{array}
+\right.
+  \]
+\includegraphics[scale=0.4,right]{Regular_Union.png}
+\end{multicols}
+\newpage
+\begin{multicols}{2}
+Concatenation\\
+We built a automata M that is the concatenation of $M_1 $ and $M_2$ we simply start with a new start state $M_1$ and for each accept state in $M_1$ we go to the start state of $M_2$ $A_1 \circ A_2$\\
+$Q = Q_1 \cup Q_2 $\\
+out star state is the same start state as $q_1$ in $M_1$ \\
+the accept states $F_2$ are the accept states for $M_2$
+our transtion funciton is \\
+\[
+\delta(q,a) = \left\{
+                \begin{array}{ll}
+                \delta_1(q,a) 	& q \in Q_1$ and $q \not\in F_1  \\
+\delta_1(q,a)  & q \in F_1$ and $ a \neq \epsilon \\
+\delta_1(q,a)\cup\{q2\}  & q\in f_1 $ and $ a = \epsilon \\
+\delta_2(q,a) & q \in Q_2
+\end{array}
+\right.
+  \]
+\includegraphics[scale=0.4,right]{Regular_Concatination.png}\\
+\end{multicols}
+\begin{multicols}{2}
+Klein star\\
+we need a new state $q_0$ that is also added to F, and we make a transition from all states in F to $q_0$\\
+
+$ Q = q_0 \cup Q$ \\
+the state $q_0$ is the new start state.\\
+$F = F \cup q_0$ \\
+\[
+\delta(q,a) = \left\{
+ \begin{array}{ll}
+\delta_1(q,a) 			 & q \in Q_1$ and $q \not\in F_1  \\
+\delta_1(q,a)  			 & q \in F_1$ and $ a \neq \epsilon \\
+\delta_1(q,a)\cup\{q_1\} & q\in f_1 $ and $ a = \epsilon \\
+\{q_1\}					 & q = q_0$ and $ a = \epsilon \\
+\emptyset				 & q = q_0$ and $ a \neq \epsilon \\
+\end{array}
+\right.
+  \]
+
+\includegraphics[scale=0.4,right]{Regular_Star.png}\\
+\end{multicols}
+
 \subsection{Pumping lemma for regular languages}
 
 The pumping lemma is a way for us to proof if a language is regular. The theorem for the pumping lemma states that the 3 conditions for the lemma is\\
@@ -306,7 +359,6 @@ $a^nb^nc^n | n \geq 0$
 \item if vy only contain the same symbol the string connot contain an equal number of letters as required
 \item when either v or y contains more than 1 type of symbol we get an out of order contradiction
 \end{itemize}
-
 \newpage
 \section{3. Turing machines}
 
@@ -346,29 +398,72 @@ Is a turing machine attached to a printer, basically it generates all possible o
 \subsubsection{Theorem 3.21}
 A language is only turing recognizable if and only if some enumerator enumerates it.
 
-
-
-\section{example/proof - Turing recognizable/decidable}
-
-TODO
+\section{Halting problem}
+You know this.
 
 
 
 \newpage
 \section{4. Decidability}
-Introduction
- If a language  defined by a DFA is decidable.
+The problem of Decidability is weather or not we can computer something, and what the limits of computers are. we need to use this to know if a problem is solvable or not with the current computational models we have.
+
+\subsubsection{Example}
+$0^n1^n $   $ n \geq 0 $ and $n \in \mathbb{N}$ is not decidable for a DFA/DNA, but it is decidable for a PDA\\
+But the grammar $0^n1^n $   $ n \geq 0 $ and $n \in \mathbb{N}$ is not decidable for a PDA, but is decidable by a TM
+
+\subsection{$A_{DFA} $ Is decidable}
+The idea for this is to present a tm that simulates $A_{DFA}$\\
+We build a TM M that takes input <B,w> where B is the DFA and w in our input.\\
+1. M first determines if proprerly reprecents a DFA B and the string w, if not it rejects. \\
+2. M then simulates B directly keeping track of how much input we have processed and what state we are in, \\
+3. When M is done simulating eg, when we reach the end of w we accept if B accepts and rejects if we're in a non-accepting states\\
+\subsection{$A_{NFA}$ is decidable}
+
+This can be proven by using the above example as a subroutine, and building make a TM N that first converts $A_{NFA}$ to  a DFA and then run the above problem on it.\\
+
+NFA to DFA theorem chapter 1 theorem 39
+
+\subsection{$A_{REX}$ is decidable}
+
+a regex can be converted into a NFA (theorem 1.54)
+
+We present a turing machine that P that converts the regex into a NFA, we can then run N as a subroutine and show that RegEX is decidable.
+
+\subsection{$A_{CFG}$ is decidable}
+we build a TM S, we take input <G,w> where G is a CFG and w is a string\\
+
+\begin{enumerate}
+\item convert G into Chomsky normal form.
+\item list all derivations with 2n-1 steps,  where n in the length of the string, except the case where n in length zero when then list all derivations with 1 step.\
+\item if any of these derivations generate w accept else reject.\\
+\end{enumerate}
+
+This same tm can be used to show that all Context free languages are decidable\
+
+\subsection{undecidability}
+
+\subsection{The denationalization method.}
+\section*{$A_{tm}$ is undeciable}
+
+
+
+
+
 
 
 Examples of Decidability and undecidability
 
 
-
+\section{Halting problem}
  
 \newpage
 \section{5. Reducibility}
-What is it and how to use it.
 
+\subsection{Introduction}
+
+Reduciblity is the method of proving by mapping a more complex problem to a simpler one, and by this we can proof that if a problem is decidable or not. You must however be very careful when doing this at it can only be done if the problems are the same in nature.\\
+The first thing we need to do when we are preforming this method is to have a problem that we can reduce to, This problem has to be mappable to our simpler problem and the property we want to map to has to be shown to be undecidable, in this case the halting problem will be used\\
+\subsubsection{halting problem} 
 
 
 
