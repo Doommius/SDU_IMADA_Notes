@@ -415,10 +415,10 @@ Takes a description and some input w and simulates it, it may accept, reject or 
 
 You could consider a universal turning machine the closets to a regular computer, except of the sense of the memory. A modern computer may have close to a tarabyte of memory but this still isn't the infinite memory of the turing machines.\\
 
-A universal turning machine is a recognizer but not a decider as i recognizes $A_TM$\\
+A universal turning machine is a recognizer but not a decider as i recognizes $A_{TM}$\\
 
 
-$A_TM $ Is decidabl
+$A_{TM} $ Is decidabl
 
 
 \section{Halting problem}
@@ -606,9 +606,39 @@ We can proof this as $A_{TM}$ is not decidable.
 \subsection{Introduction}
 
 Reduciblity is the method of proving by mapping a more complex problem to a simpler one, and by this we can proof that if a problem is decidable or not. You must however be very careful when doing this at it can only be done if the problems are the same in nature.\\
-The first thing we need to do when we are preforming this method is to have a problem that we can reduce to, This problem has to be mappable to our simpler problem and the property we want to map to has to be shown to be undecidable, in this case the $A_TM$ problem will be used, the problem for $A_TM$ is solved via the diagonalization method.
-\subsubsection{Reduction to halting problem} 
-With $A_{TM}$ we can show that $halt_{TM}$ is undecidable.
+The first thing we need to do when we are preforming this method is to have a problem that we can reduce to, This problem has to be mappable to our simpler problem and the property we want to map to has to be shown to be undecidable, in this case the $A_{TM}$ problem will be used, the problem for $A_TM$ is solved via the diagonalization method.
+\subsubsection{logic} 
+With $A_{TM}$ we can show that \textbf{P} is undecidable.\\
+
+We assume that \textbf{P} is decidable.\\
+We reduce the $ A_{TM} $ into a problem \textbf{P}\\
+
+We then use the decidability of \textbf{P} to find an algorithm to decide $ A_{TM} $\\
+Built a TM to decide $A_{TM}$ using the TM to decide P as a subroutine.\\
+But we know that a decided for $A_{TM}$ cannot exist, and therefor we reach a contradiction,
+
+\subsection{PCP to $A_{TM}$}
+
+\subsection{The halting problem}
+
+
+\subsection{Mapping reducibility}
+
+Mapping reducibility means that a computable function exist that converts problem a to problem b, if we have such a function then that i called a reduction.\\
+
+Theorem 5.22\\
+\begin{center}
+If $A \leq_m B $ and $ B $ is decidable, then A is decidable 
+\end{center}
+
+Corollary 5.23\\
+\begin{center}
+If $A \leq_m B $ and $ B $ is undecidable, then A is undecidable 
+\end{center}
+
+
+
+
 
 
 
@@ -616,9 +646,16 @@ With $A_{TM}$ we can show that $halt_{TM}$ is undecidable.
 
 \newpage
 \section{6. NP-completeness proofs – examples.}
-what is np\_completeness
+\subsection{Introduction}
+Np\_ completeness is a way for us to classify how hard problems are, we generally denote these problems in how long their run time is\\
+
+What we care about in the run time and how we write it is using the big O notation. generally here we only scare about to the power of wrt. run time. as an example 2n and $n^2$ while the run time of 2n the 2 is quickly nullified as we just run the problems on more threads, or if we double the click speed. while the problems with a run time that is exponential we suddenly have bigger issues. 
+
+\subsection{The class of NP problems.}
+
 
 Why we use it to reduce,
+
 
 Proff of np complete.
 qlique, 
