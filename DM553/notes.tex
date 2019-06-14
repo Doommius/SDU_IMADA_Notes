@@ -436,16 +436,36 @@ We then build the machine H+, This new machine has the output modified, the idea
 \subsection{Proof by contradiction}
 
 Assume that $A_tm$ is decidable, \\
-Let H be the tm tat decides $A_tm$.\\
+Let H be the tm that decides $A_tm$.\\
 
 \[
-H(<M,w>) == \left\{
+H(<M,w>) = \left\{
                 \begin{array}{ll}
                 Accept, if m accepts w\\
-                Reject, if m does not accept w
+                Reject if m does not accept w or loops.
 \end{array}
 \right.
   \]
+Using H, we can construct a new machine D\\
+
+input to D is a turing machine. and problem that D runs is to check weather a machine would accept if given a input of itself.\\
+
+output, do the opposite of what the input does.\\
+
+Now we try to run D with itself as input.
+
+\[
+D(<D>) = \left\{
+                \begin{array}{ll}
+                Accept, if D does not accepts w\\
+                Reject if D accepts
+\end{array}
+\right.
+  \]
+  
+We then we a paradox.\\
+
+
 
 \newpage
 \section{4. Decidability}
@@ -557,16 +577,26 @@ and by the first example we showed that the set of all turing machines is counta
 and we showed that the set of all langues is countably infinite.\\
 We therefor have the corollary that some languages are not turing recognizable\\
 
+\subsection{A language that isn't turing recognizable}
 
-  
- 
-  
+If a language L is decidable, then L is turing recognizable, and it's complement $\overline{L}$ is turing recognizable\\
+\begin{itemize}
+\item Every decidable language is turing recognizable
+\item want to recognize $\overline{L}$ just run the decider for L and give the opposite answer.
+\end{itemize}
+
+We run the machine for L and $\overline{L}$ in parallel. eg running one step on each until one of them reaches a accept state, and one of them has to be in one of them. and one or both of them has to halt.\\
+
+If that machine for L accepts we accept, and if the machine for it's complement $\overline{L}$ accepts we reject. either way we'll always halt\\
+
+with this it can be shown, that a language is only decidable if both it and it's complement are turing recognizable. \\
+
+a language is co-turing recognizable is if it's complement is turning recognizable \\
 
 
 
 
 
-\section{Halting problem}
  
 \newpage
 \section{5. Reducibility}
