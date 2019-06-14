@@ -433,6 +433,19 @@ We then build the machine H+, This new machine has the output modified, the idea
 \item If H+ with input <H+,H+> doesn't halts accept.
 \end{enumerate}
 
+\subsection{Proof by contradiction}
+
+Assume that $A_tm$ is decidable, \\
+Let H be the tm tat decides $A_tm$.\\
+
+\[
+H(<M,w>) == \left\{
+                \begin{array}{ll}
+                Accept, if m accepts w\\
+                Reject, if m does not accept w
+\end{array}
+\right.
+  \]
 
 \newpage
 \section{4. Decidability}
@@ -531,10 +544,20 @@ We can show that we have a countable infinite amount of turing machines.
 \item Generate one string after the other
 \item check to see if it is a valid turing machine.
 \end{itemize}
+\subsubsection{Proof (By diagonalization method)} 
 
+We can show that there are uncountable infinite many strings.\\
 We can show that we have a uncountable infinite amount of infinte strings over \{0,1\}\\
-\subsubsection{Proof (By diagonalization method)}
- same idea as $\mathbb{I}$ uncountability, by flipping the bit. this we we can generate a new string that is infinite length and that is not in the table.\\
+
+same idea as $\mathbb{I}$ uncountability, by flipping the bit. this we we can generate a new string that is infinite length and that is not in the table.\\
+
+therefor: The number of languages is countably infinite.\\
+
+and by the first example we showed that the set of all turing machines is countably infinite, and from this we have the corollary that the set of all turing-recognizable languages is countably infinite.\\
+and we showed that the set of all langues is countably infinite.\\
+We therefor have the corollary that some languages are not turing recognizable\\
+
+
   
  
   
