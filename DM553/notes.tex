@@ -803,6 +803,107 @@ Different strategy:
 Case 1:
 
 
+\chapter{notes}
+
+\section{2.4 Lower bounds for sorting by comparison of keys}
+In this section we derive lower bounds for the numbers of comparisons that must be done in the worst case and on the average(case) by any algorithm that sorts by comparison of keys. To derive the lower bounds we will assume that they keys in the list to be sorted are distinct.
+
+\subsection{2.4.1 Decision trees for sorting algorithms}
+Let \textit{n} be fixed and suppose that the keys are $x_1,x_2,...,x_n$. we will associate with each algorithm and positive integer \textit{n} a (binary) decision tree that describes the sequence of comparisons carried out by the algorithm on any input of size n. let sort be an algorithm that sorts by comparisons of keys. each comparison has a two-way branch(since the keys are distinct), and we assume that sort has an output instruction that outputs the rearranged list of keys. The decision tree for sort is define inductively by associating a tree with each compare and output instruction as follows. The tree associated with an output instruction consists of one node labeled with the rearrangement of the keys. the tree associated with an instruction that compares keys $x_i$ and $x_j$ consists of a root labeled (i:j)m a left sub tree that is the tree associated with the instruction executed next if $x_i < x_j$. and a right sub-tree that is the tree associated with the instruction executed next if $x_i > x_j$. the decision tree for sort is the tree associated with the first compare instruction it executes. an example of a decision tree for n=3 is shown in figure 2.11\\
+\vspace{10mm}
+The action of sort on a particular input corresponds to following one path in its decision tree from the root to a leaf. the tree must have at least \textit{n}! leaves because there are \textit{n}! ways in which the keys may be permuted. since the unique path followed for each input depends only on the ordering of the keys and not on their particular values, exactly \textit{n}! leaves can be reached from the root by actually executing sort. we will assume that any paths in the tree that are never followed are removed. we also assume that comparison nodes with only one child are removed and replace by the child, and this pruning is repeated until all internal nodes have degree 2. the pruned tree represents an algorithm that is at least as efficient as the original one. so the lower bounds we derive using trees with exactly n! leaves and all internal nodes of degree 2 will be valid lower bounds for all algorithms that sort by comparison of keys. from no on we assume sort is described by such a tree.\\
+\vspace{10mm}
+The number of comparisons done by sort on a particular input is the number of inter nodes on the path followed for that input. this the number of comparisons done in the worst case is the number of internal nodes on the longest path, and that is the depth of the tree. the average number of comparisons done is the average of the length of all paths from the root to a leaf. (for exsample, for n = 3, the algorithm whose decition tree is shown in fig. 2.11 does tree comparisons in the worst case, and two and two thirds on the average(case).)\\
+
+\tikzset{level 1/.style={sibling distance=-100pt},
+    level 2/.style={sibling distance=50pt},
+    level 3/.style={sibling distance=50pt},
+    circle, draw}
+    
+    
+\begin{figure}[h]
+%TODO need to make a circle around these.
+\begin{tikzpicture}
+  \node {1:2}
+    child {node {2:3}
+      child {node {$x_1,x_2,x_3$}}
+      child {node {1:3}
+	  child {node {$x_1,x_3,x_2$}}
+      child {node {$x_3,x_1,x_2$}}      
+      }
+    }
+    child {node {1:3}
+    child {node {$x_2,x_1,x_3$}}
+      child {node {2:3}
+	  child {node {$x_2,x_3,x_1$}}
+      child {node {$x_3,x_2,x_1$}}       
+      }
+    };
+\end{tikzpicture}\\
+\caption{\textbf{Figure 2.11} Decision tree for a sorting algorithm, \textit{n} = 3.}
+\end{figure}
+
+\subsection{2.4.2 Lower bounds for worst case}
+
+To get a worst-case bound for sorting by comparisons, we derive a lower bound for the depth of a binary tree in terms of the number of leaves, since the only quantitative information we have about the decision tree is the number of leaves. \\
+\vspace{5mm}
+\textbf{Lemma 2.4} Let \textit{l} be the number of leaves in a binary tree and let \textit{d} be it's depth, \\
+The $\textit{l} \leq 2^d$.
+\vspace{5mm}
+\begin{proof}
+proof. a straightforward induction on d.
+\end{proof}
+
+
+
+
+\vspace{5mm}
+\textbf{Lemma 2.5} Let \textit{l} and \textit{d} be in lamma 2.4 then $\textit{d} \geq \ceil{log \textit{l}}$
+\vspace{5mm}
+\begin{proof}
+proof. Taking logs of both sides of the inequality in lemma 2.4 gives $log \textit{l} \leq \textit{d}$. Since \textit{d} is an integer, $ \textit{d} \geq \ceil{log \textit{l}}$
+\end{proof}
+
+
+
+
+\vspace{5mm}
+\textbf{Lemma 2.6} For a given \textit{n}, the decision tree for any algorim that sorts by comparisons of keys has depth t least $\ceil{log n!}$.
+\vspace{5mm}
+\begin{proof}
+Proof let $\textit{l} = \textit{n}!$ in lemma 2.5
+\end{proof}
+\vspace{5mm}
+So the number of comparisons needed to sort in the worst care is at least $\ceil{log n!}$. Our best sort so far is Merge sort, but how close is $\ceil{log n!}$ to $\textit{n }log\textit{n}$? there are several ways to estimate or get a lower bound for log n!. perhaps the simplest is to observe that:
+\begin{equation}
+n! \geq n(n-1)....\bigg(\ceil{\frac{n}{2}}\bigg) \geq \bigg(\frac{n}{2}\bigg)^{\frac{n}{2}}
+\end{equation}
+so
+\begin{equation}
+log \ n! \geq \frac{n}{2} \ lg \ \frac{n}{2}
+\end{equation}
+which is in $\theta(n log n)$, thus we see already that mergesort is of optimal order, to get a closer bound, we use the fact that 
+\begin{equation}
+log \ n! = \sum_{j=1}^n log \ j
+\end{equation}
+
+using eq. 1.9 we get
+\begin{equation}
+log \ n! \geq n \ log \ n - 1.5n
+\end{equation}
+thus the depth of the decision tree is at least $\ceil{n \ log \ n - 1.5n}$\\
+
+\vspace{5mm}
+\textbf{Theorem 2.7} any algorithm to sort n items by comparisons of keys must do at least $ \ceil{log \ n!}$ or approximately  $\ceil{n \ log \ n - 1.5n}$ key comparisons in the worst case.
+\vspace{5mm}
+
+
+
+
+
+
+
+
 
 
 
