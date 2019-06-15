@@ -673,6 +673,10 @@ With the Above letter we can only start with A as it's the only valid start stri
 
 When we start with A the only valid following symbol is B and a never ending row of Bs after this. so we can't enter a halting case. This is however more of a toy example, the bigger example involves showing the that MPCP is undecidable and from that mapping it to the PCP problem.\\
 
+
+
+
+
 \newpage
 \section{6. NP-completeness proofs – examples.}
 \subsection{Introduction}
@@ -706,6 +710,24 @@ The same can be shown for all NP\_complete problems, that solving one solves all
 \section{7. Proof that SATISFIABILITY is NP-complete (do not assume that
 there is a known NP-Complete problem — use the proof in Sipser’s
 book).}
+NP\ completeness is a way for us to classify how hard problems are, we generally denote these problems in how long their run time is\\
+
+What we care about in the run time and how we write it is using the big O notation. generally here we only scare about to the power of wrt. run time. as an example 2n and $n^2$ while the run time of 2n the 2 is quickly nullified as we just run the problems on more threads, or if we double the click speed. while the problems with a run time that is exponential we suddenly have bigger issues. 
+
+\subsection{The class of NP problems.}
+NP is the class of languages that have deterministic polynomial time turing machine verifiers, but only have non-deterministic polynomial time turing machine solvers.
+
+Definition 7.34\\
+A problem is NP\_complete if B is in NP\\
+Every A in NP is polynomial time reducible to B\\
+
+The above definition also follows that if we can solve one NP\_complete problem in P time we can solve all NP\_complete problems in P time. proving that\\
+\begin{equation}
+P = NP
+\end{equation}
+The above is unproven. \\
+
+\subsection{Cook Levin Theorem}
 
 Cook-levin theorem - in sipset, presentation use slides on homepage.
 
@@ -740,8 +762,41 @@ As is average case.
 
 vertex cover
 
+\newpage
+\chapter{Weekly notes}
+Most of these are from whiteboard, i decided to try and convert one to text, but the issue is that they don't contain any text explanation of whats going on. eg they're fine if you're precenting live with them but all the information that is mentioned doing the lecture isn't there so what you end up with is only half of what you need and without the other part this part the things showed in the notes are mainly undecidable.\\
+\newpage
+\section{may4}
+Maximum among n elements\\
+\begin{itemize}
+\item Compare first element x with second y and keep z = max{x,y}
+\item Compare 2 with next and keep max etc.
+\end{itemize}
+find max in \textbf{n-1 comparisons}\\
+
+Complexity is in \# comparisons\\
+
+Best possible: if x has not been compared with anything, then it can still be max.\\
+
+Finding max and min: S set of n distinct numbers\\
+\vspace{5mm}
+
+Naive alg:\\
+\begin{tabular}{ll}
+Find Max in S, call it z & n-1\\
+Find Min in S-z. & n-2\\
+Total run time of & 2n-3
+\end{tabular}
+
+Different strategy:
+
+Case 1:
 
 
+
+
+
+\newpage
 \chapter{Exercises 2019}
 
 \section{Week 1}
