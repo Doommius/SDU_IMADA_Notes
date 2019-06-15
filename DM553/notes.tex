@@ -896,7 +896,8 @@ thus the depth of the decision tree is at least $\ceil{n \ log \ n - 1.5n}$\\
 \vspace{5mm}
 \textbf{Theorem 2.7} any algorithm to sort n items by comparisons of keys must do at least $ \ceil{log \ n!}$ or approximately  $\ceil{n \ log \ n - 1.5n}$ key comparisons in the worst case.
 \vspace{5mm}
-
+So Mergesort is very close to optimal, there is some difference between the exact behavior of Mergesort and the lower bound. Consider the case where \textit{n} = 5. Lower bound is $\ceil{log \ 5!} = \ceil{log 120} = 7$ is the lower bound simply not good enough, or can we do better than Mergesort? the read is encouraged to try and find a way to sort five keys with only seven comparisons in the worst case.
+\subsection{2.4.3 Lower bound for average behavior}
 
 
 
