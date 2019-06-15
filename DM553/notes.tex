@@ -907,40 +907,42 @@ A binary tree in which every node has degree 0 or two is called a \textit{2-tree
 Proof. Suppose we have a 2-tree with depth d that has a leaf x at level k, where k$ \leq d-2$, we will exhibit a 2-tree with the same number o leaves and lower epl.\\ Chose a node y at level d-1 that is not a leaf, remove its children, and attach two children to x.(see figure 2.12 for an illustration.) the total number of leaves have not changed. the epl has been decreased by 2d+k, because the path to the children of y and the path to x are no longer counted, and increased by $2(k+1)+d-1 = 2k+d+1$ the sum of the length of the paths to y and the new children of X, there is a net decrease in the epl og $2d+k-(2k+d+1) = d-k-1 > 0 $ since $k\leq d-2$
 \end{proof} 
 \vspace{5mm}
-\begin{figure}
-\includegraphics[scale=•]{notes_2.12.png}
+\begin{figure}[h]
+\includegraphics[scale=0.3]{notes_2_12.png}
 \caption{\textbf{Figure 2.12} Decreasing external path length}
 \end{figure}
 \vspace{5mm}
-\textbf{Lemma 2.9} The minimum epl for 2 trees with l leaves is $l \lfloor{log \ l}\rfloor+ 2(l-2^{\lfloorlog \ l\rfloor})$
+\textbf{Lemma 2.9} The minimum epl for 2 trees with l leaves is $l \lfloor{log \ l}\rfloor+ 2(l-2^{\lfloor log \ l\rfloor})$
 
 \begin{proof}
 If l is a power of 2, all the leaves are at level \textit{log l} .(This statement depends on both the fact that the tree is a 2 tree and that all leaves are on at most two levels. the reader should verify it) the epl is \textit{l log l} which is the value of the expression in the lemma in this case.\\
-If \textit{l} is not a power of 2 the depth of the tree is $d = \ceil{log \ l} $ and all the leaves are at levels d-1 and d. the sum of the path lengths(for all leaves) down to level d-1 is $l(d-1)$. For each leag at level d. 1 must be added to get the total epl. the number of leaves at level d is $2(l-2^{d-1})$, since for each node at level d-1 that is not a leaf there are two leaves at level d. (see figure 2.12) this the sum is $l(d-1)+2(l-2^{d-1}) = l \lfloor log \ l \rfloor +2(l-2^{\lfoor log \ l \rfloor}$. 
+If \textit{l} is not a power of 2 the depth of the tree is $d = \ceil{log \ l} $ and all the leaves are at levels d-1 and d. the sum of the path lengths(for all leaves) down to level d-1 is $l(d-1)$. For each leag at level d. 1 must be added to get the total epl. the number of leaves at level d is $2(l-2^{d-1})$, since for each node at level d-1 that is not a leaf there are two leaves at level d. (see figure 2.12) this the sum is $l(d-1)+2(l-2^{d-1}) = l \lfloor log \ l \rfloor +2(l-2^{\lfloor log \ l \rfloor}$. 
 \end{proof}
 \vspace{5mm}
 
 \textbf{Lemma 2.10} The average path lenght in 2-tree with l leaves is at least $\lfloor log \ l \rfloor$.\\
 
-\begin{figure}
-\includegraphics[scale=•]{notes_2.12.png}
+\begin{figure}[h]
+\includegraphics[scale=0.3]{notes_2_13.png}
 \caption{\textbf{Figure 2.13} Computing external path lengh for lemma 2.9, $l = 2^{d-1}$ + the number of nodes at level d-1 that are not leaves}
 \end{figure}
 
 \begin{proof}
 Proof. the minimun average path lengh is 
 \begin{equation}
-\frac{l \lfloor log \ l \rfloor +2(l-2^{\lfloor log \ l \rfllor})}{l} = \lfloor log \ l \rfloor + \epsilon
+\frac{l \lfloor log \ l \rfloor +2(l-2^{\lfloor log \ l \rfloor})}{l} = \lfloor log \ l \rfloor + \epsilon
 \end{equation}
-where $0 \leq \epsilon < 1 $ since $ l-2^{\lfloor log \ l \rfllor}$ is always less than l/2
+where $0 \leq \epsilon < 1 $ since $ l-2^{\lfloor log \ l \rfloor}$ is always less than l/2
 \end{proof}
 \vspace{5mm}
 \textbf{Theorem 2.11} The average number of comparisons done by an algorithm to sort n items by comparisons of keys is at least $\lfloor log \ n! \rfloor \approx \lfloor n \ log \ n - 1.5n \rfloor$.\\
 Thus no algorithm can do substantially better then quick sort and merge sort on the average
 
 
-
-
+\section{3.1 - Introduction}
+\subsection{3.1.1 The selection problem}
+Suppose L is an array containing n keys from some linearly ordered set, and let k be an integer such that$ 1 \leq k \leq n$. The selection problem is the problem of finding the smallest key in L, as with most of the sorting algorithms we've studied, we will assume that the only operations that may be preformed on the keys are comparisons of pairs of keys(as well as copying or moving keys).\\
+In chapter 1 we solved the selection problem for the case k = n, for that problem is simply to find the larges key, we consider a straightforward algorithm that did n-1 key comparisons. and we proved that no algorithm could do fewer. the dual case for k = 1, that is finding the smallest key, can be solved similarly. another very common instance of the selection problem is the case where $ k = \ceil{n/2}
 
 
 
