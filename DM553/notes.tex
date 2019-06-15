@@ -621,6 +621,17 @@ But we know that a decided for $A_{TM}$ cannot exist, and therefor we reach a co
 
 \subsection{The halting problem}
 
+We can show that the halting problem is undecidable by using the undicidability of $A_{TM}$\\
+
+We do this by presenting a TM R, that decides $Halt_{TM}$
+
+R <M,w> where M is a turing machine and w is a string.
+	If M accpts or rejects, accept,
+	If M loops, reject.
+
+We then present S<M,w> that decides $A_{TM}$ where we use R as a subroutine\\
+
+
 
 \subsection{Mapping reducibility}
 
@@ -652,7 +663,10 @@ Np\_ completeness is a way for us to classify how hard problems are, we generall
 What we care about in the run time and how we write it is using the big O notation. generally here we only scare about to the power of wrt. run time. as an example 2n and $n^2$ while the run time of 2n the 2 is quickly nullified as we just run the problems on more threads, or if we double the click speed. while the problems with a run time that is exponential we suddenly have bigger issues. 
 
 \subsection{The class of NP problems.}
+NP is the class of languages that have polynomial time verifiers \\
 
+A problem is NP\_complete if B is in NP\\
+Every A in NP is polynomial time reducible to B\\
 
 Why we use it to reduce,
 
