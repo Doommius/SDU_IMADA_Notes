@@ -898,7 +898,45 @@ thus the depth of the decision tree is at least $\ceil{n \ log \ n - 1.5n}$\\
 \vspace{5mm}
 So Mergesort is very close to optimal, there is some difference between the exact behavior of Mergesort and the lower bound. Consider the case where \textit{n} = 5. Lower bound is $\ceil{log \ 5!} = \ceil{log 120} = 7$ is the lower bound simply not good enough, or can we do better than Mergesort? the read is encouraged to try and find a way to sort five keys with only seven comparisons in the worst case.
 \subsection{2.4.3 Lower bound for average behavior}
+We need a lower bound on the average lenght of all paths from the root to a leaf. The \textit{external path length}(epl) of a tree is the sum of the lengths of all paths from the root to a leaf, it will be denoted epl. \\
+A binary tree in which every node has degree 0 or two is called a \textit{2-tree}. our decision trees are 2 trees, so the next two lemmas give us a lower bound on their epl.
+\vspace{5mm}
+\textbf{Lemma 2.8} Among 2-trees with \textit{l} leaves the epl is minimized only if all the leaves are on at most two adjacent levels.
 
+\begin{proof}
+Proof. Suppose we have a 2-tree with depth d that has a leaf x at level k, where k$ \leq d-2$, we will exhibit a 2-tree with the same number o leaves and lower epl.\\ Chose a node y at level d-1 that is not a leaf, remove its children, and attach two children to x.(see figure 2.12 for an illustration.) the total number of leaves have not changed. the epl has been decreased by 2d+k, because the path to the children of y and the path to x are no longer counted, and increased by $2(k+1)+d-1 = 2k+d+1$ the sum of the length of the paths to y and the new children of X, there is a net decrease in the epl og $2d+k-(2k+d+1) = d-k-1 > 0 $ since $k\leq d-2$
+\end{proof} 
+\vspace{5mm}
+\begin{figure}
+\includegraphics[scale=•]{notes_2.12.png}
+\caption{\textbf{Figure 2.12} Decreasing external path length}
+\end{figure}
+\vspace{5mm}
+\textbf{Lemma 2.9} The minimum epl for 2 trees with l leaves is $l \lfloor{log \ l}\rfloor+ 2(l-2^{\lfloorlog \ l\rfloor})$
+
+\begin{proof}
+If l is a power of 2, all the leaves are at level \textit{log l} .(This statement depends on both the fact that the tree is a 2 tree and that all leaves are on at most two levels. the reader should verify it) the epl is \textit{l log l} which is the value of the expression in the lemma in this case.\\
+If \textit{l} is not a power of 2 the depth of the tree is $d = \ceil{log \ l} $ and all the leaves are at levels d-1 and d. the sum of the path lengths(for all leaves) down to level d-1 is $l(d-1)$. For each leag at level d. 1 must be added to get the total epl. the number of leaves at level d is $2(l-2^{d-1})$, since for each node at level d-1 that is not a leaf there are two leaves at level d. (see figure 2.12) this the sum is $l(d-1)+2(l-2^{d-1}) = l \lfloor log \ l \rfloor +2(l-2^{\lfoor log \ l \rfloor}$. 
+\end{proof}
+\vspace{5mm}
+
+\textbf{Lemma 2.10} The average path lenght in 2-tree with l leaves is at least $\lfloor log \ l \rfloor$.\\
+
+\begin{figure}
+\includegraphics[scale=•]{notes_2.12.png}
+\caption{\textbf{Figure 2.13} Computing external path lengh for lemma 2.9, $l = 2^{d-1}$ + the number of nodes at level d-1 that are not leaves}
+\end{figure}
+
+\begin{proof}
+Proof. the minimun average path lengh is 
+\begin{equation}
+\frac{l \lfloor log \ l \rfloor +2(l-2^{\lfloor log \ l \rfllor})}{l} = \lfloor log \ l \rfloor + \epsilon
+\end{equation}
+where $0 \leq \epsilon < 1 $ since $ l-2^{\lfloor log \ l \rfllor}$ is always less than l/2
+\end{proof}
+\vspace{5mm}
+\textbf{Theorem 2.11} The average number of comparisons done by an algorithm to sort n items by comparisons of keys is at least $\lfloor log \ n! \rfloor \approx \lfloor n \ log \ n - 1.5n \rfloor$.\\
+Thus no algorithm can do substantially better then quick sort and merge sort on the average
 
 
 
