@@ -660,11 +660,18 @@ If $A \leq_m B $ and $ B $ is undecidable, then A is undecidable
 \subsection{PCP to $A_{TM}$}
 
 
+The reasoning for this is that we can have some PCP that doesn't halt. and if it doesn't halt we can decide it. \\
 
+Look at the at the following, we have A, B, C\\
+\begin{itemize}
+\item $ A = \frac{10}{101}$
+\item $ B = \frac{101}{011}$
+\item $ C = \frac{011}{10} $
+\end{itemize}
 
+With the Above letter we can only start with A as it's the only valid start string, We can't start with B or C as the first above and below letter doesn't match.\\
 
-
-
+When we start with A the only valid following symbol is B and a never ending row of Bs after this. so we can't enter a halting case. This is however more of a toy example, the bigger example involves showing the that MPCP is undecidable and from that mapping it to the PCP problem.\\
 
 \newpage
 \section{6. NP-completeness proofs – examples.}
