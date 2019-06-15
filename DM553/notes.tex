@@ -617,21 +617,31 @@ We then use the decidability of \textbf{P} to find an algorithm to decide $ A_{T
 Built a TM to decide $A_{TM}$ using the TM to decide P as a subroutine.\\
 But we know that a decided for $A_{TM}$ cannot exist, and therefor we reach a contradiction,
 
-\subsection{PCP to $A_{TM}$}
+
 
 \subsection{The halting problem}
 
 We can show that the halting problem is undecidable by using the undicidability of $A_{TM}$\\
 
-We do this by presenting a TM R, that decides $Halt_{TM}$
+We do this by presenting a TM R, that decides $Halt_{TM}$\\
 
 R <M,w> where M is a turing machine and w is a string.
-	If M accpts or rejects, accept,
-	If M loops, reject.
+\begin{itemize}
+	\item If M accpts or rejects, accept,
+	\item If M loops, reject.
+\end{itemize}
+
 
 We then present S<M,w> that decides $A_{TM}$ where we use R as a subroutine\\
 
+S <M,w> where M is a turing machine and w is a string.
+\begin{itemize}
+	\item simulate if <M,w> halts by running it on R as a subroutine. 
+	\item If M loops, reject, else resume.
+	\item simulate M on input w, and reject if it rejects and accept if it accepts.
+\end{itemize}
 
+Here we reach a contradiction, because we from the the diagonalization proof that $A_{TM}$ is undecidable. this implies that S -> E -> halt isn't decidable either.
 
 \subsection{Mapping reducibility}
 
@@ -646,7 +656,7 @@ Corollary 5.23\\
 \begin{center}
 If $A \leq_m B $ and $ B $ is undecidable, then A is undecidable 
 \end{center}
-
+\subsection{PCP to $A_{TM}$}
 
 
 
