@@ -1087,6 +1087,109 @@ level 1/.style={sibling distance=-120pt},
 \subsection{3.3.3 - An Adversary Lower bound Argument}
 Both methods we considered for finding the second largest key first found the largest key, this is not wasted effort, any algorithm that finds seconds largest must also find max because to know that a key is the seconds largest one must also that it is not the largest, that is it most have lone in one comparison. the winner of the comparison in which second largest looses must of course be max, this argument gives a lower bound on the number of comparisons needed to find the seconds largest namely n-1 because we already know that n-1 comparisons are needed for max, but one would expect that this lower bound could be improved because an algorithm to find secondslargest should have to do more work than an algorithm to find max. we will prove the following theorem which has as a corollary that the tournament sort is optimal.\\
 \vspace{5mm}
+\textbf{Theorem 3.2} Any algorithm (That works by comparing keys) to find the second largest in a list of n keys most do at least $n+\ceil{log \ n}-2$ comparisons in the worst case.
+\begin{proof}
+For the worst case, we may assume that the keys are distinct. 
+We have already observed that there must be n-1 comparisons with distinct losers, 
+If max was a comparand in $\ceil{log \ n}$ of these comparisons, then all but one of the $\ceil{log \ n}$ keys that lost to max must lose again for second largest to be correctly determined. 
+Then a total of at least $n+\ceil{log \ n} -2$ comparisons would be done. Therefor we will show that there is a an adversary strategy that can force any algorithm that finds secondlargest to compare max to $\ceil{log \ n}$ distinct keys. 
+\end{proof}
+The adversary assigns a "weight" w(x) to each key in the list, initially w(x) = 1 for all x, when the algorithm compares two keys, x and y, the adversary determines it's reply and modifies the weights as follows.
+
+\begin{tabular}{lcl}
+Case & Adversary reply & Updating of the weighths \\ \hline
+w(x)\textgreater{}w(y) & x\textgreater{}y & w(x) := w(x)+w(y); w(y) = 0 \\
+w(x) = w(y) \textgreater 0 & x\textgreater{}y & w(x) := w(x)+w(y); w(y) = 0 \\
+w(y)\textgreater w(x) & y \textgreater x & w(y) := w(x)+w(y); w(x) = 0 \\ \hline
+w(x) = w(y) = 0 & Consistent with previus replies & No change.
+\end{tabular}
+
+\vspace{5mm}
+We need to verify that if the adversary follows this strategy, it's replied are consistent with some input. and that max will be compared to at least $\ceil{log \ n} $ distinct keys.
+\\
+These conclusions follow from a sequence of easy observations.\\
+
+\begin{enumerate}
+\item A key has lost a comparison if and only if it's weight is zero.
+\item In the first tree cases the key chosen as the winner has a non zero weigh, so it has not yet lost. the adversary can give t an arbitrarily high value to make sure it wins without contradicting any of it's earlier replies.
+\item the sum of the weights is always n. this is true initially and the sum is preserved bu the updating of the weights.
+\item When the algorithm stops only one key can have a nonzero weight. otherwise there would be at least two keys that never lost a comparison and the adversary could choose values to make the algorithms choice of second largest incorrect.
+\end{enumerate}
+\vspace{5mm}
+\textbf{Lemma 3.3} Let x be the key that has nonzero wright when the algorithm stops. then x = max, and x has directly won against at least $\ceil{log \ n}$ distinct keys.
+
+\begin{proof}
+By fact 1, 3, and 4, when the algorithm stops. w(x) = n let $w_k = w(x)$ just after the kth comparison won by x against the previously undefeated key. Then by the adversary's rules.
+\begin{equation}
+w_k \leq 2w_{k-1}
+\end{equation}
+Now let K be the number of comparisons x wins against previously undefeated keys.\\
+Then 
+\begin{equation}
+n = w_K \leq 2^K_{w()} = 2^K
+\end{equation}
+
+Thus $K \geq log \ n$ and since K is in integer, $K \geq \ceil {log \ n}$. The K keys counted here are of course distinct, since once beaten by x a key is no longer "previusly undefeated" and will not be counted again, (even if an algorithm follishly compares it to x again.)
+\end{proof}
+
+Another way of looking at the adversary's activity is that it builds trees to represent the orderings relations between the keys. if z is the parents of y, then x beat y in comparison. figure 3.2 shows an example. the adversary combines two trees only when their roots are compared, if the algorithm compares non roots, no change is made in the trees, the weight of a key is simply the number of nodes in that key's tree, if it is a root and other zero otherwise.\\
+\vspace{5mm}
+\textbf{Example 3.2} The adversary strategy in action
+
+To illustrate the adversary's action and show how it's decision corresponds to the step-by-step construction of an input, we show an example for n = 5. keys in the list that have not yet been specified are denoted by asterisk. this initially the keys are *,*,*,*,*, note that values assigned to some keys may be changed at a later time. see table 3.3 which shows just the first few comparisons, those that find the max, but not enough to find secondlargest. the weights and the values assigned to the keys will not be changed by any subsequent comparisons.\\
+
+Diagrams on page 132 TODO
+\\
+\textbf{Table 3.3}\\
+An Example of the adversary strategy\\
+\begin{tabular}{lllll}
+\hline
+Comparands & Weights & Winner & New weights & Keys \\ \hline
+L{[}{]},L{[}{]} & w(L{[}1{]}) = w(L{[}2{]}) & L{[}1{]} & 2,0,1,1,1 & 20,10,*,*,* \\
+L{[}{]},L{[}{]} & w(L{[}1{]}) \textgreater w(L{[}3{]}) & L{[}1{]} & 3,0,0,1,1 & 20,10,15,*,* \\
+L{[}{]},L{[}{]} & w(L{[}5{]}) = w(L{[}4{]}) & L{[}5{]} & 3,0,0,0,2 & 20,10,15,30,40 \\
+L{[}{]},L{[}{]} & w(L{[}1{]}) \textgreater w(L{[}5{]}) & L{[}1{]} & 5,0,0,0,0 & 41,10,15,30,40 \\ \hline
+\end{tabular}
+\vspace{5mm}
+
+\subsection{3.3.4 Implementation of the Tournament method for finding max and secondlargest.}
+To conduct the tournament to find max we need a way to keep track of the winners in each round, this can be done by using an extra array of pointers or by careful indexing if the keys may be moved so that the winner is always placed in say the higher-indexed cell of the two being compared, we leave the choice and details to the reader.\\
+After max has been found by the tournament, only those keys that lose to it are to be compared to find secondlargest. How can we keep track of the elements that lose to max when we do not know in advance which key is max? one way is to maintain linked lists of keys that lose to each undefeated key. This can be done by allocating an array for links indexed to correspond to the keys. initially all links are zero. after each comparison in the tournament, the key that lost would be added to the winner's loser list.(at the beginning of the list) see fig 3.3 for an example. when the tournament in complete and max has been found it is easy to find secondlargest by traversing max's loser list.
+
+\subsection{Time and space}
+The tournament method for finding max and secondlargest uses $\theta(n)$ extra space for links. the running time of the algorithm is in $\theta(n+\ceil{log \ n} -2) = \theta(n)$ since the number of operations for the links is roughly proportional to the number of comparisons done.\\
+We can find the largest and second largest keys in a list by using findmax twice, doing 2n-3 comparisons. or we can use the more complicated tournament method. doing $n+\ceil{log \ n}-2$ comparisons at most. which method is better, the results of exercise should be instructive, both algorithms are in $\theta(n))$ since tournament method uses more instructions per comparison while finding max, it may very well be slower. it is also more complicated the main point considering this problem was not to find a algorithm that beats the straightforward in practice, but to illustrate the adversary argument for the lower bound and bu exhilarating both the adversary argument and the tournament algorithm to determine the optimal number of operations.\\
+\vspace{5mm}
+There are some missing pages here
+
+
+\section{3.5 A lower bound for finding the median}
+We are assuming that L is a list of n keys and that n id odd. we will establish a lower bound on the number of key comparisons that must be done by any key-comparison algorithm to find median, the $(n+1)/2th$ key. since we are establishing a lower bound we may without loss of generality, assume that the keys are distinct.\\
+
+We claim first that to know median an algorithm must know the relation of every other key to the median. That is for every other key x, the algorithm must now that x > median or x < median. in other words it must establish relations as illustrated by the tree in fig 3.6, each node represents a key and each branch represents a comparison. The key at the higher end of the branch is the larger key. suppose there were some key, say y, whose relation to median was not known, (see fig. 3.7(a) for an example) an adversary could change the value of y moving it to the opposite side of the median as in fig 3.7(b) without contradicting the results of any of the comparisons done. then median would not be the median, the algorithms answer would be wrong.\\
+Since there are n nodes in the tree in fig 3.6 there are n.1 branches so at least n.1 comparisons must be done. This is neither a surprise nor an exciting lower bound. we will show that an adversary lower can force an algorithm to do other "useless" comparisons before it preforms the n-1 comparison it needs to establish the tree of figure 3.6.\\
+
+\includegraphics[scale=0.4]{notes_3_6.png}
+
+\textbf{Definition} A comparison involves a key x is a crucial comparison if it is the first comparison where $x>y$, for some $y \geq median $or $x < y$ for some $y \leq median$(This is the comparison that establishes the relation of x to median, note that the definition does not require that the relation of y to median be already known at the time the crucial comparison for x is done.)
+
+
+\includegraphics[scale=0.4]{notes_3_7.png}
+
+Comparisons of x and y where x > median and y < median are non crucial. we will exhibit an adversary that forces an algorithm to preform such comparisons. the adversary chooses some value (but not a particular key) to be median. it will assign a value to a key when the algorithm first uses that key in a comparison, so long as it can do so the adversary will assign values to new keys involved in a comparison so as to put the keys on the opposite side of the median. The adversary may not assign values larger then the median to more than (n-1)/2 keys. it keeps track of the assignments it has made to be sure not to violate these restrictions. we indicate the status of a key during the running of the algorithm as follows:\\
+\begin{tabular}{ll}
+L & Has been assigned a value larger then median. \\
+S & Has been assigned a value smaller then median \\
+N & Has not yet been assigned a value.
+\end{tabular}
+\vspace{5mm}
+The adversary strategy is summed up in table 3.4 in all cases if there are already (n-1)/2 keys with status S(or L) the adversary ignores the rule in the table and assigns value(s) larger(or smaller) then median to new key(s) when only one key without value remains the adversary assigns the value median to that key. whenever the algorithm compares two keys with status L and L, S and S, or L and S the adversary gives the correct response based on the values already assigned to the keys.\\
+All of the comparisons are describes in table 3.4 are noncrusial, how many can the adversary make any algorithm do? each of these comparisons 
+
+
+
+
+
 
 
 
