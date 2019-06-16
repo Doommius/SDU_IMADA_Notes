@@ -745,8 +745,20 @@ The study of lower bounds for algorithms is useful when studying the average cas
 The first thing we want to show is lower bounds for algorithms by counting leaves.\\
 
 Insertion sort(2n), quicksort(2n) and merge sort(nlogn). (Worst case)\\
-\subsection{lower bounds}
-Using a decision trees we can show that the lower bound for a given comparison based sorting algorithm. the tree has n! nodes as a list of length n has n! permutations,
+\subsection{lower bounds for worst case}
+Using a decision trees we can show that the lower bound for a given comparison based sorting algorithm. the tree has n! nodes as a list of length n has n! permutations. to sort a list we need to compare the n elements in a list. we can think of this as a decision tree with n! leaf nodes, eg the possible permutations of our input. the dept of out tree is $l \leq 2^d$ which is equal to $\ceil{log \ l} \leq d$ Therefor for any decision tree for any algorithm that sorts by comparison of keys has a dept of at least $\ceil{log \ n!}$
+So the number of comparisons needed to sort in the worst case is at least $\ceil{log \ n!}$ \\
+
+using eq 1.9 er get that $ log \ n! \geq n \ log \ n - 1.5n$\\
+
+The above is very close to merge sort ans this tells us that merge sort is very close to being optimal in the worst case.
+
+\subsection{Lower bound for average behavior}
+
+This can be computed by using the external path length denoted epl, for a 2 tree epl is minimized if all leaf nodes are on most two adjacent levels. if they are not we can make surgery on the tree so all nodes are on at most 2 levels. if all leafs are on at most 2 level we get that This gives us that the minium average path lenght is $\lfloor lg l \rfloor + \epsilon$
+
+Eg, on the average case no algorithm can substantially better then merge sort or quick sort on the average case.\\
+
 
 
 
@@ -754,14 +766,50 @@ Using a decision trees we can show that the lower bound for a given comparison b
 \newpage
 \section{9. Adversary arguments – technique, examples.}
 
+\section{Introduction}
+The goal with Adversary arguments is to build the "worst" possible input wrt. run time. An example of this is the problem of min or max\\
 
+\subsection{min/max}
+
+Scanning over the list and keeping the lowest element we've met so far. n-1 run time.\\
+
+\subsection{Least information per comparison. Finding min and max}
+
+Max min for 5 element list. is that we want to give as little information as possible and we first assign the final value of a variable when we need to return it and make a relative order while running the problem.\\
+
+\begin{tabular}{l|lr|lr|lr|lr|lr|lr|l}
+\hline
+Comparison & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_1\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_2\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_3\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_4\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_5\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_6\\ Status Value\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Info\\ Given\end{tabular}} \\ \hline
+$x_1,x_2$ & \textbf{W} & \textbf{20} & \textbf{L} & \textbf{10} & N & * & N & * & N & * & N & * & 2 \\
+$x_1,x_5$ & \textbf{W} & \textbf{20} & L & 10 & \textbf{N} & * & N & * & \textbf{L} & \textbf{5} & N & * & 1 \\
+$x_3,x_4$ & W & 20 & L & 10 & \textbf{W} & \textbf{15} & \textbf{L} & \textbf{8} & L & 5 & N & * & 2 \\
+$x_3,x_6$ & W & 20 & L & 10 & \textbf{W} & \textbf{15} & L & 8 & L & 5 & \textbf{L} & \textbf{12} & 1 \\
+$x_3,x_1$ & \textbf{WL} & \textbf{20} & L & 10 & \textbf{W} & \textbf{25} & L & 8 & L & 5 & L & 12 & 1 \\ \hline
+$x_2,x_4$ & WL & 20 & \textbf{WL} & \textbf{10} & W & 25 & \textbf{L} & \textbf{8} & L & 5 & L & 12 & 1 \\
+$x_5,x_6$ & WL & 20 & WL & 10 & W & 25 & L & 8 & \textbf{WL} & \textbf{5} & \textbf{L} & \textbf{3} & 1 \\
+$x_6,x_4$ & WL & 20 & WL & 10 & W & 25 & \textbf{L} & \textbf{2} & WL & 5 & \textbf{WL} & \textbf{3} & 1 \\ \hline
+\end{tabular}
+\vspace{5mm}
+
+\subsection{Weight based, finding max and second largest}
+In the weight based, the adversary assigns value to nodes and follows those nodes.
+we build a tree and keep pointers to the elements that our root nodes have beat thus far. the the second iteration for the root nodes of our max (log n elements) and find the biggests of those gives us the second largest element.
+\begin{tabular}{lllll}
+\hline
+Comparands & Weights & Winner & New weights & Keys \\ \hline
+L{[}{]},L{[}{]} & w(L{[}1{]}) = w(L{[}2{]}) & L{[}1{]} & 2,0,1,1,1 & 20,10,*,*,* \\
+L{[}{]},L{[}{]} & w(L{[}1{]}) \textgreater w(L{[}3{]}) & L{[}1{]} & 3,0,0,1,1 & 20,10,15,*,* \\
+L{[}{]},L{[}{]} & w(L{[}5{]}) = w(L{[}4{]}) & L{[}5{]} & 3,0,0,0,2 & 20,10,15,30,40 \\
+L{[}{]},L{[}{]} & w(L{[}1{]}) \textgreater w(L{[}5{]}) & L{[}1{]} & 5,0,0,0,0 & 41,10,15,30,40 \\ \hline
+\end{tabular}
+\vspace{5mm}
 
 
 
 \newpage
 \section{10. Median problem – algorithm and lower bound.}
 
-
+Lower vs upper median
 
 
 
@@ -769,6 +817,10 @@ Using a decision trees we can show that the lower bound for a given comparison b
 \section{11. Approximation algorithms}
 
 vertex cover
+
+
+
+
 
 \newpage
 \chapter{Weekly notes}
@@ -871,7 +923,7 @@ Taking logs of both sides of the inequality in lemma 2.4 gives $log \textit{l} \
 
 
 \vspace{5mm}
-\textbf{Lemma 2.6} For a given \textit{n}, the decision tree for any algorim that sorts by comparisons of keys has depth t least $\ceil{log n!}$.
+\textbf{Lemma 2.6} For a given \textit{n}, the decision tree for any algorim that sorts by comparisons of keys has depth at least $\ceil{log n!}$.
 \vspace{5mm}
 \begin{proof}
 Let $\textit{l} = \textit{n}!$ in lemma 2.5
@@ -1184,8 +1236,12 @@ N & Has not yet been assigned a value.
 \end{tabular}
 \vspace{5mm}
 The adversary strategy is summed up in table 3.4 in all cases if there are already (n-1)/2 keys with status S(or L) the adversary ignores the rule in the table and assigns value(s) larger(or smaller) then median to new key(s) when only one key without value remains the adversary assigns the value median to that key. whenever the algorithm compares two keys with status L and L, S and S, or L and S the adversary gives the correct response based on the values already assigned to the keys.\\
-All of the comparisons are describes in table 3.4 are noncrusial, how many can the adversary make any algorithm do? each of these comparisons 
-
+All of the comparisons are describes in table 3.4 are noncrusial, how many can the adversary make any algorithm do? each of these comparisons creates at most one L key. and each creates at most one S key. since the adversray is free to make the indicated assignment until there are (n-1)/2 L keys or (n-1)/2 S keys it can force any algorithm to do at least (n-1)/2 noncrucial comparisons.(since an algortihm could start out by doing (n-1)/2 comparisions involding two N keys this adversary cannot guarantee any more then (n-1)/2 noncrucial comparisons)
+We can now conclude that the total number of comparisons must at least be n-1(The crucial comparisons)+n-1/2 (the crucial comparisons) we sum up the result in the following theorem.\\
+\vspace{5mm}
+\textbf{Theorem 3.4} Any algorithm to find the median of n keys(for odd n) by comparisons of keys must do at least 3n/2-3/2 comparisons in the worst case.\\
+\vspace{5mm}
+Out adversary was not as clever as it could have been in it's attempt to force an algorithm to do noncucial comparisons, in the past several years the lower found for the median problem has crept up the roughly 1.75n-log n, then roughly 1.8n then a little higher. the best lower bound currently known is slightly above 2n for large n, there is still a small gap between the best known and the lower bound and the best known algorithm for finding the median.
 
 
 
