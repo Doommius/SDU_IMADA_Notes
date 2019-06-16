@@ -803,8 +803,11 @@ Different strategy:
 Case 1:
 
 
-\chapter{notes}
+\chapter{Other lecture notes.}
+Here is the text for topics not covered by Introduction To the thery of computation by Micheal Sipser, Combinatorial Optiomization, Christos H. Papadimitriou, and Kenneth Steighlitz\\
 
+The following content is from the book Computer algorithms by Sara Baase\\
+\newpage
 \section{2.4 Lower bounds for sorting by comparison of keys}
 In this section we derive lower bounds for the numbers of comparisons that must be done in the worst case and on the average(case) by any algorithm that sorts by comparison of keys. To derive the lower bounds we will assume that they keys in the list to be sorted are distinct.
 
@@ -851,7 +854,7 @@ To get a worst-case bound for sorting by comparisons, we derive a lower bound fo
 The $\textit{l} \leq 2^d$.
 \vspace{5mm}
 \begin{proof}
-proof. a straightforward induction on d.
+a straightforward induction on d.
 \end{proof}
 
 
@@ -861,7 +864,7 @@ proof. a straightforward induction on d.
 \textbf{Lemma 2.5} Let \textit{l} and \textit{d} be in lamma 2.4 then $\textit{d} \geq \ceil{log \textit{l}}$
 \vspace{5mm}
 \begin{proof}
-proof. Taking logs of both sides of the inequality in lemma 2.4 gives $log \textit{l} \leq \textit{d}$. Since \textit{d} is an integer, $ \textit{d} \geq \ceil{log \textit{l}}$
+Taking logs of both sides of the inequality in lemma 2.4 gives $log \textit{l} \leq \textit{d}$. Since \textit{d} is an integer, $ \textit{d} \geq \ceil{log \textit{l}}$
 \end{proof}
 
 
@@ -871,7 +874,7 @@ proof. Taking logs of both sides of the inequality in lemma 2.4 gives $log \text
 \textbf{Lemma 2.6} For a given \textit{n}, the decision tree for any algorim that sorts by comparisons of keys has depth t least $\ceil{log n!}$.
 \vspace{5mm}
 \begin{proof}
-Proof let $\textit{l} = \textit{n}!$ in lemma 2.5
+Let $\textit{l} = \textit{n}!$ in lemma 2.5
 \end{proof}
 \vspace{5mm}
 So the number of comparisons needed to sort in the worst care is at least $\ceil{log n!}$. Our best sort so far is Merge sort, but how close is $\ceil{log n!}$ to $\textit{n }log\textit{n}$? there are several ways to estimate or get a lower bound for log n!. perhaps the simplest is to observe that:
@@ -904,7 +907,7 @@ A binary tree in which every node has degree 0 or two is called a \textit{2-tree
 \textbf{Lemma 2.8} Among 2-trees with \textit{l} leaves the epl is minimized only if all the leaves are on at most two adjacent levels.
 
 \begin{proof}
-Proof. Suppose we have a 2-tree with depth d that has a leaf x at level k, where k$ \leq d-2$, we will exhibit a 2-tree with the same number o leaves and lower epl.\\ Chose a node y at level d-1 that is not a leaf, remove its children, and attach two children to x.(see figure 2.12 for an illustration.) the total number of leaves have not changed. the epl has been decreased by 2d+k, because the path to the children of y and the path to x are no longer counted, and increased by $2(k+1)+d-1 = 2k+d+1$ the sum of the length of the paths to y and the new children of X, there is a net decrease in the epl og $2d+k-(2k+d+1) = d-k-1 > 0 $ since $k\leq d-2$
+Suppose we have a 2-tree with depth d that has a leaf x at level k, where k$ \leq d-2$, we will exhibit a 2-tree with the same number o leaves and lower epl.\\ Chose a node y at level d-1 that is not a leaf, remove its children, and attach two children to x.(see figure 2.12 for an illustration.) the total number of leaves have not changed. the epl has been decreased by 2d+k, because the path to the children of y and the path to x are no longer counted, and increased by $2(k+1)+d-1 = 2k+d+1$ the sum of the length of the paths to y and the new children of X, there is a net decrease in the epl og $2d+k-(2k+d+1) = d-k-1 > 0 $ since $k\leq d-2$
 \end{proof} 
 \vspace{5mm}
 \begin{figure}[h]
@@ -928,7 +931,7 @@ If \textit{l} is not a power of 2 the depth of the tree is $d = \ceil{log \ l} $
 \end{figure}
 
 \begin{proof}
-Proof. the minimun average path lengh is 
+The minimun average path lengh is 
 \begin{equation}
 \frac{l \lfloor log \ l \rfloor +2(l-2^{\lfloor log \ l \rfloor})}{l} = \lfloor log \ l \rfloor + \epsilon
 \end{equation}
@@ -958,15 +961,132 @@ In the test of this chapter we present algorithms for selection problems and adv
 \subsection{3.2 - Finding min and max}
 Throughout this section we will use the names max and min to refer to the largest and smallest keys, respectively, in a list of n keys.\\
 
-We can find max and min by using algorithm 1.3 to find max, eliminating max from the list. and then using the appropriate variant of the algorithm to find min among the remaining n-1 keys. This max and min can be found b doing n-1+n-2 or 2n-3 comparisons. This is not optimal, although we know (from chapter 1) that n-1 key comparisons are needed to find min and max independently. when finding both some of the work can be shared
+We can find max and min by using algorithm 1.3 to find max, eliminating max from the list. and then using the appropriate variant of the algorithm to find min among the remaining n-1 keys. This max and min can be found b doing n-1+n-2 or 2n-3 comparisons. This is not optimal, although we know (from chapter 1) that n-1 key comparisons are needed to find min and max independently. when finding both some of the work can be "shared" exercise 1.12 asks for an algorithm to find max and min with only about $\frac{3n}{2}$ key comparisons. The solution (For even n) is to pair up the keys and do n/2 comparisons, then find the largest of the winners and the smallest of the losers. (If n is odd, the last key may have to be considered among the winners and the losers). In this section we give an adversary argument to show that this solution is optimal. Specifically we will prove:\\
+\vspace{5mm}
+\textbf{Theorem 3.1} Any algorithm to find max an min of n keys by comparisons of keys must do at least $\frac{3n}{2}-2$ key comparisons in the worst case.\\
+\vspace{5mm}
+To establish the lower bound we may assume that the keys are distinct. to know that a key x is max and that a key y is min. an algorithm must know that every key other then x has lost some comparison and that every other than y has won some comparison. if we count each win as one unit of information, and each loos as one uni of information then an algorithm must have (at least) 2n-2 units of information to be sure of giving the correct answer. we give a strategy for an adversary to use in responding to the comparisons so that it gives away as few units of new information as possible with each comparison. Imagine the adversary construction a specific input list as it responds to the algorithm's comparisons.\\
+We denote the status of each key at any time during the course of the algorithms as follows:\\
+
+
+\begin{center}
+\begin{tabular}{ll}
+Key status & Meaning                                        \\ \hline
+W          & Has won at least one comparison and never lost \\
+L          & Has lost at least one comparison and never won \\
+WL         & Has won and lost at least one comparison       \\
+N          & Has not yet participated in a comparison       \\ \hline
+\end{tabular}
+\end{center}
+\vspace{5mm}
+The adversary is described in table 3.1 the main point is that. except in the case where both keys have not yet been in any comparisons. the adversary can give a response that provides most at most one unit of information.we need to verify that if the adversary follows these rules, it's replies are consistent with some input.then we need to show that this strategy forces any algorithm to do as many comparisons as the theorem claims.\\
+Observe that in all cases in Table 3.1 except that last, either the key chosen by the adversary as the winner has not yet lost any comparisons, or the key chosen as the loser has not yet won any. consider the first possibility. suppose that the algorithms compares x and y, that the adversary chooses x as the winner, and that x has not yet lost any comparison. Even if the value already assigned by the adversary o x is smaller then the value it has assigned to y. the adversary can change's value to make it bet y without contradicting any of he responses it gave earlier. the other situation where the key chosen as the loser has never won, can be handled similarly -- by reducing the value of the key if necessary. So the adversary can construct an input consistent with the rules for responding to the algorithms comparisons This is illustrated in the following example.
+\vspace{5mm}
+\textbf{Table 3.1}\\
+The adversary strategy for the min and max problem.
+\begin{center}[h]
+\begin{tabular}{lccc}
+\hline
+\begin{tabular}[c]{@{}l@{}}Status of keys x and y\\ Compared by an algorithm\end{tabular} & \multicolumn{1}{l}{Adversary argument} & \multicolumn{1}{l}{New status} & \multicolumn{1}{l}{Units of new information} \\ \hline
+N,N                                                                                       & x\textgreater{}y                       & W,L                            & 2                                            \\
+W,N or WL, N                                                                              & x\textgreater{}y                       & W,L or WL, L                   & 1                                            \\
+L,N                                                                                       & x \textless{}y                         & L,W                            & 1                                            \\
+W,W                                                                                       & x \textgreater y                       & W, WL                          & 1                                            \\
+L,L                                                                                       & x\textgreater{}y                       & WL,W                           & 1                                            \\
+W,L, or WL,L og W, WL                                                                     & x\textgreater{}y                       & no change                      & 0                                            \\
+WL, WL                                                                                    & consistent with assigned values        & no change                      & 0                                            \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{5mm}
+\textbf{Example 3.1} Constructing an input using the adversary's rules\\
+\vspace{5mm}
+The first column in table 3.2 shows a sequence of comparisons that might be carried out by some algorithm. the remaining columns show status and values assigned to the keys by the adversary. (keys that have not yet been assigned a value are denoted by asterisk.) each row after the first contains only the entries relevant for the current comparison.Note that when $x_3$ and $x_1$ are compared (in the fifth comparison), the adversary increase the values of $x_3$ because $x_3$ is suppose to win. later the adversary changes the values of x6 and x4 consistent with it's rules, After the first five comparisons every key except $x_3$ has lost at least once, so $x_3$ is max. after the last comparison $x_4$ is the only key that has never won. so it is min, in this example the algorithm did eight comparisons, the worst case lower bound for size keys.(still to be proved) is $3/2\dot 6 -2 = 7$\\
+\vspace{5mm}
+\textbf{Table 3.2}\\
+An Exsample of the adversary strategy\\
+
+\begin{tabular}{l|lr|lr|lr|lr|lr|lr|l}
+\hline
+Comparison & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_1\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_2\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_3\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_4\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_5\\ Status Value\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}x\_6\\ Status Value\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Info\\ Given\end{tabular}} \\ \hline
+$x_1,x_2$ & \textbf{W} & \textbf{20} & \textbf{L} & \textbf{10} & N & * & N & * & N & * & N & * & 2 \\
+$x_1,x_5$ & \textbf{W} & \textbf{20} & L & 10 & \textbf{N} & * & N & * & \textbf{L} & \textbf{5} & N & * & 1 \\
+$x_3,x_4$ & W & 20 & L & 10 & \textbf{W} & \textbf{15} & \textbf{L} & \textbf{8} & L & 5 & N & * & 2 \\
+$x_3,x_6$ & W & 20 & L & 10 & \textbf{W} & \textbf{15} & L & 8 & L & 5 & \textbf{L} & \textbf{12} & 1 \\
+$x_3,x_1$ & \textbf{WL} & \textbf{20} & L & 10 & \textbf{W} & \textbf{25} & L & 8 & L & 5 & L & 12 & 1 \\ \hline
+$x_2,x_4$ & WL & 20 & \textbf{WL} & \textbf{10} & W & 25 & \textbf{L} & \textbf{8} & L & 5 & L & 12 & 1 \\
+$x_5,x_6$ & WL & 20 & WL & 10 & W & 25 & L & 8 & \textbf{WL} & \textbf{5} & \textbf{L} & \textbf{3} & 1 \\
+$x_6,x_4$ & WL & 20 & WL & 10 & W & 25 & \textbf{L} & \textbf{2} & WL & 5 & \textbf{WL} & \textbf{3} & 1 \\ \hline
+\end{tabular}
+\vspace{5mm}
+
+\begin{proof}
+
+
+To complete the proof of theorem 3.1 we need only show that the adversary rules will force any algorithm to do at least $3n/2-1$ comparisons to get $2n-2$ units of information it needs. The only case where an algorithm can get two units of information from one comparison is the case where two keys have not been included in any previous comparisons. suppose for the moment that n is even. An algorithm can do at most $n/2$ comparisons of previously unseen keys. so it can get at most n units of information this way. From each comparison. it gets at most one unit of information. this to get $2n-2$ units of information an  algorithm must do at least $n/2 + n - 2 = 3n/2-2$ comparisons in total. the reader can easily check that for odd n, at least $3n/2 - 3/2$ comparisons are needed.This completes the proof for theorem 3.1
+\end{proof}
+\vspace{5mm}
+
+\section{3.3 Finding the second largest key}
+\subsection{3.3.1 introduction}
+Throughout this section we will use \textit{max} and \textit{SecondLargest} to refer to the largest and second-largest keys, respectively. for the simplicity in describing the problem and algorithms, we will assume that the keys are distinct.\\
+The second largest key can be found with 2n-3 comparisons by using findmax(algorithm 1.3)twice. but this is not likely to be optimal. we should expect that some of the information discovered by the algorithm while finding max can be used to decrease the number of comparisons preformed in finding second largest. all such keys are discovered while finding max may be ignored during the second pass though the list.(The problem of keeping track of them will be considered later.)\\
+
+Using algorithm 1.3 on a list with five keys. the result might be as follows:\\
+\begin{tabular}{ll}
+Comparands & Winner \\
+L{[}1{]},L{[}2{]} & L{[}1{]} \\
+L{[}1{]},L{[}3{]} & L{[}1{]} \\
+L{[}1{]},L{[}4{]} & L{[}4{]} \\
+L{[}4{]},L{[}5{]} & L{[}4{]}
+\end{tabular}
+\\
+Then max = L[4] and secondlargest is either L[5] or L[1]because both L[2] and L[3] lost to L[1], this only one more comparison is needed to find secondlargest in this example.\\
+It may happen, however that during the first pass though the list to find max we no not obtain any information useful for finding secondlargest. Not necessarily. In the preceding discussion we used a specific algorithm. no algorithm can find max faster then n-1 comparisons, but another may provide more information for eliminating some during doing the second pass though the list. The tournament method, described next provides such information.\\
+\subsection{3.3.2 The Tournament method}
+The tournament method is so name because it preforms comparisons in the same way that tournaments are played. keys are paired off and compared in "rounds" in each round after the first one the winners from the preceding rounds are paired off and compared. (if at any round the number of keys are odd one of them simply waits for the next round.) A Tournament can be described by a tree diagram as shown in figure 3.1, each leaf contains a key, and at each subsequent level the parents of each pair contains the winner. the root will contain the largest key, as in algorithm 1.3, n-1 comparisons are done to find max.\\
+In the process of finding max, every key except max loses in one comparisons, how many lose directly to max? roughly halt the keys in one round will be losers and will not appear in the next round, if n is a power of 2, there are exactly log n rounds, in general the number of rounds is $\ceil{log \ n }$ since max in involved in at most one comparison in each round, there are at most $\ceil{log \ n }$ keys that lost only to max and this could possibly be second largest. The method of algorithm 1.3 can be used to find the largest of these $\ceil{log \ n}$ keys by doing $\ceil{log \ n} -1$ comparisons, thus the tournament finds max and second largest by doing a total of $n+\ceil{log \ n} -2$ comparisons. this is an improvement over our first result of 2n-3. can we do better?
 
 
 
+    
+    
+\begin{figure}[h]
+%TODO need to make a circle around these.
+\begin{tikzpicture}
+[every node/.style={circle},
+level 1/.style={sibling distance=-120pt},
+    level 2/.style={ sibling distance=60pt},
+    level 3/.style={sibling distance=40pt},
+    level 4/.style={sibling distance=25pt}]
+  \node {L[6]}[grow=up]
+    child {node {L[4]}
+      child {node {L[2]}
+      	child {node {L[1]}}
+      	child {node {L[2]}}}
+      child {node {L[4]}
+	  	child {node {L[3]}}
+      	child {node {L[4]}}      
+      }
+    }
+    child {node {L[6]}
+    	child {node {L[6]}
+    		child {node {L[5]}}
+      		child {node {L[6]}}}
+      	child {node {L{7}}
+	  		child {node {L[7]}}
+      		child {node {L[8]}}       
+      }
+    };
+\end{tikzpicture}\\
+\caption{\textbf{Figure 3,1} An example of a tournament, max = L[6] secondlargest may be L[4],L[5], or L[7]}
+\end{figure}
 
 
 
-
-We can find max and min by using algorithm 1.3 
+\subsection{3.3.3 - An Adversary Lower bound Argument}
+Both methods we considered for finding the second largest key first found the largest key, this is not wasted effort, any algorithm that finds seconds largest must also find max because to know that a key is the seconds largest one must also that it is not the largest, that is it most have lone in one comparison. the winner of the comparison in which second largest looses must of course be max, this argument gives a lower bound on the number of comparisons needed to find the seconds largest namely n-1 because we already know that n-1 comparisons are needed for max, but one would expect that this lower bound could be improved because an algorithm to find secondslargest should have to do more work than an algorithm to find max. we will prove the following theorem which has as a corollary that the tournament sort is optimal.\\
+\vspace{5mm}
 
 
 
