@@ -17,6 +17,7 @@
 \usepackage{tikz}
 \usepackage{tabularx}
 \usepackage{fancyhdr}
+\usepackage{listing}
 \usepackage[normalem]{ulem}
 \usepackage{lastpage}
 \usepackage{multicol}
@@ -848,7 +849,57 @@ This overall gives us a linear runtime.
 \newpage
 \section{11. Approximation algorithms}
 
-vertex cover
+\section{introduction}
+Many problems in NP are quite significant so we can't abandon them, It may be fine with limited n, or in other cases huge amounts of computational power. but it's not in all cases we need the optimal solution, and the near optimal solution can often be found in linear polynomial time.
+
+
+\subsection{In comparison with np-complete}
+
+While NP complete problems may take $2^n$ we can approximate them much faster. this approximation will be within some margin of error.\\
+An example of this is vertex cover\
+
+To get a vertex cover we may have to try all possible $2^n$ markings to test which one has the fewest nodes.\\
+
+Our approximation algorithm works by \\
+\begin{lstlisting}
+approx-Vertex-cover(G(V,E))
+	C = empty set
+	while E != empty
+		Select a arbitrary edge in E{u,v}
+		C = C union {u,v}
+		Remove every incident edge on {u,v}
+	return C;
+\end{lstlisting}
+\subsection{Approximation ration}
+Is the ratio that we are within of our optimal solution.\\
+
+For our above problem of vertex cover the optimal solution is n\\
+
+The definitions says that we have to cover every edge in our graph. eg every node has to be connected to at least 1 marked node. our approach has two nodes in C that are adjacent which gives us the upper bound of
+\begin{equation}
+|C| \leq 2|C^*|
+\end{equation}
+
+If follows that that the ratio for maximization is $\frac{C^*}{C}$ and for minimization $\frac{C}{C^*}$ and P cant be 1 and can only be p > 1, else P = NP is true.\\
+
+\subsection{Traveling salesman}
+
+The traveling salesman problem is based on the triangle inequality. where we can build a MST, and traverse it. and if we meat repeat nodes on the way back from our transverse we ignore them by removing them from the tree. This gives us a run time of $|V|^2$ which is polynomial.\\
+The cost ration compared to the optimal shown be at most 2C, furthermore. by using the Triangle inequality we can show that the $c(H) \leq c(W)$\\
+
+However if we do not consider the case where the Triangle inequality then here is no TSP algorithm that runs in p time unless N = NP\\
+
+
+\subsection{Greedy}
+
+Set-cover
+
+\subsection{Randomized}
+
+
+
+
+
 
 
 
