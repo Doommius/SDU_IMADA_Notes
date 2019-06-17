@@ -169,6 +169,8 @@ A Finite atomata is defined as a tuple containing:
 \item and the set of accept states F. \\
 \end{itemize} 
 
+Show a illustration of a state diagram
+
 	
 \subsection{Regular languages}
 	A regular languages is a sequence of letters in some alphabet defined by $\sum$ the empty alphabet is defined by the empty set $ \emptyset $, and contains letters and the empty string $ \epsilon $. they are also closed under the union $ \cup $, concatination $ \cap $, and kleene star $^*$, and the proceeding order is $^*, \cap, \cup$, A language is Regular is a Finite automata recognizes it.\\
@@ -178,9 +180,9 @@ A Finite atomata is defined as a tuple containing:
 
 \subsection{Deterministic And Non-deterministic}
 
-The difference between deterministic and non-deterministic is the way they operate. they recognize the same class of languages as a NFA can be  convert into a DFA and the same goes the other way around, it is not a efficiency operation as the algorithm is exponential. there is however some benefits to both. where the non-deterministic preforms branching and could potentially benefit the execution wrt. size, runtime. or recourse consumption. \\
+The difference between deterministic and non-deterministic is the way they operate. they recognize the same class of languages as a NFA can be  convert into a DFA and the same goes the other way around, it is not a efficiency operation as the algorithm is exponential. there is however some benefits to both. where the non-deterministic preforms branching and could potentially benefit the execution wrt. size, runtime. \\
 
-The correct term here would that that a DFA Can simulate a NFA \\
+The correct term here would that that a NFA can be converted into a DFA but this DFA may have $n^2$ many states.\\
 
 \subsection{Regular languages Closure under}
 \begin{multicols}{2}
@@ -265,7 +267,15 @@ The way you do this is to assume it's regular and make a counter argument. with 
 
 \subsection{Example -> Pumping lemma or convert NFA to DFA}
 
-TODO exam with pumping lemma
+Language $0^n1^n $ where $n \geq 0$\\
+
+For this example we can show 3 contradictions.\\
+
+\begin{enumerate}
+\item out of order 0 or 1 if our pumping string contains both 1 or 0
+\item wrong number of 1s if our pumping string only contains 1s
+\item wrong number of 0s if our pumping string only contains 0s 
+\end{enumerate}
 
 \newpage
 \section{2. Pushdown automata and context-free languages}
@@ -368,7 +378,7 @@ The way you do this is to assume it's regular and make a counter argument. with 
 $a^nb^nc^n | n \geq 0$
 
 \begin{itemize}
-\item if vy only contain the same symbol the string connot contain an equal number of letters as required
+\item if vy only contain the same symbol the string cannot contain an equal number of letters as required
 \item when either v or y contains more than 1 type of symbol we get an out of order contradiction
 \end{itemize}
 \newpage
@@ -813,7 +823,25 @@ L{[}{]},L{[}{]} & w(L{[}1{]}) \textgreater w(L{[}5{]}) & L{[}1{]} & 5,0,0,0,0 & 
 \newpage
 \section{10. Median problem – algorithm and lower bound.}
 
-Lower vs upper median
+\subsection{introduction}
+The problem of finding the median is finding the element in the middle. eg this can be done naively by sorting the list and picking element (n+1)/2\\
+
+\subsection{Algorithm}
+The algorithm we use builds a tree where we have a center node the presumed median and all the keys larger then it is on top and smaller then it is below. and as we need to know the medians relative position compared to all other keys we need to do n-1 comparisons. this is not a great lower bound as it only accounts for the time to verify that it's the median.\\
+
+\subsection{lower bound}
+
+We can use adversary arguments to show that we can make the algorithm make useless comparisons. this is done by assigning a value to our median but not a key until we have to. \\ using this method we can make our algorithm do non crucial computations.\\
+The way this works is that we assign values to our nodes based on the relative size to our median. S(maller), L(arger), and N(on). \\
+Using this method we can always put our new node on the bad size compared to the algorithm picked median and making it shift it's input. this can be done until either L or S has (n-1)/2 keys. as we can't put anymore keys on the bad side anymore, but by this time we would have wasted (n-1)/2 non crucial comparisons.\\
+
+This brings the total lower bound to n-1+(n-1)/2 comparisons, this is again not a great lower bound as adversary arguments doesn't work well for this task.
+
+\subsection{Today}
+Today the lower bound has slowly crept up and i currently at around 2n(CLRS) and the best proven method is using the selection algorithm from quick sort.
+
+The way this works is by splitting the input into segments of 5 and sorting using insertion sort. do this again on the input from the first step. 
+This overall gives us a linear runtime.
 
 
 
