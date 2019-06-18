@@ -759,7 +759,11 @@ The study of lower bounds for algorithms is useful when studying the average cas
 
 The first thing we want to show is lower bounds for algorithms by counting leaves.\\
 
-Insertion sort(2n), quicksort(2n) and merge sort(nlogn). (Worst case)\\
+Merge sort(nlogn). (Worst case)\\
+\subsection{run times}
+
+Theta
+
 \subsection{lower bounds for worst case}
 Using a decision trees we can show that the lower bound for a given comparison based sorting algorithm. the tree has n! nodes as a list of length n has n! permutations. to sort a list we need to compare the n elements in a list. we can think of this as a decision tree with n! leaf nodes, eg the possible permutations of our input. the dept of out tree is $l \leq 2^d$ which is equal to $\ceil{log \ l} \leq d$ Therefor for any decision tree for any algorithm that sorts by comparison of keys has a dept of at least $\ceil{log \ n!}$
 So the number of comparisons needed to sort in the worst case is at least $\ceil{log \ n!}$ \\
@@ -767,6 +771,34 @@ So the number of comparisons needed to sort in the worst case is at least $\ceil
 using eq 1.9 er get that $ log \ n! \geq n \ log \ n - 1.5n$\\
 
 The above is very close to merge sort ans this tells us that merge sort is very close to being optimal in the worst case.
+
+\tikzset{level 1/.style={sibling distance=-100pt},
+    level 2/.style={sibling distance=50pt},
+    level 3/.style={sibling distance=50pt},
+    circle, draw}
+    
+\begin{figure}[h]
+%TODO need to make a circle around these.
+\begin{tikzpicture}
+  \node {1:2}
+    child {node {2:3}
+      child {node {$x_1,x_2,x_3$}}
+      child {node {1:3}
+	  child {node {$x_1,x_3,x_2$}}
+      child {node {$x_3,x_1,x_2$}}      
+      }
+    }
+    child {node {1:3}
+    child {node {$x_2,x_1,x_3$}}
+      child {node {2:3}
+	  child {node {$x_2,x_3,x_1$}}
+      child {node {$x_3,x_2,x_1$}}       
+      }
+    };
+\end{tikzpicture}\\
+\caption{\textbf{Figure 2.11} Decision tree for a sorting algorithm, \textit{n} = 3.}
+\end{figure}
+
 
 \subsection{Lower bound for average behavior}
 
@@ -838,7 +870,7 @@ Using this method we can always put our new node on the bad size compared to the
 
 This brings the total lower bound to n-1+(n-1)/2 comparisons, this is again not a great lower bound as adversary arguments doesn't work well for this task.
 
-\subsection{Today}
+\subsection{Selection in worst case linear time.}
 Today the lower bound has slowly crept up and i currently at around 2n(CLRS) and the best proven method is using the selection algorithm from quick sort.
 
 The way this works is by splitting the input into segments of 5 and sorting using insertion sort. do this again on the input from the first step. 
@@ -1037,7 +1069,7 @@ thus the depth of the decision tree is at least $\ceil{n \ log \ n - 1.5n}$\\
 So Mergesort is very close to optimal, there is some difference between the exact behavior of Mergesort and the lower bound. Consider the case where \textit{n} = 5. Lower bound is $\ceil{log \ 5!} = \ceil{log 120} = 7$ is the lower bound simply not good enough, or can we do better than Mergesort? the read is encouraged to try and find a way to sort five keys with only seven comparisons in the worst case.
 \subsection{2.4.3 Lower bound for average behavior}
 We need a lower bound on the average lenght of all paths from the root to a leaf. The \textit{external path length}(epl) of a tree is the sum of the lengths of all paths from the root to a leaf, it will be denoted epl. \\
-A binary tree in which every node has degree 0 or two is called a \textit{2-tree}. our decision trees are 2 trees, so the next two lemmas give us a lower bound on their epl.
+A binary tree in which every node has degree 0 or two is called a \textit{2-tree}. our decision trees are 2 trees, so the next two lemmas give us a lower bound on their epl.\\
 \vspace{5mm}
 \textbf{Lemma 2.8} Among 2-trees with \textit{l} leaves the epl is minimized only if all the leaves are on at most two adjacent levels.
 
