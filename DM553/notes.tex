@@ -408,7 +408,13 @@ All turning machines are equal in power, show why.
 The idea is to show that a multitape turing machine $TM_m$ can be simulated on a equivalent single tape turing machine. this is done by storing the tapes on a single tape and discriminating them via the letter $\#$, \\
 
 And we use dot to mark the position of the read head on the underlying tapes. 
-If we reach the condition where one of the simulated readheads reaches a $ \# $ symbol on the right side of the simulated tape we write a \textvisiblespace \ and shift the contents of the tape by 1,  
+If we reach the condition where one of the simulated readheads reaches a $ \# $ symbol on the right side of the simulated tape we write a \textvisiblespace \ and shift the contents of the tape by 1,  \\
+
+The way a step from step one is simulated is that we start at cell 0 on both tapes. so does our master pointer.\\
+
+We then scan from the beginning to the first tape marker, and read whats at the first read head. here after we scan forward until we see the next marker. this is repeated n times where n is the number of tapes. after this first scan, we scan to the start of the tape until we reach the beginning of the tape.\\
+
+The cost for doing this in worst case is N*k where n is the size of our input and k is the number of tapes.\\
 \subsubsection{Nondetermanistic turning machine}
 A ND turing machine can be simulated by running a tree search to find accepting state for the desired configuration. and we'll want to approach this in a breath first search as using a dept first can result in following a infinite branch that never reaches a accept state, therefor it's better running a breath first as we're guaranteed to find a accept state should one exist but the issue of looping still exists.
 
