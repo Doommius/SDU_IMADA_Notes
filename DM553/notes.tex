@@ -484,7 +484,7 @@ The problem of Decidability is weather or not we can computer something, and wha
 
 \subsubsection{Example}
 $0^n1^n $   $ n \geq 0 $ and $n \in \mathbb{N}$ is not decidable for a DFA/DNA, but it is decidable for a PDA\\
-But the grammar $0^n1^n $   $ n \geq 0 $ and $n \in \mathbb{N}$ is not decidable for a PDA, but is decidable by a TM
+But the grammar $0^n1^n0^n $   $ n \geq 0 $ and $n \in \mathbb{N}$ is not decidable for a PDA, but is decidable by a TM
 
 \subsection{$A_{DFA} $ Is decidable}
 The idea for this is to present a tm that simulates $A_{DFA}$\\
@@ -570,7 +570,7 @@ we can build a new number, that can't be in the table, which gives us a contradi
 \section*{some langues are not turing recognizable}
 We can show that we have a countable infinite amount of turing machines.
 \begin{itemize}
-\item every turing machine can be coded into a string, that have a finite length
+\item every turing machine can be coded into a string, that have a countable infinite length
 \item everything is either a valid turing machine or "garbage"
 \item Generate one string after the other
 \item check to see if it is a valid turing machine.
