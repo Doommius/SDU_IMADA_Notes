@@ -130,9 +130,23 @@ Below is the list of possible topics and some suggested content. The listed cont
 \subsection{Function Principle}
 \subsection{Output Units}
 \subsubsection{Sigmoid}
+The sigmoid function is a binary type of output unit, which also means it can only product of a binary variable,and can only predict the Bernoulli distribution. it is of the form
+\begin{equation}
+\sigma(x) = \frac{1}{1+exp(-x)}
+\end{equation}
+
+The activation function for the sigmoid looks like the following.\\
+\includegraphics[scale=0.4]{sigmoid.png}
 \subsubsection{Softmax}
+The softmax function is a more powerful output that is able to handle Multinoulli distribution/categorical results.
 
+The softmax consists of two layers, first in linear layer followed by the softmax function.
 
+\begin{equation}
+Softmax(z)_i = \frac{e^{z}i}{\Sigma_j e^z j}
+\end{equation}
+
+The output vector of the softmax layer contains values in the interval [1,0] which represent the probability, the sum of all value in the output vector must always equal 1.
 \subsection{Hidden Units}
 \subsubsection{Relu}
 \subsubsection{Sigmoid}
