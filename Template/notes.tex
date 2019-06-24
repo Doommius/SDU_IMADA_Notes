@@ -1,0 +1,94 @@
+%Template by Mark Jervelund - 2015 - mjerv15@student.sdu.dk
+
+\documentclass[a4paper,10pt,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{ marvosym }
+\usepackage{algpseudocode}
+\usepackage[document]{ragged2e}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{datenumber}
+\usepackage{venndiagram}
+\usepackage{chngcntr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{mathtools}
+\newtheorem{theorem}{Theorem}
+
+\usepackage{mathtools} % Bonus
+\DeclarePairedDelimiter\norm\lVert\rVert
+\setdatetoday
+\addtocounter{datenumber}{0} %date for dilierry standard is today
+\setdatebynumber{\thedatenumber}
+\date{}
+\setcounter{secnumdepth}{0}
+\pagestyle{fancy}
+\fancyhf{}
+\title{<Course ID> <course name>}
+
+\newcommand{\Z}{\mathbb{Z}}
+\lhead{<Course id>}
+\rhead{<Name> (<Student id)}
+\rfoot{Page  \thepage \, of \pageref{LastPage}}
+\counterwithin*{equation}{section}
+
+\begin{document}
+\begin{titlepage}
+\centering
+    \vspace*{9\baselineskip}
+    \huge
+    \bfseries
+    <Title> \\
+    \normalfont 
+    <Name>  \\
+    <Email>\\
+    <Website> 	\\
+    \vspace*{9\baselineskip}
+    \normalfont
+	\includegraphics[scale=1]{SDU_logo.png}
+    \vfill\ 
+    \vspace{5mm}
+    Institute \\
+
+	%Date 
+    \textbf{\datedate} \\[2\baselineskip]
+\end{titlepage}
+
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+
+\part{Formal course description}
+
+\section{Aim}
+
+\section{Statement of aims}
+
+\section{Pensum}
+
+
+\part{Exam topics}
+
+\section{Exam Form}
+
+\newpage
+\section{Topic 1}
+
+\newpage
+\section{Topic 2}
+
+\end{document}
