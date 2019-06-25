@@ -122,12 +122,26 @@ After the short presentation, additional question about the presentation's topic
 \\
 \vspace{10mm}
 Below is the list of possible topics and some suggested content. The listed content are only suggestions and is not necessarily complete nor must everything be covered in the short presentation. It is the responsibility of the examinee to gather and select among all relevant information for each topic from the course material. On the course website you can find suggested readings for each of these topics.\\
+
+
+
+
+
+
+
 \newpage
 \section{Feed-Forward Networks}
 
 \subsection{introduction}
-
+A feed foreward is the oldest and simplest network we have, it only supports feeding information in one direction (forward) eg we can't have loops.
 \subsection{Function Principle}
+The Artificial Neuron\\
+\includegraphics[scale=0.1]{neuron.jpeg}
+\\
+
+
+Network build up
+Layers of neurons, 
 \subsection{Output Units}
 \subsubsection{Sigmoid}
 The sigmoid function is a binary type of output unit, which also means it can only product of a binary variable,and can only predict the Bernoulli distribution. it is of the form
@@ -148,36 +162,59 @@ Softmax(z)_i = \frac{e^{z}i}{\Sigma_j e^z j}
 
 The output vector of the softmax layer contains values in the interval [1,0] which represent the probability, the sum of all value in the output vector must always equal 1.
 \subsection{Hidden Units}
-\subsubsection{Relu}
-\subsubsection{Sigmoid}
-\subsection{cosine}
-\subsection{Radial Basis}
-\subsection{Softplus}
-\subsection{Hard tanh}
+\subsubsection{ReLU - Rectified linear unit}
+
+\begin{equation}
+f(x) = max(0,x)
+\end{equation}
+
+%Maybe put a graph here showing what it is
+\includegraphics[scale=0.1]{relu.png}
 
 \subsection{Architecture design}
-\subsubsection{Size}
-\subsubsection{Depth}
+Size and dept.
 
 
 \newpage
 \section{Backpropagation}
 
 \subsection{introduction}
+This is the way the network calculates the gradient, This is then used to adjust the weights so the network can reach a minima in the learning function.
 \subsection{Function Principle}
+Make example
 \subsection{Computational Graphs}
-\subsection{Backpropagation through time}
-...
-
+\subsection{Mini batches}
+We split the dataset into smaller batches and run one iteration of the Backpropagation function once per mini batch.
 
 \newpage
 \section{Regularization}
 \subsection{introduction}
+Our problem is that our network needs to preform good on not just our training data but also new data.
 \subsection{Over/Underfitting \& Model Capacity}
-\subsection{Parameter Penalties}
-\subsection{Bagging}
+
+	Overfitting got this. 
+	
+	
+\subsection{Data augmentation}
+We can augment data by injection noise, rotating the images a few degrees, blur,
+
+
+\subsection{Adversarial training}
+
+
+\subsection{Early stopping}
+We can obtain a model with better validation set error (and thus
+better test error) by returning to the parameter setting at the
+point of time with the lowest validation set error, and at the same time reduce the chance of over fitting.(if we are limited in data set)
+
+
+\subsection{ Bagging (Bootstrap Aggregating)}
+
+
 \subsection{Dropout}
-...
+
+
+
 
 \newpage
 \section{Convolutional Neural Networks}
@@ -190,8 +227,16 @@ The output vector of the softmax layer contains values in the interval [1,0] whi
 \newpage
 \section{Recurrent Neural Networks}
 \subsection{introduction}
+Recurrent Neural Networks are a family of neural networks for processing sequential data \\
+
+Speech Recognition, etc.
+
 \subsection{Function Principle}
+
+\includegraphics[scale=0.1]{RNN_unrolled.png}
 \subsection{Problems with long term memory}
+It should be able to handle large gabs inbetween information but in practice this fails in practice.\\
+Eg it can maybe understand "i'm hungry" but it has issues understanding the connection over larger paragraphs. here LSTM offer a solution.
 \subsection{Long Short Term Memory}
 ...
 
@@ -202,7 +247,7 @@ The output vector of the softmax layer contains values in the interval [1,0] whi
 \subsection{Adaptive Learning}
 \subsection{Batch Normalization}
 \subsection{Pre-training}
-...
+\subsection{Local minima}
 
 \newpage
 \section{Autoencoders and GANs}
