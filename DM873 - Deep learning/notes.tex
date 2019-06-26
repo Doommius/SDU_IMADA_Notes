@@ -246,7 +246,7 @@ Max pooling. makes our network more resistant to shifting of pixels.\\
 \item bluring filters.
 \item edge detection.
 \item sharpen
-
+%
 \end{itemize}
 
 \newpage
@@ -268,9 +268,42 @@ Eg it can maybe understand "i'm hungry" but it has issues understanding the conn
 \newpage
 \section{Optimization for Neural Networks}
 \subsection{introduction}
+
+\subsubsection{Problems}
+\paragraph{Initial point}
+Finding a good initial staring point, as this is often required for finding the global minima. else we risk getting stuck in a local minima which would mean our solution would not be optimal.
+\paragraph{Cliffs and explosion Gradients}
+
+\subsection{Momentum}
+Momentum method accelerates learning, when:
+\begin{itemize}
+\item Facing high curvature
+\item Small but consistent gradients
+\item Noisy gradients
+\end{itemize}
+
 \subsection{Parameter Initialization}
+Only property known with certainty: Initial parameters must be
+chosen to break symmetry
+\begin{itemize}
+\item If two hidden units have the same inputs and same activation function then
+they must have different initial parameters
+\item Usually best to initialize each unit to compute a different function
+\item This motivates use random initialization of parameters
+\end{itemize}
+
 \subsection{Adaptive Learning}
+Change the learning rate according to the gradient which one to use it up to the designer of the network, but the most pupolar ones are 
+\begin{itemize}
+\item SGD, 
+\item SGD with momentum, 
+\item RMSProp, 
+\item RMSProp with momentum,
+\item AdaDelta
+\item Adam
+\end{itemize}
 \subsection{Batch Normalization}
+
 \subsection{Pre-training}
 \subsection{Local minima}
 
