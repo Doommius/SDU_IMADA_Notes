@@ -10,13 +10,13 @@ The original authors of the notes should be on the frontpage of the notes.
 
 Notes are for 
 
-DM510 - Operating systems
-DM553 - Complexity and Computability
-DM555 - Data mining
-DM556 - Database management systems
-DM558 - Introduction to computer science
-DM818 - Paralle computing
-DM869 - Advanced Topics in Concurrent Systems
-DM873 - Deep learning
+# DM510 - Operating systems
+# DM553 - Complexity and Computability
+# DM555 - Data mining
+# DM556 - Database management systems
+# DM558 - Introduction to computer science
+# DM818 - Paralle computing
+# DM869 - Advanced Topics in Concurrent Systems
+# DM873 - Deep learning
 
 More to be added.
